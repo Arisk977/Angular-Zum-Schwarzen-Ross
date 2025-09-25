@@ -1,0 +1,51 @@
+.container {
+  position: relative; /* wichtig für absolute Positionierung des Videos */
+  width: 100%;
+  min-height: 100vh;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  overflow: hidden; /* verhindert Scrollbars durch Video */
+}
+
+.background-clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* skaliert automatisch und behält Seitenverhältnis */
+  z-index: -1;
+}
+
+.slogan{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 300px;
+
+}
+
+h1{
+  padding-left: 96px;
+  color: white;
+  font-size: 64px;
+  font-family: 'Kalam', sans-serif;
+  filter: drop-shadow(1px 4px 10px black);
+}
+
+.genuss{
+  padding-bottom: 180px;
+}
+
+.welcome{
+  padding-top: 280px;
+}
+
+app-header{
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+}
