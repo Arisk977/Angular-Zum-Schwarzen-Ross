@@ -1,0 +1,79 @@
+main {
+    min-height: 100vh;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 48px;
+}
+
+h1 {
+    padding-top: 64px;
+    color: rgb(200, 0, 0);
+}
+
+.sub-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 64px;
+    width: 100%;
+    padding-left: 10%;
+}
+
+.min-order {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+    >h2 {
+        padding-left: 15px;
+    }
+    >table {
+        border-collapse: separate;
+        border-spacing: 15px 24px;
+        >tr {
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.397);
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.order-value {
+    font-weight: 700;
+    width: 100px;
+    text-align: center;
+}
+
+.free-delivery {
+    color: rgb(200, 0, 0);
+}
+
+.company-offer {
+    width: 100%;
+     display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 16px;
+     >table {
+        border-collapse: separate;
+        border-spacing: 15px 24px;
+        >tr {
+            display: block;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.397);
+            margin-bottom: 20px;
+        }
+    }
+}
+
+.meals{
+    width: 200px;
+    font-weight: 700;
+}
