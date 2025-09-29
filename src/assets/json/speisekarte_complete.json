@@ -1,0 +1,1003 @@
+{
+  "Vorspeisen": [
+    {
+      "nummer": 7,
+      "name": "Tzatziki",
+      "beschreibung": "mit Jogurt, Quark, Gurken, frischem Knoblauch und Dill",
+      "preis": 4.50
+    },
+    {
+      "nummer": 8,
+      "name": "Gemischte Vorspeisen",
+      "beschreibung": "Schafskäse, Gurken, Tzatziki, Oliven*, Peperoni",
+      "preis": 6.00
+    },
+    {
+      "nummer": 9,
+      "name": "Schafskäse paniert",
+      "beschreibung": "garniert",
+      "preis": 6.00
+    },
+    {
+      "nummer": 10,
+      "name": "Frische Champignons",
+      "beschreibung": "gebraten mit Butter, Knoblauch, Weißwein, Cognac",
+      "preis": 6.00
+    }
+  ],
+  "Salate": [
+    {
+      "nummer": 11,
+      "name": "Gemischter Salat der Saison",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Zwiebeln, Karotten",
+      "preis": 6.00
+    },
+    {
+      "nummer": 12,
+      "name": "Tomatensalat",
+      "beschreibung": "Tomaten, Zwiebeln, Oliven*, Essig/Öl",
+      "preis": 7.00
+    },
+    {
+      "nummer": "12a",
+      "name": "Rucolasalat",
+      "beschreibung": "mit Kirschtomaten, rote Zwiebeln, Schinken*, Parmesan, Essig/Öl, Mozarella",
+      "preis": 9.00
+    },
+    {
+      "nummer": 13,
+      "name": "Mozzarellasalat",
+      "beschreibung": "Tomatenscheiben, Mozzarella, Basilikum, Oliven*, Öl, Pizzabrot",
+      "preis": 8.50
+    },
+    {
+      "nummer": 14,
+      "name": "Chefsalat",
+      "beschreibung": "Grüner Salat, Mais, Gurken, Oliven*, Tomaten, Champignons, Zwiebeln, Putenstreifen, Pizzabrot",
+      "preis": 9.00
+    },
+    {
+      "nummer": 15,
+      "name": "Italienischer Salat",
+      "beschreibung": "Grüner Salat, Schinken*, Käse*, Ei, Oliven*, Gurken, Tomaten, Karotten, Thunfisch, Pizzabrot",
+      "preis": 8.50
+    },
+    {
+      "nummer": 16,
+      "name": "Thunfisch Salat",
+      "beschreibung": "Grüner Salat, Thunfisch, Zwiebeln, Ei, Tomatenscheiben, Pizzabrot",
+      "preis": 8.50
+    },
+    {
+      "nummer": 17,
+      "name": "Bauernsalat",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Zwiebeln, Schafskäse*, Paprika, Peperoni, Oliven*, Pizzabrot, Essig/Öl",
+      "preis": 8.50
+    },
+    {
+      "nummer": 18,
+      "name": "Picco Bello",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Karotten, Käse*, Schinken*, Eier",
+      "preis": 8.00
+    },
+    {
+      "nummer": "18a",
+      "name": "Rindfleischsalat",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Gebr. Rindfleisch, Zwiebeln, Champignons, Chilisauce und Pizzabrot",
+      "preis": 9.50
+    },
+    {
+      "nummer": "18b",
+      "name": "Gyros Salat",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Paprika, Gyrosfleisch und Schafskäse mit Essigdressing und Pizzabrot",
+      "preis": 9.00
+    },
+    {
+      "nummer": 19,
+      "name": "Insalata Scampis",
+      "beschreibung": "Grüner Salat mit Käse*, Tomaten, Gurken, Ei, Scampis, frische Champignons und Pizzabrot",
+      "preis": 9.00
+    }
+  ],
+  "Kleine Gerichte": [
+    {
+      "nummer": "19a",
+      "name": "Chicken-Nuggets 8 Stück",
+      "beschreibung": "Mit süß-sauer Sauce und Pommes",
+      "preis": 8.0
+    },
+    {
+      "nummer": "19b",
+      "name": "Kinder-Schnitzel",
+      "beschreibung": "Mit Pommes",
+      "preis": 7.5
+    }
+  ],
+  "Burger": [
+    {
+      "nummer": 405,
+      "name": "Crispy Chickenburger",
+      "beschreibung": "Mit Rucola, Fetakäse, Tomaten, Käse und Pommes",
+      "preis": 9.0
+    },
+    {
+      "nummer": 406,
+      "name": "Hamburger",
+      "beschreibung": "Mit 100% Rindfleisch, grüner Salat, Tomaten, Gurken, Käse und Pommes",
+      "preis": 8.0
+    },
+    {
+      "nummer": 407,
+      "name": "Doppelburger",
+      "beschreibung": "Mit 2 Hacksteaks und 2 Käse, grüner Salat, Tomaten, Gurken und Pommes",
+      "preis": 9.0
+    },
+    {
+      "nummer": 408,
+      "name": "Veganer Burger",
+      "beschreibung": "Mit veganem Patty, grüner Salat, Tomaten, Gurken, Ketchup und Pommes",
+      "preis": 8.5
+    }
+  ],
+  "Überbackene Nudeln": [
+    {
+      "nummer": 20,
+      "name": "Hausgemachte Lasagne",
+      "beschreibung": "Nudelauflauf mit Rinder-Hackfleisch, Bechamelsoße und Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 21,
+      "name": "Rigatoni Maison",
+      "beschreibung": "Mit Tomaten, Sahnesoße, Mozzarella-Käse",
+      "preis": 8.0
+    },
+    {
+      "nummer": 22,
+      "name": "Rigatoni al Forno",
+      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße, Erbsen",
+      "preis": 9.0
+    },
+    {
+      "nummer": 23,
+      "name": "Combinazione",
+      "beschreibung": "Verschieden Nudeln, Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 24,
+      "name": "Tortellini Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 25,
+      "name": "Tortellini Würges",
+      "beschreibung": "Mit Hackfleischsoße, Champignons, Schinken*, Sahne, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 26,
+      "name": "Spaghetti Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 27,
+      "name": "Spaghetti",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 28,
+      "name": "Tagliatelle",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "preis": 9.0
+    }
+  ],
+  "Rigatoni": [
+    {
+      "nummer": 36,
+      "name": "Rigatoni Napoli",
+      "beschreibung": "Mit Tomaten-Sahnesoße, Basilikum, Käse*",
+      "preis": 7.5
+    },
+    {
+      "nummer": "36a",
+      "name": "Rigatoni Shrimps",
+      "beschreibung": "Mit Shrimps und Tomaten-Sahnesoße",
+      "preis": 9.0
+    },
+    {
+      "nummer": "36b",
+      "name": "Rigatoni Pollo",
+      "beschreibung": "Mit Hähnchen, Champignons und Tomaten-Sahnesoße",
+      "preis": 9.0
+    },
+    {
+      "nummer": 37,
+      "name": "Rigatoni Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 38,
+      "name": "Rigatoni Panna Prosciutto",
+      "beschreibung": "Mit Schinken*, Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 39,
+      "name": "Rigatoni Würges",
+      "beschreibung": "Mit Erbsen, Champignons, Schinken*, Tomatensoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 40,
+      "name": "Rigatoni Gorgonzola",
+      "beschreibung": "Mit Gorgonzolasoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 41,
+      "name": "Rigatoni Salmone",
+      "beschreibung": "Mit frischem Lachs, Zwiebeln, Tomaten-Sahnesoße",
+      "preis": 9.5
+    },
+    {
+      "nummer": 42,
+      "name": "Rigatoni Quattro Formaggi",
+      "beschreibung": "Mit 4 verschiedenen Käsesorten",
+      "preis": 9.0
+    },
+    {
+      "nummer": 43,
+      "name": "Rigatoni Ciao Ciao",
+      "beschreibung": "Mit Hackfleisch, Champignons, Schinken*, Sahne",
+      "preis": 8.5
+    },
+    {
+      "nummer": 44,
+      "name": "Rigatoni Broccoli",
+      "beschreibung": "Mit Schinken*, Broccoli, Sahnesoße",
+      "preis": 8.5
+    }
+  ],
+  "Tortellini": [
+    {
+      "nummer": 45,
+      "name": "Tortellini* Panna",
+      "beschreibung": "Mit Schinken* und Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 46,
+      "name": "Tortellini* ala Casa",
+      "beschreibung": "Mit frischem Lauch, Paprika, Zwiebeln, Champignons, Tomaten, Sahne",
+      "preis": 8.5
+    },
+    {
+      "nummer": 47,
+      "name": "Tortellini* Gorgonzola",
+      "beschreibung": "Mit Gorgonzolakäse und Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 48,
+      "name": "Tortellini* Maison",
+      "beschreibung": "Mit Schinken*, Tomaten-Sahnesoße, Champignons, Erbsen",
+      "preis": 8.5
+    }
+  ],
+  "Tagliatelle": [
+    {
+      "nummer": 49,
+      "name": "Tagliatelle Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 50,
+      "name": "Tagliatelle Würges",
+      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 51,
+      "name": "Tagliatelle Salmone",
+      "beschreibung": "Mit frischem Lachsfilet, Tomaten, Zwiebeln, Sahnesoße",
+      "preis": 9.5
+    }
+  ],
+  "Gnocchi": [
+    {
+      "nummer": 400,
+      "name": "Gnocchi Napoli",
+      "beschreibung": "Mit Tomaten-Sahnesoße",
+      "preis": 8.0
+    },
+    {
+      "nummer": 401,
+      "name": "Gnocchi Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 402,
+      "name": "Gnocchi Sorrentino",
+      "beschreibung": "Mit Tomatensoße, Basilikum, Mozzarella, Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 403,
+      "name": "Gnocchi Gorgonzola",
+      "beschreibung": "Mit Sahne, Gorgonzolakäse",
+      "preis": 9.0
+    },
+    {
+      "nummer": 404,
+      "name": "Gnocchi Atlanta",
+      "beschreibung": "Mit Tomatensoße, Spinat und Gorgonzolakäse*",
+      "preis": 9.5
+    }
+  ],
+  "Pizzen aus dem Steinofen": [
+    {
+      "nummer": 52,
+      "name": "Pizzabrot",
+      "beschreibung": "Mit Tomaten, Mozzarella (groß)",
+      "preis": 6.00
+    },
+    {
+      "nummer": 53,
+      "name": "Pizzabrot",
+      "beschreibung": "Mit Kräuterbutter",
+      "preis": 3.00
+    },
+    {
+      "nummer": 54,
+      "name": "Pizzabrot",
+      "beschreibung": "Mit Tomatensoße, Knoblauch",
+      "preis": 4.50
+    },
+    {
+      "nummer": 55,
+      "name": "Pizza Margherita",
+      "beschreibung": "Mit Tomatensoße und Käse*",
+      "preis": {"30cm": 7.00, "40cm": 13.00}
+    },
+    {
+      "nummer": 56,
+      "name": "Pizza Salami",
+      "beschreibung": "Mit Salami*",
+      "preis": {"30cm": 7.50, "40cm": 14.50}
+    },
+    {
+      "nummer": 57,
+      "name": "Pizza Peperoniwurst",
+      "beschreibung": "Mit Peperoniwurst*",
+      "preis": {"30cm": 7.50, "40cm": 14.50}
+    },
+    {
+      "nummer": 58,
+      "name": "Pizza Prosciutto",
+      "beschreibung": "Mit Schinken",
+      "preis": {"30cm": 7.50, "40cm": 14.50}
+    },
+    {
+      "nummer": 59,
+      "name": "Pizza Funghi",
+      "beschreibung": "Mit Champignons",
+      "preis": {"30cm": 7.50, "40cm": 14.50}
+    },
+    {
+      "nummer": 60,
+      "name": "Pizza Hawaii",
+      "beschreibung": "Mit Schinken*, Ananas",
+      "preis": {"30cm": 8.00, "40cm": 15.50}
+    },
+    {
+      "nummer": 61,
+      "name": "Pizza Mexico",
+      "beschreibung": "Mit Hackfleisch, Mais, Zwiebeln, scharf",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": "61a",
+      "name": "Pizza Gyros",
+      "beschreibung": "Mit Gyrosfleisch und Zwiebeln",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": "61b",
+      "name": "Pizza Olympia",
+      "beschreibung": "Mit Gyrosfleisch, Paprika, Zwiebeln, Champignons",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": "61c",
+      "name": "Pizza Athen",
+      "beschreibung": "Mit Gyrosfleisch, Zwiebeln, Schafskäse*",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 62,
+      "name": "Pizza Würges",
+      "beschreibung": "Mit Salami*, Schinken*, Peperoniwurst*",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": 63,
+      "name": "Pizza Peperoncini",
+      "beschreibung": "Mit Peperoniwurst*, Zwiebeln, Schinken*",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": 64,
+      "name": "Pizza De Luxe",
+      "beschreibung": "Mit Salami*, Schinken*, Champignons",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": 65,
+      "name": "Pizza Primavera",
+      "beschreibung": "Mit Schinken*, Champignons, Knoblauch, Ei",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 66,
+      "name": "Pizza Vulcano",
+      "beschreibung": "Mit Peperoniwurst*, Zwiebeln, Peperoni, Oliven* (scharf)",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 67,
+      "name": "Pizza Vier Jahreszeiten",
+      "beschreibung": "Mit Salami*, Schinken*, Pilze, Paprika",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 68,
+      "name": "Pizza Tonno",
+      "beschreibung": "Mit Thunfisch, Zwiebeln, Oliven*",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": 69,
+      "name": "Pizza Calzone (Pizzatasche)",
+      "beschreibung": "Mit Salami*, Schinken*, Paprika, Champignons, Ei",
+      "preis": 9.00
+    },
+    {
+      "nummer": 70,
+      "name": "Pizza Vegetarisch",
+      "beschreibung": "Mit Champignons, Oliven*, Broccoli, Paprika, Artischocken, Zwiebeln",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 71,
+      "name": "Pizza Quattro Formaggi",
+      "beschreibung": "Mit Gorgonzola, Parmesan, Mozzarella, Gouda",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 72,
+      "name": "Pizza Fevrita",
+      "beschreibung": "Mit Salami*, Zwiebeln, Artischocken, Paprika",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 73,
+      "name": "Pizza Romana",
+      "beschreibung": "Mit Salami*, Schinken*, Pilze, Peperoniwurst*",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 74,
+      "name": "Pizza Capri",
+      "beschreibung": "Mit frischen Tomaten, Mozzarella, Basilikum",
+      "preis": {"30cm": 8.50, "40cm": 16.50}
+    },
+    {
+      "nummer": 75,
+      "name": "Pizza Mare",
+      "beschreibung": "Mit Meeresfrüchte, Knoblauch",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 76,
+      "name": "Pizza Barbeque",
+      "beschreibung": "Mit Barbequesoße, Peperoniwurst*, Zwiebeln, Hackfleisch",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 77,
+      "name": "Pizza Creme Fraiche",
+      "beschreibung": "Mit Schinken*, Zwiebeln, Mais, Mozzarella",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 79,
+      "name": "Pizza Spinaci",
+      "beschreibung": "Mit frischem Spinat, Zwiebeln, Champignons, Mozzarella und Knoblauch",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 410,
+      "name": "Pizza Chef",
+      "beschreibung": "Mit Hähnchenbrust, Zwiebeln, Chillisauce, Mozzarella",
+      "preis": {"30cm": 10.00, "40cm": 18.50}
+    },
+    {
+      "nummer": 411,
+      "name": "Pizza Nizza",
+      "beschreibung": "Mit Creme Fraiche, Krabben, Zwiebeln, Mais, Mozzarella",
+      "preis": {"30cm": 10.00, "40cm": 18.50}
+    },
+    {
+      "nummer": 412,
+      "name": "Pizza Sicilia",
+      "beschreibung": "Mit Thunfisch, Sardellen, Zwiebeln, Knoblauch",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 413,
+      "name": "Pizza Salmone",
+      "beschreibung": "Mit frischen Lachsfiletstücken, Creme Fraiche, Zwiebeln, Knoblauch",
+      "preis": {"30cm": 10.00, "40cm": 18.50}
+    },
+    {
+      "nummer": 414,
+      "name": "Pizza Orient (Halal)",
+      "beschreibung": "Mit türkischer Wurst, Peperoni, Zwiebeln, Champignons, Knoblauch, scharf",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 415,
+      "name": "Pizza Chicken Curry Masala",
+      "beschreibung": "Mit gebratenem Hähnchenfilet, Ingwer, Zwiebeln, Paprika, Knoblauch, scharf",
+      "preis": {"30cm": 10.00, "40cm": 18.50}
+    },
+    {
+      "nummer": 416,
+      "name": "Pizza Spaghetti Bolognese",
+      "beschreibung": "Mit Spaghetti Bolognese",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 417,
+      "name": "Pizza Hollandaise",
+      "beschreibung": "Mit Schinken*, Zwiebeln, Mozarella",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 418,
+      "name": "Pizza Hähnchen",
+      "beschreibung": "Mit Hähnchenfleisch, Hollandaisesauce, Mozarella",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    },
+    {
+      "nummer": 419,
+      "name": "Pizza Broccoli",
+      "beschreibung": "Mit Hollandaisesauce, Brokkoli, Sucuk, Jalapeño",
+      "preis": {"30cm": 9.50, "40cm": 18.00}
+    },
+    {
+      "nummer": 420,
+      "name": "Pizza Rucola",
+      "beschreibung": "Mit Kirschtomaten, Champignon, Rucola, Mozzarella, Parmesan",
+      "preis": {"30cm": 9.50, "40cm": 18.00}
+    },
+    {
+      "nummer": 421,
+      "name": "Pizza Rucola Prociutto",
+      "beschreibung": "Mit Kirschtomaten, Schinken*, Rucola, Parmesan, Mozarella",
+      "preis": {"30cm": 9.50, "40cm": 18.00}
+    },
+    {
+      "nummer": 422,
+      "name": "Pizza Chicken BBQ",
+      "beschreibung": "Mit BBQ-Soße, Hähnchen, Mais, rote Zwiebeln",
+      "preis": {"30cm": 9.00, "40cm": 17.50}
+    }
+  ],
+  "Spezialitäten des Hauses": [
+    {
+      "nummer": 80,
+      "name": "Schnitzel paniert (Wiener Art)",
+      "beschreibung": "Mit Pommes Frites, Salat",
+      "preis": 10.50
+    },
+    {
+      "nummer": "80a",
+      "name": "Curry Schnitzel",
+      "beschreibung": "Mit scharfer Currysoße, dazu Basmatireis und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": "80b",
+      "name": "Schnitzel Hollandaise",
+      "beschreibung": "Mit Hollandaisesauce, Käse* überbacken, Salzkartoffeln, Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": "80c",
+      "name": "Schnitzel Broccoli & Hollandaise",
+      "beschreibung": "Mit Hollandaisesauce, Käse* überbacken, Salzkartoffeln, Salat",
+      "preis": 13.50
+    },
+    {
+      "nummer": 81,
+      "name": "Jägerschnitzel",
+      "beschreibung": "Mit Jägersoße, Pommes Frites, Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 82,
+      "name": "Rahmschnitzel",
+      "beschreibung": "Mit Rahmsoße, Kroketten, Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 83,
+      "name": "Hawaii Schnitzel",
+      "beschreibung": "Mit Ananas, Käse*",
+      "preis": 11.50
+    },
+    {
+      "nummer": 84,
+      "name": "Putenschnitzel Pizzaiola",
+      "beschreibung": "Paniert mit Bolognese und Käse* überbacken, dazu Pommes und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": "84a",
+      "name": "Putenschnitzel (Wiener Art)",
+      "beschreibung": "Paniert mit Pommes Frites, Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 85,
+      "name": "Cordon Bleu",
+      "beschreibung": "Schnitzeltasche gefüllt mit Schinken*, Käse*, Rahmsoße, Kroketten, Salat",
+      "preis": 14.00
+    },
+    {
+      "nummer": 86,
+      "name": "Zigeunerschnitzel",
+      "beschreibung": "Mit einer pikanten Soße, Pommes Frites und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 87,
+      "name": "Zwiebelschnitzel",
+      "beschreibung": "Mit Zwiebeln, Pommes Frites und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 88,
+      "name": "Bauernschnitzel",
+      "beschreibung": "Mit 2 Spiegeleiern, Bratkartoffeln und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": 89,
+      "name": "Hähnchenbrustfilet gegrillt",
+      "beschreibung": "Mit Champignonsoße, Pommes und Salat",
+      "preis": 15.50
+    },
+    {
+      "nummer": 90,
+      "name": "Hähnchenbrust (gegrillt)",
+      "beschreibung": "Mit Schinken*, Käse*, Röstzwiebeln, Kroketten, Salat",
+      "preis": 15.50
+    },
+    {
+      "nummer": 91,
+      "name": "Grillteller",
+      "beschreibung": "Verschiedene Sorten Fleisch vom Grill, Tzatziki, Pommes, Salat",
+      "preis": 16.50
+    },
+    {
+      "nummer": 92,
+      "name": "Hacksteak",
+      "beschreibung": "Gefüllt mit Schafskäse*, Reis, Salat, pikante Soße",
+      "preis": 13.00
+    },
+    {
+      "nummer": 93,
+      "name": "Hacksteak (gegrillt)",
+      "beschreibung": "Mit Spiegelei, Bratkartoffeln und Salat",
+      "preis": 14.00
+    },
+    {
+      "nummer": 94,
+      "name": "Hähnchenmedaillons",
+      "beschreibung": "Gebraten, frische Champignons, Sahne, Reis und Salat",
+      "preis": 13.50
+    },
+    {
+      "nummer": 95,
+      "name": "Hähnchenmedaillons",
+      "beschreibung": "Mit Ananas, Sherry-Cognac-Soße, Reis und Salat",
+      "preis": 14.50
+    },
+    {
+      "nummer": 96,
+      "name": "Pikantiko",
+      "beschreibung": "Hähnchenbrustfilet-Spieß mit Paprika, Zwiebeln, Peperoni, gegrillt mit Pikanta-Soße, dazu Reis und Salat",
+      "preis": 14.50
+    },
+    {
+      "nummer": 97,
+      "name": "Schweinerückensteak",
+      "beschreibung": "Vom Grill mit Schinken*, Käse*, Röstzwiebeln, gegrillter Tomate, Pommes Frites und Salat",
+      "preis": 13.50
+    },
+    {
+      "nummer": 98,
+      "name": "Mixed Grill (für 2 Personen)",
+      "beschreibung": "Verschiedene Sorten Fleisch vom Grill, Reis, Gemüse, Tzatziki, dazu Pommes Frites und Salat",
+      "preis": 31.50
+    },
+    {
+      "nummer": 99,
+      "name": "Gyros",
+      "beschreibung": "Würziger geschnetzeltes Schweinefleisch, gebraten, mit rohen Zwiebeln und Tzatziki, dazu Pommes und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": "99a",
+      "name": "Gyros Olympia",
+      "beschreibung": "Gyrosfleisch mit Paprika, Zwiebeln, Tzatziki, Champignons, gebraten, dazu Pommes und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": "99b",
+      "name": "Grillplatte",
+      "beschreibung": "Mit Gyros, Hacksteak, Rindersteak, Putensteak, dazu Tzatziki, Kräuterbutter, Pommes und Salat",
+      "preis": 16.50
+    }
+  ],
+  "Argentinische Rindersteaks": [
+    {
+      "nummer": 100,
+      "name": "Hüftsteak (220g)",
+      "beschreibung": "Mit Kräuterbutter, Pommes Frites und Salat",
+      "preis": 16.00
+    },
+    {
+      "nummer": 102,
+      "name": "Hüftsteak (300g)",
+      "beschreibung": "Mit Kräuterbutter, Folienkartoffeln und Salat",
+      "preis": 18.50
+    },
+    {
+      "nummer": 103,
+      "name": "Hüftsteak (220g)",
+      "beschreibung": "Mit frischen Champignons, Kroketten und Salat",
+      "preis": 17.50
+    },
+    {
+      "nummer": 104,
+      "name": "Rumpsteak (220g)",
+      "beschreibung": "Mit Kräuterbutter, Pommes Frites und Salat",
+      "preis": 18.50
+    },
+    {
+      "nummer": 105,
+      "name": "Rumpsteak (300g)",
+      "beschreibung": "Saftiges Rinderrückensteak mit leichtem Fettrand vom Grill, mit Kräuterbutter, Folienkartoffeln und Salat",
+      "preis": 21.50
+    },
+    {
+      "nummer": 106,
+      "name": "Rumpsteak (220g)",
+      "beschreibung": "Vom Grill mit Röstzwiebeln, Pommes Frites und Salat",
+      "preis": 20.00
+    },
+    {
+      "nummer": 107,
+      "name": "Entrecote (300g)",
+      "beschreibung": "Mit Kräuterbutter, Kroketten und Salat",
+      "preis": 23.50
+    },
+    {
+      "nummer": 110,
+      "name": "Pfeffersteak (300g)",
+      "beschreibung": "Rumsteak mit einer delikaten Pfeffer-Rahmsoße",
+      "preis": 23.50
+    },
+    {
+      "nummer": 111,
+      "name": "Argentinischer Spieß",
+      "beschreibung": "Saftige Fleischstücke, Zwiebeln, Paprika, delikat-scharfer Soße, dazu Folienkartoffeln und Salat",
+      "preis": 18.50
+    }
+  ],
+  "Fisch": [
+    {
+      "nummer": 119,
+      "name": "Schollenfilet",
+      "beschreibung": "Paniert mit Remuladensauce, Pommes Frites und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 120,
+      "name": "Seezungenfilet",
+      "beschreibung": "Gebraten, in Zitronen-Weißweinsoße, Salzkartoffeln, Salat",
+      "preis": 14.50
+    },
+    {
+      "nummer": 121,
+      "name": "Seezungenfilet",
+      "beschreibung": "Mit Knoblauch und Pfeffersoße, Salzkartoffeln und Salat",
+      "preis": 15.50
+    },
+    {
+      "nummer": 123,
+      "name": "Calamaris",
+      "beschreibung": "Panierter Tintenfisch mit Knoblauchsoße, Pommes Frites und Salat",
+      "preis": 11.50
+    }
+  ],
+  "Indische & Pakistanische Spezialitäten": [
+    {
+      "nummer": 150,
+      "name": "Chicken Curry",
+      "beschreibung": "Zartes Hühnerfilet in Currysoße mit frischen Gewürzen, Basmati Reis und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 151,
+      "name": "Chicken Chilli Masala (scharf)",
+      "beschreibung": "Hähnchenbrustfilet gebraten mit Knoblauch und Cognac, Ingwer, Zwiebeln, Paprika, frischen Gewürzen, Basmati Reis und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": 152,
+      "name": "Chicken Saag",
+      "beschreibung": "Hähnchenbrustfilet mit frischen Gewürzen, Blattspinat, Kokosnuss-Sahnesoße, Basmati Reis und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 153,
+      "name": "Chicken Biryani",
+      "beschreibung": "Gebratener Reis, mit Paprika, Hähnchenfilet und Salat",
+      "preis": 12.00
+    },
+    {
+      "nummer": 154,
+      "name": "Chicken Korma",
+      "beschreibung": "Hähnchenfilet in Kokosnuss-Joghurt-Sahnesoße, Wodka, mit geriebenen Mandeln, Basmati Reis, Chilisauce und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": 155,
+      "name": "Chicken Malai",
+      "beschreibung": "Hähnchenfilet in Sahnecremesoße, Reis, Salat, Mandeln-Wodka",
+      "preis": 12.50
+    },
+    {
+      "nummer": 156,
+      "name": "Chicken Shahi",
+      "beschreibung": "Hähnchenbrustfilet mit frischen Gewürzen, Broccoli, Tomaten-Sahnesoße, Basmati Reis und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": 157,
+      "name": "Saag Panier Spinat",
+      "beschreibung": "Blattspinat mit Frischkäse, Sahne, exotischen Gewürzen, gebratenem Basmati Reis und Salat",
+      "preis": 10.50
+    },
+    {
+      "nummer": 158,
+      "name": "Matar Panier",
+      "beschreibung": "Erbsen, mit Frischkäse, frischen Gewürzen, Currysoße, dazu Basmati Reis und Salat",
+      "preis": 10.50
+    },
+    {
+      "nummer": 159,
+      "name": "Chicken Hawaii",
+      "beschreibung": "Hähnchenbrustfilet mit frischen Indischen Gewürzen, Knoblauch, Ananas, Wodka-Curry-Sahnesoße, Basmati Reis und Salat",
+      "preis": 11.50
+    },
+    {
+      "nummer": 160,
+      "name": "Lamm Curry",
+      "beschreibung": "Lammfleisch mit frischem Ingwer, Knoblauch, Champignons, Currysoße, dazu Basmati Reis und Salat",
+      "preis": 12.50
+    },
+    {
+      "nummer": 161,
+      "name": "Lamm Chilli Massalla",
+      "beschreibung": "Lammfleisch gebraten mit Knoblauch, Ingwer, Champignons, Zwiebeln, Tomaten, dazu Basmati Reis und Salat",
+      "preis": 13.50
+    },
+    {
+      "nummer": 162,
+      "name": "Lamm Saag",
+      "beschreibung": "Lammfleisch, Spinat, Knoblauch, Ingwer, Zwiebeln, Tomaten Creme Fraiche und Wodkasoße, dazu Basmati Reis und Salat",
+      "preis": 13.50
+    },
+    {
+      "nummer": 170,
+      "name": "Schlemmer Topf überbacken",
+      "beschreibung": "Hähnchenfleisch mit Broccoli, Blumenkohl, Kartoffeln, Pilze*, Tomaten, Sahne und Käse* überbacken",
+      "preis": 10.50
+    },
+    {
+      "nummer": 171,
+      "name": "Aloo Saag",
+      "beschreibung": "Kartoffeln und Spinat Spezialitäten nach indischer Art, dazu Basmati Reis und Salat",
+      "preis": 10.50
+    },
+    {
+      "nummer": 172,
+      "name": "Chana Masala",
+      "beschreibung": "Kichererbsen gekocht in indischen Gewürzen, dazu Basmati Reis und Salat",
+      "preis": 10.50
+    }
+  ],
+  "Dessert": [
+    {
+      "name": "Hausgemachtes Tiramisu",
+      "preis": 6.00
+    }
+  ],
+  "Extras": [
+    {
+      "name": "Pommes Frites, Kroketten, Reis",
+      "preis": 3.50
+    },
+    {
+      "name": "Bratkartoffeln, Salzkartoffeln",
+      "preis": 5.00
+    },
+    {
+      "name": "Folienkartoffeln mit Sour Cream",
+      "preis": 5.50
+    }
+  ],
+  "Getränke": [
+    {
+      "name": "Mineralwasser",
+      "beschreibung": "0,7l mit Pfand",
+      "preis": 2.50
+    },
+    {
+      "name": "Coca Cola, Cola light, Fanta, Sprite",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Orangensaft, Apfelsaft",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 4.50
+    }
+  ],
+  "Biere": [
+    {
+      "name": "Krombacher Pils",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 3.00
+    },
+    {
+      "name": "Bitburger",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 3.00
+    },
+    {
+      "name": "Schöfferhofer Hefeweizen (Hell, Dunkel, Kristall, alkoholfrei)",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 4.50
+    }
+  ],
+  "Weine": [
+    {
+      "name": "Lambrusco, Chianti D.O.C, Rose, Pinot Grigio",
+      "beschreibung": "0,7l",
+      "preis": 10.00
+    }
+  ]
+}

@@ -25,13 +25,13 @@ main{
 .meals{
     width: 90%;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
     align-items: center;
     justify-content: center;
     gap: 72px;
 }
 
 app-meals-banner{
-    width: 100%;
+    width: 80%;
     height: 150px;
 }
