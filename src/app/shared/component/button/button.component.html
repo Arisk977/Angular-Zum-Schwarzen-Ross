@@ -1,0 +1,10 @@
+<button 
+  [ngStyle]="{
+    'background-color': backgroundColor,
+    'color': textColor,
+    'border': border,
+    'filter': 'drop-shadow(2px 2px 0px ' + shadowColor + ')'
+  }"
+  (click)="onClick()">
+  {{ text }}
+</button>
