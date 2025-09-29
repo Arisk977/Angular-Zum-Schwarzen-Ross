@@ -9,4 +9,7 @@ import { MealsBannerComponent } from './meals-banner/meals-banner.component';
 })
 export class SpeisenComponent {
 
+  onClick(){
+    console.log('test erfolgreich');
+  }
 }
