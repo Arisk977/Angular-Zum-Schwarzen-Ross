@@ -6,11 +6,13 @@ main {
     justify-content: center;
     align-items: center;
     gap: 48px;
+    padding-top: 64px;
+    margin-bottom: 64px;
 }
 
 h1 {
-    padding-top: 64px;
-    color: rgb(200, 0, 0);
+    font-size: 64px;    
+    color: rgb(180, 0, 0);
 }
 
 .sub-content {

@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { LandingPageComponent } from '../landing-page/landing-page.component';
 import { LieferserviceComponent } from '../lieferservice/lieferservice.component';
+import { CateringComponent } from '../catering/catering.component';
+
 
 @Component({
   selector: 'app-main',
-  imports: [LandingPageComponent, LieferserviceComponent],
+  imports: [LandingPageComponent, LieferserviceComponent, CateringComponent],
   templateUrl: './main.component.html',
   styleUrl: './main.component.scss'
 })

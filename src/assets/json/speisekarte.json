@@ -1,0 +1,244 @@
+{
+  "Kleine Gerichte": [
+    {
+      "nummer": "19a",
+      "name": "Chicken-Nuggets 8 Stück",
+      "beschreibung": "Mit süß-sauer Sauce und Pommes",
+      "preis": 8.0
+    },
+    {
+      "nummer": "19b",
+      "name": "Kinder-Schnitzel",
+      "beschreibung": "Mit Pommes",
+      "preis": 7.5
+    }
+  ],
+  "Burger": [
+    {
+      "nummer": 405,
+      "name": "Crispy Chickenburger",
+      "beschreibung": "Mit Rucola, Fetakäse, Tomaten, Käse und Pommes",
+      "preis": 9.0
+    },
+    {
+      "nummer": 406,
+      "name": "Hamburger",
+      "beschreibung": "Mit 100% Rindfleisch, grüner Salat, Tomaten, Gurken, Käse und Pommes",
+      "preis": 8.0
+    },
+    {
+      "nummer": 407,
+      "name": "Doppelburger",
+      "beschreibung": "Mit 2 Hacksteaks und 2 Käse, grüner Salat, Tomaten, Gurken und Pommes",
+      "preis": 9.0
+    },
+    {
+      "nummer": 408,
+      "name": "Veganer Burger",
+      "beschreibung": "Mit veganem Patty, grüner Salat, Tomaten, Gurken, Ketchup und Pommes",
+      "preis": 8.5
+    }
+  ],
+  "Überbackene Nudeln": [
+    {
+      "nummer": 20,
+      "name": "Hausgemachte Lasagne",
+      "beschreibung": "Nudelauflauf mit Rinder-Hackfleisch, Bechamelsoße und Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 21,
+      "name": "Rigatoni Maison",
+      "beschreibung": "Mit Tomaten, Sahnesoße, Mozzarella-Käse",
+      "preis": 8.0
+    },
+    {
+      "nummer": 22,
+      "name": "Rigatoni al Forno",
+      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße, Erbsen",
+      "preis": 9.0
+    },
+    {
+      "nummer": 23,
+      "name": "Combinazione",
+      "beschreibung": "Verschieden Nudeln, Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 24,
+      "name": "Tortellini Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 25,
+      "name": "Tortellini Würges",
+      "beschreibung": "Mit Hackfleischsoße, Champignons, Schinken*, Sahne, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 26,
+      "name": "Spaghetti Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "preis": 8.5
+    },
+    {
+      "nummer": 27,
+      "name": "Spaghetti",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "preis": 9.0
+    },
+    {
+      "nummer": 28,
+      "name": "Tagliatelle",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "preis": 9.0
+    }
+  ],
+  "Rigatoni": [
+    {
+      "nummer": 36,
+      "name": "Rigatoni Napoli",
+      "beschreibung": "Mit Tomaten-Sahnesoße, Basilikum, Käse*",
+      "preis": 7.5
+    },
+    {
+      "nummer": "36a",
+      "name": "Rigatoni Shrimps",
+      "beschreibung": "Mit Shrimps und Tomaten-Sahnesoße",
+      "preis": 9.0
+    },
+    {
+      "nummer": "36b",
+      "name": "Rigatoni Pollo",
+      "beschreibung": "Mit Hähnchen, Champignons und Tomaten-Sahnesoße",
+      "preis": 9.0
+    },
+    {
+      "nummer": 37,
+      "name": "Rigatoni Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 38,
+      "name": "Rigatoni Panna Prosciutto",
+      "beschreibung": "Mit Schinken*, Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 39,
+      "name": "Rigatoni Würges",
+      "beschreibung": "Mit Erbsen, Champignons, Schinken*, Tomatensoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 40,
+      "name": "Rigatoni Gorgonzola",
+      "beschreibung": "Mit Gorgonzolasoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 41,
+      "name": "Rigatoni Salmone",
+      "beschreibung": "Mit frischem Lachs, Zwiebeln, Tomaten-Sahnesoße",
+      "preis": 9.5
+    },
+    {
+      "nummer": 42,
+      "name": "Rigatoni Quattro Formaggi",
+      "beschreibung": "Mit 4 verschiedenen Käsesorten",
+      "preis": 9.0
+    },
+    {
+      "nummer": 43,
+      "name": "Rigatoni Ciao Ciao",
+      "beschreibung": "Mit Hackfleisch, Champignons, Schinken*, Sahne",
+      "preis": 8.5
+    },
+    {
+      "nummer": 44,
+      "name": "Rigatoni Broccoli",
+      "beschreibung": "Mit Schinken*, Broccoli, Sahnesoße",
+      "preis": 8.5
+    }
+  ],
+  "Tortellini": [
+    {
+      "nummer": 45,
+      "name": "Tortellini* Panna",
+      "beschreibung": "Mit Schinken* und Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 46,
+      "name": "Tortellini* ala Casa",
+      "beschreibung": "Mit frischem Lauch, Paprika, Zwiebeln, Champignons, Tomaten, Sahne",
+      "preis": 8.5
+    },
+    {
+      "nummer": 47,
+      "name": "Tortellini* Gorgonzola",
+      "beschreibung": "Mit Gorgonzolakäse und Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 48,
+      "name": "Tortellini* Maison",
+      "beschreibung": "Mit Schinken*, Tomaten-Sahnesoße, Champignons, Erbsen",
+      "preis": 8.5
+    }
+  ],
+  "Tagliatelle": [
+    {
+      "nummer": 49,
+      "name": "Tagliatelle Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 50,
+      "name": "Tagliatelle Würges",
+      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 51,
+      "name": "Tagliatelle Salmone",
+      "beschreibung": "Mit frischem Lachsfilet, Tomaten, Zwiebeln, Sahnesoße",
+      "preis": 9.5
+    }
+  ],
+  "Gnocchi": [
+    {
+      "nummer": 400,
+      "name": "Gnocchi Napoli",
+      "beschreibung": "Mit Tomaten-Sahnesoße",
+      "preis": 8.0
+    },
+    {
+      "nummer": 401,
+      "name": "Gnocchi Bolognese",
+      "beschreibung": "Mit Hackfleischsoße (Rind)",
+      "preis": 8.5
+    },
+    {
+      "nummer": 402,
+      "name": "Gnocchi Sorrentino",
+      "beschreibung": "Mit Tomatensoße, Basilikum, Mozzarella, Sahnesoße",
+      "preis": 8.5
+    },
+    {
+      "nummer": 403,
+      "name": "Gnocchi Gorgonzola",
+      "beschreibung": "Mit Sahne, Gorgonzolakäse",
+      "preis": 9.0
+    },
+    {
+      "nummer": 404,
+      "name": "Gnocchi Atlanta",
+      "beschreibung": "Mit Tomatensoße, Spinat und Gorgonzolakäse*",
+      "preis": 9.5
+    }
+  ]
+}
