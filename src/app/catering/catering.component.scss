@@ -5,7 +5,7 @@ main{
     flex-direction: column;
     justify-content: flex-start;
     align-items: center;
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(36, 36, 36);
     color: white;
     padding-top: 72px;
 }
@@ -13,6 +13,7 @@ main{
 h1{
     font-size: 64px;
     color: rgb(180, 0, 0);
+    margin: 0;
 }
 
 .content{
@@ -29,15 +30,19 @@ h1{
     justify-content: space-between;
     align-items: center;
     width: 80%;
+    margin-top: -150px;
+    margin-bottom: -150px;
 }
 
 .button-container{
     display: flex;
-    justify-content: center;
+    justify-content: flex-end;
+    padding-right: 15%;
     align-items: center;
     width: 100%;
     height: auto;
     gap: 16px;
+    margin: 0;
 }
 
     .red-arrow{
@@ -46,4 +51,37 @@ h1{
         >img{
             width: 100%;
         }
+    }
+
+
+    .img{
+        width: 350px;
+        border-radius: 50px 10px ;
+        box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
+    }
+
+    .catering-1{
+        padding-top: 400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .catering-2{
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
+    }
+
+    .catering-3{
+        margin-top: -400px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 16px;
     }
