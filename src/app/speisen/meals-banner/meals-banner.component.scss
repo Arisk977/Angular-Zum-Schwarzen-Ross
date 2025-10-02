@@ -12,11 +12,12 @@ main{
     justify-content: center;
     align-items: center;
     filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.41));
-    transition: transform 100ms ease-in, box-shadow 100ms ease-in;
+    transition: transform 75ms ease-in, box-shadow 100ms ease-in;
     &:hover{
          filter: drop-shadow(0px 0px 0px rgba(0, 0, 0, 0.41));
          transform: translate(2px, 4px);
          cursor: pointer;
+         transform: scale(1.1);
     }
  
     >div{
@@ -26,7 +27,15 @@ main{
         display: flex;
         justify-content: center;
         align-items: center;
-        font-size: 48px;
+        font-size: 32px;
+        font-weight: 900;
         background-color: rgba(0, 0, 0, 0.4);
+        &:hover{
+            background-color: rgba(0, 0, 0, 0);
+        }
+        >div{
+            width: 80%;
+            text-align: center;
+        }
     }
 }

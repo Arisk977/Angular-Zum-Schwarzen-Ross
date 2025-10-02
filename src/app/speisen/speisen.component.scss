@@ -7,13 +7,17 @@ main{
     padding-top: 72px;
 }
 
+h1{
+    font-size: 64px;
+    color: rgb(180, 0, 0);
+}
+
 .content{
     width: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
-    padding-left: 10%;
     gap: 48px;
     >h1{
         display: flex;
@@ -23,15 +27,15 @@ main{
 }
 
 .meals{
-    width: 90%;
+    width: 100%;
     display: flex;
     flex-wrap: wrap;
     align-items: center;
     justify-content: center;
-    gap: 72px;
+    gap: 64px;
 }
 
 app-meals-banner{
-    width: 80%;
-    height: 150px;
+    width: 40%;
+    height: 200px;
 }
