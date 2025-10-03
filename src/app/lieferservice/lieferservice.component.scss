@@ -5,9 +5,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background-image: url('./../../assets/img/bg-delivery-2.png');
-    background-size: 50% 50%;
-    object-fit: contain;
     gap: 48px;
     padding-top: 64px;
     padding-bottom: 64px;
@@ -16,10 +13,13 @@ main {
 h1 {
     font-size: 64px;    
     color: rgb(180, 0, 0);
-    background-color: white;
-    padding: 10px;
-    border-radius: 20px;
-    filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
+}
+
+h2 {
+    font-size: 32px;    
+    color: rgb(180, 0, 0);
+    filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
 }
 
 .sub-content {
@@ -27,16 +27,22 @@ h1 {
     justify-content: space-between;
     align-items: flex-start;
     gap: 32px;
-    width: 100%;
-    padding-left: 10%;
+    width: 90%;
+    padding: 0 5%;
 }
 
 .min-order {
     width: 100%;
     display: flex;
     flex-direction: column;
-    align-items: flex-start;
+    align-items: center;
+    justify-content: center;
     gap: 16px;
+     background-color: rgb(36, 36, 36);
+   padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    border-radius: 50px;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.393);
     >h2 {
         padding-left: 15px;
            filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.4));
@@ -44,13 +50,14 @@ h1 {
     >table {
         border-collapse: separate;
         border-spacing: 15px 24px;
-        background-color: white;
+    
         >tr {
             display: block;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.397);
             margin-bottom: 20px;
+            background-color: white;
         }
     }
 }
@@ -71,16 +78,22 @@ h1 {
     flex-direction: column;
     align-items: center;
     gap: 16px;
+    background-color: rgb(36, 36, 36);
+   padding: 12px;
+    border: 1px solid rgba(0, 0, 0, 0.356);
+    border-radius: 50px;
+    box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.393);
      >table {
         border-collapse: separate;
-        border-spacing: 45px 24px;
-            background-color: white;
+        border-spacing: 24px 24px;
+            
         >tr {
             display: block;
             border-radius: 8px;
             overflow: hidden;
             box-shadow: 0 1px 10px 1px rgba(0, 0, 0, 0.397);
             margin-bottom: 20px;
+            background-color: white;
         }
     }
 }

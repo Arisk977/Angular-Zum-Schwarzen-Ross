@@ -7,9 +7,10 @@ nav {
     >a {
         color: white;
         text-decoration: none;
+        font-weight: 700;
 
         &:hover {
-            color: orange;
+            color: rgb(180, 0, 0);
             cursor: pointer;
         }
     }
