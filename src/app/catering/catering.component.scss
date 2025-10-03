@@ -45,14 +45,30 @@ h1{
     margin: 0;
 }
 
-    .red-arrow{
-        width: 220px;
-        padding-top: 10px;
-        >img{
-            width: 100%;
-        }
-    }
+.red-arrow {
+  width: 220px;
+  padding-top: 10px;
+  overflow: hidden;
+}
 
+.red-arrow > img {
+  width: 100%;
+  /* Start: komplett abgeschnitten (rechts 100%) */
+  clip-path: inset(0 100% 0 0);
+  animation: revealRightToLeft 1s ease-in-out infinite;
+}
+
+@keyframes revealRightToLeft {
+  0% {
+    clip-path: inset(0 100% 0 0); /* komplett versteckt */
+  }
+  70% {
+    clip-path: inset(0 0 0 0);    /* vollständig sichtbar */
+  }
+  100% {
+    clip-path: inset(0 0 0 0);    /* bleibt sichtbar → Pause */
+  }
+}
 
     .img{
         width: 350px;

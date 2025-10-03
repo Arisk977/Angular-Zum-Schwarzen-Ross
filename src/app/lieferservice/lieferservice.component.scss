@@ -5,7 +5,6 @@ main {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 48px;
     padding-top: 64px;
     padding-bottom: 64px;
 }
@@ -106,4 +105,56 @@ h2 {
 app-button{
 align-self: center;
 
+}
+
+.pizza-car{
+    align-self: flex-end;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0;
+    padding-right: 5%;
+    margin-top: -180px;
+}
+
+.car{
+    width: 250px;
+    margin-right: -80px;
+    >img{
+        width: 100%;
+    }
+}
+
+.smoke {
+  width: 200px;
+  margin-bottom: -20px;
+  overflow: hidden;
+  > img {
+  width: 100%;
+  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 60%);
+          mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 60%);
+  -webkit-mask-repeat: no-repeat;
+          mask-repeat: no-repeat;
+  -webkit-mask-size: 200% 100%;
+          mask-size: 200% 100%;
+
+  animation: smokeMaskSlide 2s linear infinite;
+}
+}
+
+
+
+@keyframes smokeMaskSlide {
+  0% {
+    -webkit-mask-position: 0 0;
+            mask-position: 0 0;
+  }
+  50% {
+    -webkit-mask-position: 100% 0;
+            mask-position: 100% 0;
+  }
+  100% {
+    -webkit-mask-position: 0 0;
+            mask-position: 0 0;
+  }
 }
