@@ -10,15 +10,15 @@ main {
 }
 
 h1 {
-    font-size: 64px;    
+    font-size: 64px;
     color: rgb(180, 0, 0);
     filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
 }
 
 h2 {
-    font-size: 32px;    
+    font-size: 32px;
     color: rgb(180, 0, 0);
-    filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
+    filter: drop-shadow(1px 1px 1px rgba(255, 255, 255, 0.4));
 }
 
 .sub-content {
@@ -36,20 +36,21 @@ h2 {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 16px;
-     background-color: rgb(36, 36, 36);
-   padding: 12px;
+    gap: 8px;
+    background-color: rgb(36, 36, 36);
+    padding: 12px;
     border: 1px solid rgba(0, 0, 0, 0.356);
     border-radius: 50px;
     box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.393);
+
     >h2 {
         padding-left: 15px;
-           filter: drop-shadow(1px 1px 10px rgba(0, 0, 0, 0.4));
     }
+
     >table {
         border-collapse: separate;
         border-spacing: 15px 24px;
-    
+
         >tr {
             display: block;
             border-radius: 8px;
@@ -73,19 +74,20 @@ h2 {
 
 .company-offer {
     width: 100%;
-     display: flex;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 16px;
+    gap: 8px;
     background-color: rgb(36, 36, 36);
-   padding: 12px;
+    padding: 12px;
     border: 1px solid rgba(0, 0, 0, 0.356);
     border-radius: 50px;
     box-shadow: 1px 1px 10px 1px rgba(0, 0, 0, 0.393);
-     >table {
+
+    >table {
         border-collapse: separate;
         border-spacing: 24px 24px;
-            
+
         >tr {
             display: block;
             border-radius: 8px;
@@ -97,17 +99,17 @@ h2 {
     }
 }
 
-.meals{
+.meals {
     width: 200px;
     font-weight: 700;
 }
 
-app-button{
-align-self: center;
-
+app-button {
+    align-self: center;
+    padding-bottom: 16px;
 }
 
-.pizza-car{
+.pizza-car {
     align-self: flex-end;
     display: flex;
     justify-content: center;
@@ -117,44 +119,33 @@ align-self: center;
     margin-top: -180px;
 }
 
-.car{
+.car {
     width: 250px;
     margin-right: -80px;
-    >img{
+
+    >img {
         width: 100%;
     }
 }
 
 .smoke {
-  width: 200px;
-  margin-bottom: -20px;
-  overflow: hidden;
-  > img {
-  width: 100%;
-  -webkit-mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 60%);
-          mask-image: linear-gradient(to right, rgba(0,0,0,1) 30%, rgba(0,0,0,0) 60%);
-  -webkit-mask-repeat: no-repeat;
-          mask-repeat: no-repeat;
-  -webkit-mask-size: 200% 100%;
-          mask-size: 200% 100%;
+    width: 200px;
+    margin-bottom: -20px;
+    overflow: hidden;
 
-  animation: smokeMaskSlide 2s linear infinite;
-}
+    >img {
+        width: 100%;
+        animation: smokeInsetMove 1s linear infinite;
+        clip-path: inset(0 100% 0 0);
+    }
 }
 
+@keyframes smokeInsetMove {
+    0% {
+        clip-path: inset(0 100% 0 0);
+    }
 
-
-@keyframes smokeMaskSlide {
-  0% {
-    -webkit-mask-position: 0 0;
-            mask-position: 0 0;
-  }
-  50% {
-    -webkit-mask-position: 100% 0;
-            mask-position: 100% 0;
-  }
-  100% {
-    -webkit-mask-position: 0 0;
-            mask-position: 0 0;
-  }
+    100% {
+        clip-path: inset(0 0 0 0);
+    }
 }

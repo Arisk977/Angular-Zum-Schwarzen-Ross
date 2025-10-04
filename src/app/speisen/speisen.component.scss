@@ -1,4 +1,4 @@
-main{
+main {
     min-height: 100vh;
     width: 100%;
     display: flex;
@@ -8,26 +8,28 @@ main{
     padding-bottom: 72px;
 }
 
-h1{
+h1 {
     font-size: 64px;
     color: rgb(180, 0, 0);
+    filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
 }
 
-.content{
+.content {
     width: 100%;
     display: flex;
     flex-direction: column;
     align-content: center;
     justify-content: center;
     gap: 48px;
-    >h1{
+
+    >h1 {
         display: flex;
         justify-content: center;
         align-items: center;
     }
 }
 
-.meals{
+.meals {
     width: 100%;
     display: flex;
     flex-wrap: wrap;
@@ -36,7 +38,7 @@ h1{
     gap: 64px;
 }
 
-app-meals-banner{
+app-meals-banner {
     width: 40%;
     height: 200px;
 }

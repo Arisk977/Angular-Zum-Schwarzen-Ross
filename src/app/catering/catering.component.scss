@@ -1,57 +1,103 @@
-main{
-    min-height: 100vh;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    background-color: rgb(36, 36, 36);
-    color: white;
-    padding-top: 72px;
+main {
+  position: relative;
+  min-height: 100vh;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: rgb(36, 36, 36);
+  color: white;
+  padding-top: 72px;
 }
 
-h1{
-    font-size: 64px;
-    color: rgb(180, 0, 0);
-    margin: 0;
+h1 {
+  font-size: 64px;
+  color: rgb(180, 0, 0);
+  margin: 0;
+  filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
 }
 
-.content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    gap: 72px;
-    width: 100%;
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 72px;
+  width: 100%;
 }
 
-.image-container{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    width: 80%;
-    margin-top: -150px;
-    margin-bottom: -150px;
+.image-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 80%;
+  margin-top: -150px;
+  margin-bottom: -150px;
+  gap: 72px;
 }
 
-.button-container{
-    display: flex;
-    justify-content: flex-end;
-    padding-right: 15%;
-    align-items: center;
-    width: 100%;
-    height: auto;
-    gap: 16px;
-    margin: 0;
+.img {
+  width: 100%;
+  border-radius: 50px 10px;
+  box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
+}
+
+.catering-1 {
+  padding-top: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.catering-2 {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.catering-3 {
+  margin-top: -400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  gap: 16px;
+}
+
+.contact {
+  align-self: flex-end;
+  padding: 64px;
+  margin-top: -250px;
+  width: 450px;
+}
+
+.text {
+  width: 100%;
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 15%;
+  align-items: center;
+  width: 100%;
+  height: auto;
+  gap: 16px;
+  margin: 0;
 }
 
 .red-arrow {
-  width: 220px;
+  width: 300px;
   padding-top: 10px;
   overflow: hidden;
 }
 
-.red-arrow > img {
+.red-arrow>img {
   width: 100%;
   /* Start: komplett abgeschnitten (rechts 100%) */
   clip-path: inset(0 100% 0 0);
@@ -60,44 +106,62 @@ h1{
 
 @keyframes revealRightToLeft {
   0% {
-    clip-path: inset(0 100% 0 0); /* komplett versteckt */
+    clip-path: inset(0 100% 0 0);
   }
+
   70% {
-    clip-path: inset(0 0 0 0);    /* vollständig sichtbar */
+    clip-path: inset(0 0 0 0);
   }
+
   100% {
-    clip-path: inset(0 0 0 0);    /* bleibt sichtbar → Pause */
+    clip-path: inset(0 0 0 0);
   }
 }
 
-    .img{
-        width: 350px;
-        border-radius: 50px 10px ;
-        box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
-    }
+.catering-icon {
+  position: absolute;
+  top: 72px;
+  left: 72px;
+  width: 250px;
 
-    .catering-1{
-        padding-top: 400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-    }
+  >img {
+    position: absolute;
+    width: 100%;
+    opacity: 0; // Standard: unsichtbar
+    filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.403));
+    transition: opacity 0.6s ease-in-out;
+  }
 
-    .catering-2{
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-    }
+  .icon-1 {
+    animation: fadeCycle 2s infinite ease-in-out;
+  }
 
-    .catering-3{
-        margin-top: -400px;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-        align-items: center;
-        gap: 16px;
-    }
+  .icon-2 {
+    animation: fadeCycle 2s infinite ease-in-out;
+    animation-delay: 1s; // startet versetzt
+    margin-top: -12px;
+    margin-left: -5px;
+  }
+}
+
+@keyframes fadeCycle {
+  0% {
+    opacity: 1;
+  }
+
+  45% {
+    opacity: 1;
+  }
+
+  50% {
+    opacity: 0;
+  }
+
+  95% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
