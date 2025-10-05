@@ -2,34 +2,141 @@
     <div class="content">
         <h1>Speisen</h1>
         <div class="meals">
-            <app-meals-banner [title]="'Vorspeisen'" [backgroundImage]="'assets/img/oily-58745_1920.jpg'" (click)="onClick()">
+            <app-meals-banner [title]="'Vorspeisen'" [backgroundImage]="'assets/img/oily-58745_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Salate'" [backgroundImage]="'assets/img/vegetables-8176731_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Salate'" [backgroundImage]="'assets/img/vegetables-8176731_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'kleine Gerichte'" [backgroundImage]="'assets/img/nuggets.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Kleine Gerichte'" [backgroundImage]="'assets/img/nuggets.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Burger'" [backgroundImage]="'assets/img/ai-generated-8302143_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Burger'" [backgroundImage]="'assets/img/ai-generated-8302143_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'überbackene Nudeln'" [backgroundImage]="'assets/img/spaghetti-bolognese-7517639_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'überbackene Nudeln'"
+                [backgroundImage]="'assets/img/spaghetti-bolognese-7517639_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Nudelgerichte'" [backgroundImage]="'assets/img/spaghetti-bolognese-7517639_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Nudelgerichte'"
+                [backgroundImage]="'assets/img/spaghetti-bolognese-7517639_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Pizzen'" [backgroundImage]="'assets/img/ai-generated-8775471_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Pizzen'" [backgroundImage]="'assets/img/ai-generated-8775471_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Schnitzel'" [backgroundImage]="'assets/img/schnitzel-8147627_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Schnitzelgerichte'" [backgroundImage]="'assets/img/schnitzel-8147627_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Unsere Spezialitäten'" [backgroundImage]="'assets/img/schnitzel-8147627_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Unsere Spezialitäten'"
+                [backgroundImage]="'assets/img/schnitzel-8147627_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Argentinischer Rindersteak'" [backgroundImage]="'assets/img/steak-7423223_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Argentinische Rindersteaks'"
+                [backgroundImage]="'assets/img/steak-7423223_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Fischgerichte'" [backgroundImage]="'assets/img/seezungefilet.png'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Fischgerichte'" [backgroundImage]="'assets/img/seezungefilet.png'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Indische & Pakistanische Spezialitäten'" [backgroundImage]="'assets/img/biryani-7009110_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Indische & Pakistanische Spezialitäten'"
+                [backgroundImage]="'assets/img/biryani-7009110_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Dessert & Extras'" [backgroundImage]="'assets/img/tiramisu.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Dessert & Extras'" [backgroundImage]="'assets/img/tiramisu.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
-            <app-meals-banner [title]="'Getränke'" [backgroundImage]="'assets/img/cola-7263982_1920.jpg'" (click)="onClick()">
+
+            <app-meals-banner [title]="'Getränke'" [backgroundImage]="'assets/img/cola-7263982_1920.jpg'"
+                (clicked)="openScrollable(scrollContent, $event)">
             </app-meals-banner>
         </div>
     </div>
 </main>
+
+<ng-template #scrollContent let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title">{{ selectedTitle }}</h4>
+        <button type="button" class="btn-close" aria-label="Close" (click)="modal.dismiss()"></button>
+    </div>
+
+    <div class="modal-body">
+
+        <!-- Falls Daten vorhanden -->
+        <ng-container *ngIf="gefilterteGerichte.length > 0; else keineDaten">
+
+            <!-- 🔹 Gruppierung nach Unterkategorie (z. B. Dessert / Extras) -->
+            <ng-container *ngFor="let gruppe of groupByUnterkategorie(gefilterteGerichte)">
+                <ng-container *ngIf="gruppe.gerichte.length > 0">
+                    <!-- Unterkategorie nur anzeigen, wenn vorhanden -->
+                    <h5 *ngIf="gruppe.unterKategorie" class="unterkategorie-titel">
+                        {{ gruppe.unterKategorie }}
+                    </h5>
+
+                    <!-- 🔸 Liste der Gerichte -->
+                    <div *ngFor="let gericht of gruppe.gerichte" class="gericht">
+
+                        <div class="gericht-header">
+                            <div class="gericht-name">
+                                <span *ngIf="gericht.nummer" class="nummer">{{ gericht.nummer }}.</span>
+                                <strong>{{ gericht.name }}</strong>
+                            </div>
+
+                            <!-- 🔸 Preis-Anzeige -->
+                            <ng-container *ngIf="gericht.preis && typeof gericht.preis === 'object'; else singlePrice">
+                                <div class="preis-groessen">
+                                    <span *ngIf="gericht.preis['30cm']">
+                                        30 cm:
+                                        <span class="preiswert">
+                                            {{ gericht.preis['30cm'] | currency:'EUR':'symbol':'1.2-2' }}
+                                        </span>
+                                    </span>
+                                    <span *ngIf="gericht.preis['40cm']">
+                                        40 cm:
+                                        <span class="preiswert">
+                                            {{ gericht.preis['40cm'] | currency:'EUR':'symbol':'1.2-2' }}
+                                        </span>
+                                    </span>
+
+                                </div>
+                            </ng-container>
+
+                            <ng-template #singlePrice>
+                                <span class="preis">
+                                    {{ gericht.preis | currency:'EUR':'symbol':'1.2-2' }}
+                                </span>
+                            </ng-template>
+                        </div>
+
+                        <!-- Beschreibung -->
+                        <div class="beschreibung text-muted">
+                            {{ gericht.beschreibung }}
+                        </div>
+                    </div>
+                </ng-container>
+            </ng-container>
+        </ng-container>
+
+        <!-- Falls keine Gerichte -->
+        <ng-template #keineDaten>
+            <p>❌ Keine Gerichte in dieser Kategorie gefunden.</p>
+        </ng-template>
+
+    </div>
+
+    <div class="modal-footer">
+        <button class="btn btn-outline-secondary" (click)="modal.close()">Schließen</button>
+    </div>
+</ng-template>

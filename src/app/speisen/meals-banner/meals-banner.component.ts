@@ -8,11 +8,11 @@ import { Component, EventEmitter, Input, Output } from '@angular/core';
   styleUrl: './meals-banner.component.scss'
 })
 export class MealsBannerComponent {
-@Input() title: string = '';                     // Text im <div>
-  @Input() backgroundImage: string = ''; 
-   @Output() bannerClick = new EventEmitter<void>();
+@Input() title!: string;
+  @Input() backgroundImage!: string; 
+   @Output() clicked = new EventEmitter<string>();
 
-  onClick() {
-    this.bannerClick.emit();
+  onBannerClick() {
+    this.clicked.emit(this.title);
   }
 }

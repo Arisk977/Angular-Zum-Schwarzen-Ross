@@ -1,4 +1,4 @@
-.container {
+.hero-container {
   position: relative; /* wichtig für absolute Positionierung des Videos */
   width: 100%;
   min-height: 100vh;
@@ -6,7 +6,7 @@
   display: flex;
   align-items: center;
   justify-content: flex-start;
-  overflow: hidden; /* verhindert Scrollbars durch Video */
+  overflow: hidden;
 }
 
 .background-clip {
@@ -21,7 +21,7 @@
 
 .slogan{
   display: flex;
-  justify-content: space-around;
+  justify-content: center;
   align-items: center;
   gap: 200px;
 
