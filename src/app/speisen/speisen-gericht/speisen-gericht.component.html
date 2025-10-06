@@ -1,0 +1,30 @@
+<div class="gericht" [class.alternate-bg]="alternate">
+  <div class="gericht-header">
+    <div class="gericht-name">
+      <span *ngIf="gericht.nummer" class="nummer">{{ gericht.nummer }}.</span>
+      <strong>{{ gericht.name }}</strong>
+    </div>
+
+    <!-- Preis -->
+    <ng-container *ngIf="gericht.preis && typeof gericht.preis === 'object'; else singlePrice">
+      <div class="preis-groessen">
+        <span *ngIf="gericht.preis['30cm']">
+          30 cm:
+          <span class="preiswert">{{ gericht.preis['30cm'] | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </span>
+        <span *ngIf="gericht.preis['40cm']">
+          40 cm:
+          <span class="preiswert">{{ gericht.preis['40cm'] | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </span>
+      </div>
+    </ng-container>
+
+    <ng-template #singlePrice>
+      <span class="preis">
+        {{ gericht.preis | currency:'EUR':'symbol':'1.2-2' }}
+      </span>
+    </ng-template>
+  </div>
+
+  <div class="beschreibung text-muted">{{ gericht.beschreibung }}</div>
+</div>

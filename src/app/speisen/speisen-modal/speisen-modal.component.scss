@@ -1,0 +1,48 @@
+.modal-body {
+  max-height: 70vh;
+  overflow-y: auto;
+  padding: 1rem 1.5rem;
+
+  // Scrollbar dezent anpassen
+  &::-webkit-scrollbar {
+    width: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(160, 0, 0, 0.6);
+    border-radius: 3px;
+  }
+}
+
+.modal-header {
+  background: rgba(160, 0, 0, 0.85);
+  color: white;
+  font-family: 'Kalam', sans-serif;
+  font-size: 1.4rem;
+  letter-spacing: 1px;
+  border-bottom: none;
+  padding: 0.8rem 1.2rem;
+}
+
+.modal-footer {
+  border-top: none;
+  padding: 0.8rem 1.2rem;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.btn-outline-secondary {
+  border-color: rgb(160, 0, 0);
+  color: rgb(160, 0, 0);
+
+  &:hover {
+    background-color: rgb(160, 0, 0);
+    color: white;
+  }
+}
+
+.btn-close:focus,
+.btn-close:active {
+  outline: none !important;
+  box-shadow: none !important;
+}

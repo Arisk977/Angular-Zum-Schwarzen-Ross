@@ -1,0 +1,26 @@
+.unterkategorie-titel {
+  margin-top: 1.2rem;
+  margin-bottom: 0.4rem;
+  font-size: 1.2rem;
+  font-weight: 600;
+  border-bottom: 1px solid #ccc;
+  padding-bottom: 4px;
+  color: rgb(160, 0, 0);
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+:host {
+  display: block;
+  margin-bottom: 1rem;
+}
+
+.alternate-bg {
+  background-color: #f7f7f7;
+  transition: background-color 0.3s ease-in-out;
+}
+
+app-speisen-gericht:hover {
+  background-color: #ececec;
+}
+

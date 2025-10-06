@@ -1,0 +1,67 @@
+.gericht {
+    border-bottom: 1px solid #e0e0e0;
+    padding: 12px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+
+    &:hover {
+        background-color: #c1bebe;
+        cursor: pointer;
+    }
+
+    &:last-child {
+        border-bottom: none;
+    }
+}
+
+.alternate-bg {
+    background-color: #fff3f3;
+}
+
+.gericht-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-weight: 500;
+}
+
+.gericht-name {
+    display: flex;
+    align-items: baseline;
+    gap: 0.4rem;
+
+    .nummer {
+        color: #555;
+        font-weight: 400;
+    }
+}
+
+.preis {
+    color: rgb(160, 0, 0);
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.preis-groessen {
+    display: flex;
+    flex-direction: column;
+    text-align: right;
+    font-size: 0.9rem;
+
+    span {
+        line-height: 1.3;
+        color: black;
+
+        .preiswert {
+            color: rgb(160, 0, 0);
+            font-weight: 600;
+            margin-left: 0.3rem;
+        }
+    }
+}
+
+.beschreibung {
+    margin-left: 1.5rem;
+    font-size: 0.9rem;
+    color: #555;
+}

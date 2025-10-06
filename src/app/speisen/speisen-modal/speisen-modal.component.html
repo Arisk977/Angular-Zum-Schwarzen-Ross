@@ -1,0 +1,21 @@
+<div class="modal-header">
+  <h4 class="modal-title">{{ title }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <ng-container *ngIf="gerichte.length > 0; else keineDaten">
+    <app-speisen-gruppe
+      *ngFor="let gruppe of groupByUnterkategorie(gerichte)"
+      [gruppe]="gruppe">
+    </app-speisen-gruppe>
+  </ng-container>
+
+  <ng-template #keineDaten>
+    <p>❌ Keine Gerichte in dieser Kategorie gefunden.</p>
+  </ng-template>
+</div>
+
+<div class="modal-footer">
+  <button class="btn btn-outline-secondary" (click)="close()">Schließen</button>
+</div>

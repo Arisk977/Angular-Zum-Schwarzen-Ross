@@ -1,0 +1,13 @@
+<ng-container *ngIf="gruppe.gerichte.length > 0">
+  <h5 *ngIf="gruppe.unterKategorie" class="unterkategorie-titel">
+    {{ gruppe.unterKategorie }}
+  </h5>
+
+<app-speisen-gericht
+  *ngFor="let gericht of gruppe.gerichte; let i = index"
+  [gericht]="gericht"
+  [alternate]="i % 2 === 1">
+</app-speisen-gericht>
+
+
+</ng-container>
