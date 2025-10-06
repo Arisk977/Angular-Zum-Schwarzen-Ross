@@ -1,0 +1,19 @@
+<app-header></app-header>
+<div class="login-container">
+  <h2>📱 Telefon Login</h2>
+
+  <!-- Schritt 1: Telefonnummer -->
+  <form *ngIf="step === 1" (ngSubmit)="sendCode()" class="login-form">
+    <label>Telefonnummer:</label>
+    <input type="tel" [(ngModel)]="phoneNumber" name="phone" placeholder="+49 170 1234567" required />
+    <button type="submit">Code anfordern</button>
+    <div id="recaptcha-container"></div>
+  </form>
+
+  <!-- Schritt 2: SMS Code -->
+  <form *ngIf="step === 2" (ngSubmit)="confirmCode()" class="login-form">
+    <label>SMS-Code:</label>
+    <input type="text" [(ngModel)]="verificationCode" name="code" placeholder="z. B. 123456" required />
+    <button type="submit">Anmelden</button>
+  </form>
+</div>

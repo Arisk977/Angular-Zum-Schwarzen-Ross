@@ -19,25 +19,52 @@ export class SpeisenComponent implements OnInit {
   selectedTitle = '';
   gefilterteGerichte: Gericht[] = [];
   kategorien: string[] = [
-  'Vorspeisen',
-  'Salate',
-  'Kleine Gerichte',
-  'Burger',
-  'Überbackene Nudeln',
-  'Nudelgerichte',
-  'Pizzen',
-  'Schnitzelgerichte',
-  'Unsere Spezialitäten',
-  'Argentinische Rindersteaks',
-  'Fischgerichte',
-  'Indische & Pakistanische Spezialitäten',
-  'Dessert & Extras',
-  'Getränke'
-];
-
+    'Vorspeisen',
+    'Salate',
+    'Kleine Gerichte',
+    'Burger',
+    'Überbackene Nudeln',
+    'Nudelgerichte',
+    'Pizzen',
+    'Schnitzelgerichte',
+    'Unsere Spezialitäten',
+    'Argentinische Rindersteaks',
+    'Fischgerichte',
+    'Indische & Pakistanische Spezialitäten',
+    'Dessert & Extras',
+    'Getränke'
+  ];
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
+  
+  private erstelleModal(title: string, index: number) {
+    const modalRef = this.modalService.open(SpeisenModalComponent, { scrollable: true, size: 'lg' });
+    modalRef.componentInstance.title = title;
+    modalRef.componentInstance.kategorien = this.kategorien;
+    modalRef.componentInstance.currentIndex = index;
+    modalRef.componentInstance.speisen = this.speisen;
+    return modalRef;
+  }
 
+  private ermittleGerichteZuTitel(title: string): Gericht[] {
+    const kategorie = this.speisen[title];
+
+    if (Array.isArray(kategorie)) {
+      return kategorie;
+    }
+    if (typeof kategorie === 'object' && kategorie !== null) {
+      return this.extrahiereGerichteAusKategorie(kategorie as Record<string, Gericht[]>);
+    }
+    return [];
+  }
+
+  private extrahiereGerichteAusKategorie(kategorieObj: Record<string, Gericht[]>): Gericht[] {
+    const gerichte: Gericht[] = [];
+    for (const [unterKategorie, gruppe] of Object.entries(kategorieObj)) {
+      gerichte.push(...gruppe.map(g => ({ ...g, unterKategorie })));
+    }
+    return gerichte;
+  }
   ngOnInit() {
     this.http.get<Speisekarte>('assets/json/speisekarte_complete.json').subscribe({
       next: (daten) => (this.speisen = daten),
@@ -45,29 +72,13 @@ export class SpeisenComponent implements OnInit {
     });
   }
 
-openScrollable(title: string) {
-  const index = this.kategorien.indexOf(title);
-  const modalRef = this.modalService.open(SpeisenModalComponent, { scrollable: true, size: 'lg' });
+  openScrollable(title: string) {
+    const index = this.kategorien.indexOf(title);
+    const modalRef = this.erstelleModal(title, index);
 
-  modalRef.componentInstance.title = title;
-  modalRef.componentInstance.kategorien = this.kategorien;
-  modalRef.componentInstance.currentIndex = index;
-  modalRef.componentInstance.speisen = this.speisen;
-
-  const kategorie = this.speisen[title];
-
-  if (Array.isArray(kategorie)) {
-    modalRef.componentInstance.gerichte = kategorie;
-  } else if (typeof kategorie === 'object' && kategorie !== null) {
-    const gerichte: Gericht[] = [];
-    for (const [unterKategorie, gruppe] of Object.entries(kategorie as Record<string, Gericht[]>)) {
-      gerichte.push(...gruppe.map(g => ({ ...g, unterKategorie })));
-    }
+    const gerichte = this.ermittleGerichteZuTitel(title);
     modalRef.componentInstance.gerichte = gerichte;
-  } else {
-    modalRef.componentInstance.gerichte = [];
   }
-}
 
 
 }
