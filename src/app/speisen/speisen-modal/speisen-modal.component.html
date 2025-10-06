@@ -16,6 +16,24 @@
   </ng-template>
 </div>
 
-<div class="modal-footer">
-  <button class="btn btn-outline-secondary" (click)="close()">Schließen</button>
+<div class="modal-footer navigation-footer">
+  <button
+    class="arrow-btn"
+    (click)="navigate('prev')"
+    [disabled]="currentIndex === 0"
+  >
+    ←
+  </button>
+
+  <span class="page-info">
+    {{ currentIndex + 1 }} / {{ kategorien.length }}
+  </span>
+
+  <button
+    class="arrow-btn"
+    (click)="navigate('next')"
+    [disabled]="currentIndex === kategorien.length - 1"
+  >
+    →
+  </button>
 </div>

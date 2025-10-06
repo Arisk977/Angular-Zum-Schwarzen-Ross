@@ -5,11 +5,12 @@ import { CommonModule } from '@angular/common';
 import { Gericht, Speisekarte } from './../interfaces/speisekarte.interface';
 import { HttpClient } from '@angular/common/http';
 import { SpeisenModalComponent } from './speisen-modal/speisen-modal.component';
+import { HeaderComponent } from '../shared/component/header/header.component';
 
 @Component({
   selector: 'app-speisen',
   standalone: true,
-  imports: [MealsBannerComponent, CommonModule],
+  imports: [MealsBannerComponent, CommonModule, HeaderComponent],
   templateUrl: './speisen.component.html',
   styleUrl: './speisen.component.scss'
 })
@@ -17,6 +18,23 @@ export class SpeisenComponent implements OnInit {
   speisen: Speisekarte = {};
   selectedTitle = '';
   gefilterteGerichte: Gericht[] = [];
+  kategorien: string[] = [
+  'Vorspeisen',
+  'Salate',
+  'Kleine Gerichte',
+  'Burger',
+  'Überbackene Nudeln',
+  'Nudelgerichte',
+  'Pizzen',
+  'Schnitzelgerichte',
+  'Unsere Spezialitäten',
+  'Argentinische Rindersteaks',
+  'Fischgerichte',
+  'Indische & Pakistanische Spezialitäten',
+  'Dessert & Extras',
+  'Getränke'
+];
+
 
   constructor(private http: HttpClient, private modalService: NgbModal) { }
 
@@ -27,28 +45,29 @@ export class SpeisenComponent implements OnInit {
     });
   }
 
-  openScrollable(title: string) {
-    this.selectedTitle = title;
+openScrollable(title: string) {
+  const index = this.kategorien.indexOf(title);
+  const modalRef = this.modalService.open(SpeisenModalComponent, { scrollable: true, size: 'lg' });
 
-    const kategorie = this.speisen[title];
+  modalRef.componentInstance.title = title;
+  modalRef.componentInstance.kategorien = this.kategorien;
+  modalRef.componentInstance.currentIndex = index;
+  modalRef.componentInstance.speisen = this.speisen;
 
-    let gefilterteGerichte: any[] = [];
+  const kategorie = this.speisen[title];
 
-    if (Array.isArray(kategorie)) {
-      gefilterteGerichte = kategorie;
-    } else if (typeof kategorie === 'object' && kategorie !== null) {
-      for (const [unterKategorie, gerichte] of Object.entries(kategorie as Record<string, any[]>)) {
-        gefilterteGerichte.push(
-          ...gerichte.map(g => ({
-            ...g,
-            unterKategorie
-          }))
-        );
-      }
+  if (Array.isArray(kategorie)) {
+    modalRef.componentInstance.gerichte = kategorie;
+  } else if (typeof kategorie === 'object' && kategorie !== null) {
+    const gerichte: Gericht[] = [];
+    for (const [unterKategorie, gruppe] of Object.entries(kategorie as Record<string, Gericht[]>)) {
+      gerichte.push(...gruppe.map(g => ({ ...g, unterKategorie })));
     }
-
-    const modalRef = this.modalService.open(SpeisenModalComponent, { scrollable: true, size: 'lg' });
-    modalRef.componentInstance.title = title;
-    modalRef.componentInstance.gerichte = gefilterteGerichte;
+    modalRef.componentInstance.gerichte = gerichte;
+  } else {
+    modalRef.componentInstance.gerichte = [];
   }
+}
+
+
 }
