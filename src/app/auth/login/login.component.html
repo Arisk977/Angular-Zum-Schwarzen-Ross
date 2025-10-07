@@ -1,19 +1,42 @@
 <app-header></app-header>
+
 <div class="login-container">
-  <h2>📱 Telefon Login</h2>
+  <h2>🔐 Login</h2>
 
-  <!-- Schritt 1: Telefonnummer -->
-  <form *ngIf="step === 1" (ngSubmit)="sendCode()" class="login-form">
-    <label>Telefonnummer:</label>
-    <input type="tel" [(ngModel)]="phoneNumber" name="phone" placeholder="+49 170 1234567" required />
-    <button type="submit">Code anfordern</button>
-    <div id="recaptcha-container"></div>
-  </form>
+  <form (ngSubmit)="login()" class="login-form">
+    <!-- Email -->
+    <label for="email">E-Mail-Adresse:</label>
+    <input
+      type="email"
+      id="email"
+      name="email"
+      [(ngModel)]="email"
+      placeholder="z. B. name@email.de"
+      required
+    />
 
-  <!-- Schritt 2: SMS Code -->
-  <form *ngIf="step === 2" (ngSubmit)="confirmCode()" class="login-form">
-    <label>SMS-Code:</label>
-    <input type="text" [(ngModel)]="verificationCode" name="code" placeholder="z. B. 123456" required />
+    <!-- Passwort -->
+    <label for="password">Passwort:</label>
+    <input
+      type="password"
+      id="password"
+      name="password"
+      [(ngModel)]="password"
+      placeholder="••••••••"
+      required
+    />
+
+    <!-- Remember Me -->
+    <div class="remember-me">
+      <input type="checkbox" id="rememberMe" [(ngModel)]="rememberMe" name="rememberMe" />
+      <label for="rememberMe">Angemeldet bleiben</label>
+    </div>
+
     <button type="submit">Anmelden</button>
   </form>
+
+  <div class="register-link">
+    <p>Noch keinen Account?</p>
+    <a routerLink="/register">Jetzt registrieren</a>
+  </div>
 </div>

@@ -3,28 +3,31 @@ import { HeaderComponent } from '../../shared/component/header/header.component'
 import { AuthService } from '../auth.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+import { Router, RouterModule  } from '@angular/router';
+
 
 @Component({
   selector: 'app-login',
-  imports: [HeaderComponent, FormsModule, CommonModule],
+  standalone: true,
+  imports: [HeaderComponent, FormsModule, CommonModule, RouterModule],
   templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+  styleUrls: ['./login.component.scss']
 })
 export class LoginComponent {
- phoneNumber = '';
-  verificationCode = '';
-  step = 1; // 1 = Eingabe Telefonnummer, 2 = Code-Eingabe
+  email = '';
+  password = '';
+  rememberMe = false;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
-  async sendCode() {
-    const verifier = this.authService.setupRecaptcha('recaptcha-container');
-    await this.authService.sendVerificationCode(this.phoneNumber, verifier);
-    this.step = 2;
-  }
-
-  async confirmCode() {
-    await this.authService.verifyCode(this.verificationCode);
-    alert('Erfolgreich eingeloggt!');
+  async login() {
+    try {
+      await this.authService.loginWithEmail(this.email, this.password, this.rememberMe);
+      alert('✅ Erfolgreich eingeloggt!');
+      this.router.navigate(['/']); // z. B. zur Startseite
+    } catch (err: any) {
+      console.error('❌ Login-Fehler:', err);
+      alert('Login fehlgeschlagen: ' + err.message);
+    }
   }
 }
