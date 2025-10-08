@@ -80,6 +80,7 @@
 
         &:hover {
           text-decoration: underline;
+          cursor: pointer;
         }
       }
     }
@@ -126,11 +127,11 @@
       }
 
       #postalCode{
-        width: 250px;
+        width: 80px;
       }
 
       #city{
-        width: 80px;
+        width: 250px;
       }
 
      

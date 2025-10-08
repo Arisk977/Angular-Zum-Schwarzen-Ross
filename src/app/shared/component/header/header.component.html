@@ -5,9 +5,33 @@
             <a>Lieferservice</a>
             <a>Catering</a>
             <a routerLink="/speisen" routerLinkActive="active">Speisekarte</a>
-            <a routerLink="/warenkorb" routerLinkActive="active">Warenkorb</a>
-            <a routerLink="/bestellungen" routerLinkActive="active">Bestellungen</a>
-            <a routerLink="/login" routerLinkActive="active">Login</a>
+
+            <div class="cart-icon-container" (click)="toggleCart()">
+                <div class="cart-icon" [class.animate]="cartAnimate">
+                    🛒
+                </div>
+                <div class="cart-count" *ngIf="cartCount > 0">
+                    {{ cartCount }}
+                </div>
+            </div>
+
+            <a *ngIf="!isLoggedIn" routerLink="/login" routerLinkActive="active">Login</a>
+
+            <div *ngIf="isLoggedIn" class="avatar-wrapper">
+                <div (click)="toggleMenu()" class="user-avatar" [ngStyle]="{ 'background-color': avatarColor }">
+                    {{ initials }}
+                </div>
+
+                <div class="dropdown-menu" *ngIf="menuOpen">
+                    <a routerLink="/account">👤 Account-Details</a>
+                    <hr>
+                    <a routerLink="/bestellungen">🧾 Meine Bestellungen</a>
+                    <hr />
+                    <a (click)="logout()">🚪 Logout</a>
+                </div>
+            </div>
         </nav>
     </div>
 </main>
+
+<app-warenkorb [isOpen]="cartOpen"></app-warenkorb>

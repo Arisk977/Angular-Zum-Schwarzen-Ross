@@ -27,8 +27,12 @@ export class RegisterComponent {
   };
 
   privacyAccepted = false;
+  private randomColor(): string {
+    const colors = ['#FF8A80', '#FFB74D', '#81C784', '#64B5F6', '#BA68C8', '#F06292'];
+    return colors[Math.floor(Math.random() * colors.length)];
+  }
 
-  constructor(private auth: Auth, private firestore: Firestore, private router: Router) {}
+  constructor(private auth: Auth, private firestore: Firestore, private router: Router) { }
 
   async register() {
     try {
@@ -43,6 +47,8 @@ export class RegisterComponent {
         this.user.password
       );
 
+      const avatarColor = this.randomColor();
+
       const userRef = doc(this.firestore, `users/${credential.user.uid}`);
       await setDoc(userRef, {
         vorname: this.user.firstName,
@@ -55,6 +61,7 @@ export class RegisterComponent {
         },
         telefonnummer: this.user.phone,
         email: this.user.email,
+        avatarColor: avatarColor,
         createdAt: new Date().toISOString()
       });
 
