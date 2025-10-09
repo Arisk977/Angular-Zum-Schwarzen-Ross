@@ -1,0 +1,106 @@
+{
+    "zutaten": {
+        "vorspeisen": {},
+        "salate": {"kostenlos": [
+            "Senfsoße",
+            "Joghurtsoße",
+            "Essig Öl",
+            "Balsamico"
+        ],
+            "0.50€": [
+                "Champignons",
+                "Mais",
+                "Rucola",
+                "Paprika",
+                "Zwiebeln",
+                "Schinken",
+                "Käse",
+                "Peperonie",
+                "Oliven",
+                "Karotten",
+                "Weißkraut"
+            ],
+            "1.00€": [
+                "Mozzarella",
+                "Schafskäse",
+                "Garnelen",
+                "Thunfisch",
+                "Hähnchenfleisch",
+                "gekochtes Ei"
+            ]
+        },
+        "kleine_gerichte": {},
+        "burger": {},
+        "überbackene_nudeln": {},
+        "nudelgerichte": {
+            "0.50€": [
+                "viel Soße"
+            ],
+            "1.00€": [
+                "Käse überbacken"
+            ]
+        },
+        "pizzen": {
+            "kostenlos": [
+                "Tomatensoße",
+                "Tabasco",
+                "Hollandaise Soße",
+                "Barbecue Soße",
+                "Knoblauchsoße",
+                "scharf"
+            ],
+            "0.50€": [
+                "Salami",
+                "Schinken",
+                "Peperoniwurst",
+                "Champignons",
+                "Mais",
+                "Rucola",
+                "Paprika",
+                "Artischocken",
+                "Kapern",
+                "Ananas",
+                "Zwiebeln",
+                "Sucuk",
+                "Jalapeño",
+                "Peperonie",
+                "Oliven"
+            ],
+            "1.00€": [
+                "Thunfisch",
+                "Krabben",
+                "Sardellen",
+                "Gorgonzola",
+                "Mozzarella",
+                "Schafskäse",
+                "Käse",
+                "Hähnchenfleisch",
+                "Spiegelei",
+                "Hackfleisch",
+                "Parmesan"
+            ]
+        },
+        "schnitzelgerichte": {
+            "0.50€": [
+                "viel Soße",
+                "Soße extra verpackt"
+            ]
+        },
+        "unsere_spezialitäten": {
+            "0.50€": [
+                "viel Soße",
+                "Soße extra verpackt"
+            ]
+        },
+        "argentinische_rindersteaks": {},
+        "fischgerichte": {},
+        "indische_und_pakistanische_spezialitäten": {
+            "0.50€": [
+                "viel Soße",
+                "Soße extra verpackt"
+            ]
+        },
+        "dessert_und_extras": {},
+        "getränke": {}
+    }
+}
