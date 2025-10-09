@@ -1,4 +1,4 @@
-<div class="gericht" [class.alternate-bg]="alternate">
+<div class="gericht" [class.alternate-bg]="alternate" (click)="onClick()">
   <div class="gericht-header">
     <div class="gericht-name">
       <span *ngIf="gericht.nummer" class="nummer">{{ gericht.nummer }}.</span>

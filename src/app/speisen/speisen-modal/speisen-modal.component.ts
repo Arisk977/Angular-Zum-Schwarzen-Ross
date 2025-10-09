@@ -1,8 +1,9 @@
 import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpeisenGruppeComponent } from '../speisen-gruppe/speisen-gruppe.component';
 import { Speisekarte, Gericht } from '../../interfaces/speisekarte.interface';
+import { ZutatenModalComponent } from '../zutaten-modal/zutaten-modal.component';
 
 @Component({
   selector: 'app-speisen-modal',
@@ -14,23 +15,30 @@ import { Speisekarte, Gericht } from '../../interfaces/speisekarte.interface';
 export class SpeisenModalComponent {
   @Input() title: string = '';
   @Input() gerichte: Gericht[] = [];
-  @Input() kategorien: string[] = []; // ✅ vom Haupt-Component übergeben
-  @Input() currentIndex: number = 0; // ✅ aktuelle Kategorieposition
-  @Input() speisen: Speisekarte = {}; // ✅ vollständige Daten für Navigation
+  @Input() kategorien: string[] = [];
+  @Input() currentIndex: number = 0;
+  @Input() speisen: Speisekarte = {};
 
-  constructor(public activeModal: NgbActiveModal) {}
+  constructor(
+    public activeModal: NgbActiveModal,
+    private modalService: NgbModal
+  ) {}
 
   close() {
     this.activeModal.close();
   }
 
-  groupByUnterkategorie(gerichte: any[]): { unterKategorie: string | null, gerichte: any[] }[] {
+  groupByUnterkategorie(
+    gerichte: any[]
+  ): { unterKategorie: string | null; gerichte: any[] }[] {
     const gruppen: Record<string, any[]> = {};
+
     for (const g of gerichte) {
       const key = g.unterKategorie || '';
       if (!gruppen[key]) gruppen[key] = [];
       gruppen[key].push(g);
     }
+
     return Object.entries(gruppen).map(([unterKategorie, gerichte]) => ({
       unterKategorie: unterKategorie || null,
       gerichte
@@ -55,9 +63,23 @@ export class SpeisenModalComponent {
     if (Array.isArray(kategorie)) {
       this.gerichte = kategorie;
     } else if (typeof kategorie === 'object' && kategorie !== null) {
-      for (const [unterKategorie, gerichte] of Object.entries(kategorie as Record<string, Gericht[]>)) {
+      for (const [unterKategorie, gerichte] of Object.entries(
+        kategorie as Record<string, Gericht[]>
+      )) {
         this.gerichte.push(...gerichte.map(g => ({ ...g, unterKategorie })));
       }
     }
+  }
+
+  openGerichtDetail(gericht: Gericht) {
+    const modalRef = this.modalService.open(ZutatenModalComponent, {
+      size: 'lg',
+      backdrop: 'static'
+    });
+
+    modalRef.componentInstance.gericht = {
+      ...gericht,
+      kategorie: this.title // ✅ Kategorie mitgeben
+    };
   }
 }

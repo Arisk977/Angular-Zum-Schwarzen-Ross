@@ -1,1 +1,27 @@
-<p>zutaten-modal works!</p>
+<div class="modal-header">
+  <h4 class="modal-title">{{ gericht?.name }}</h4>
+  <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
+</div>
+
+<div class="modal-body">
+  <!-- Hier wird später je nach Kategorie der richtige Flow geladen -->
+  <ng-container [ngSwitch]="flowType">
+
+    <div *ngSwitchCase="'pizza'">
+      <p>🍕 Pizza Flow wird hier geladen...</p>
+    </div>
+
+    <div *ngSwitchCase="'burger'">
+      <p>🍔 Burger Flow wird hier geladen...</p>
+    </div>
+
+    <div *ngSwitchCase="'pasta'">
+      <p>🍝 Pasta Flow wird hier geladen...</p>
+    </div>
+
+    <div *ngSwitchDefault>
+      <p>📝 Standard Flow für einfache Gerichte</p>
+    </div>
+
+  </ng-container>
+</div>

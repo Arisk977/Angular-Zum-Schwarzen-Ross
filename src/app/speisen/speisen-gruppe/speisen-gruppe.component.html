@@ -6,7 +6,9 @@
 <app-speisen-gericht
   *ngFor="let gericht of gruppe.gerichte; let i = index"
   [gericht]="gericht"
-  [alternate]="i % 2 === 1">
+  [alternate]="i % 2 === 1"
+   (gerichtClicked)="onGerichtClicked($event)"
+  >
 </app-speisen-gericht>
 
 

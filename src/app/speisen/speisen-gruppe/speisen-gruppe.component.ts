@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { SpeisenGerichtComponent } from '../speisen-gericht/speisen-gericht.component';
 
@@ -11,4 +11,9 @@ import { SpeisenGerichtComponent } from '../speisen-gericht/speisen-gericht.comp
 })
 export class SpeisenGruppeComponent {
   @Input() gruppe: { unterKategorie: string | null; gerichte: any[] } = { unterKategorie: null, gerichte: [] };
+  @Output() gerichtSelected = new EventEmitter<any>();
+
+  onGerichtClicked(gericht: any) {
+    this.gerichtSelected.emit(gericht);
+  }
 }

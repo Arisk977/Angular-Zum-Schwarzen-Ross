@@ -1,4 +1,4 @@
-import { Component, Input } from '@angular/core';
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -11,5 +11,9 @@ import { CommonModule } from '@angular/common';
 export class SpeisenGerichtComponent {
   @Input() gericht: any;
   @Input() alternate: boolean = false;
+    @Output() gerichtClicked = new EventEmitter<any>();
 
+   onClick() {
+    this.gerichtClicked.emit(this.gericht);
+  }
 }
