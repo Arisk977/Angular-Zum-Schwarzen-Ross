@@ -3,13 +3,13 @@ import { CommonModule } from '@angular/common';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { SpeisenGruppeComponent } from './speisen-gruppe/speisen-gruppe.component';
 import { Speisekarte, Gericht } from '../../interfaces/speisekarte.interface';
-import { ZutatenModalComponent } from '../zutaten-modal/zutaten-modal.component';
-import { DeleteIngredientsComponent} from './delete-ingredients/delete-ingredients.component';
+import { DeleteIngredientsComponent } from './delete-ingredients/delete-ingredients.component';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-speisen-modal',
   standalone: true,
-  imports: [CommonModule, SpeisenGruppeComponent, DeleteIngredientsComponent],
+  imports: [CommonModule, FormsModule, SpeisenGruppeComponent, DeleteIngredientsComponent],
   templateUrl: './speisen-modal.component.html',
   styleUrl: './speisen-modal.component.scss'
 })
@@ -20,24 +20,50 @@ export class SpeisenModalComponent {
   @Input() currentIndex: number = 0;
   @Input() speisen: Speisekarte = {};
 
- gerichtZumBearbeiten: Gericht | null = null;
+  selectedDish: Gericht | null = null;
   isDeleteIngredientsActive = false;
+  isSizeSelectionActive = false;
+  selectedSize: string | null = null
 
   @ViewChild(DeleteIngredientsComponent) deleteIngredientsComp?: DeleteIngredientsComponent;
   constructor(
     public activeModal: NgbActiveModal,
     private modalService: NgbModal
-  ) {}
+  ) { }
 
-  openDeleteIngredients(gericht: Gericht) {
-    this.gerichtZumBearbeiten = gericht;
+openDeleteIngredients(dish: Gericht) {
+  this.selectedDish = dish;
+
+  const price = dish.preis;
+  const hasSizeOptions =
+    typeof price === 'object' &&
+    price !== null &&
+    ('30cm' in price || '40cm' in price);
+
+  if (hasSizeOptions) {
+    this.isSizeSelectionActive = true;
+    this.isDeleteIngredientsActive = false;
+  } else {
+    this.isDeleteIngredientsActive = true;
+    this.isSizeSelectionActive = false;
+  }
+}
+
+
+selectSizeAndContinue() {
+  if (this.selectedSize) {
+    console.log('✅ Gewählte Größe:', this.selectedSize);
+    this.isSizeSelectionActive = false;
     this.isDeleteIngredientsActive = true;
   }
+}
 
-  backToList() {
-    this.isDeleteIngredientsActive = false;
-    this.gerichtZumBearbeiten = null;
-  }
+backToList() {
+  this.isDeleteIngredientsActive = false;
+  this.isSizeSelectionActive = false;
+  this.selectedSize = null;
+  this.selectedDish = null;
+}
 
   triggerSubmitFromFooter() {
     this.deleteIngredientsComp?.submitSelection();
@@ -52,7 +78,6 @@ export class SpeisenModalComponent {
   close() {
     this.activeModal.close();
   }
-
 
   groupByUnterkategorie(
     gerichte: any[]
@@ -95,17 +120,5 @@ export class SpeisenModalComponent {
         this.gerichte.push(...gerichte.map(g => ({ ...g, unterKategorie })));
       }
     }
-  }
-
-  openGerichtDetail(gericht: Gericht) {
-    const modalRef = this.modalService.open(ZutatenModalComponent, {
-      size: 'lg',
-      backdrop: 'static'
-    });
-
-    modalRef.componentInstance.gericht = {
-      ...gericht,
-      kategorie: this.title // ✅ Kategorie mitgeben
-    };
   }
 }
