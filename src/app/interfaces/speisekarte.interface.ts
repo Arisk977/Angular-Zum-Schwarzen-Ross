@@ -3,6 +3,8 @@ export interface Gericht {
   name: string;
   beschreibung: string;
   preis: number;
+  zutaten?: string[];
+  unterKategorie?: string;
 }
 
 export interface Speisekarte {

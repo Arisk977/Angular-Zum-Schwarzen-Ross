@@ -1,0 +1,25 @@
+<div class="delete-ingredients-container">
+  <!-- Gerichtstitel -->
+  <h5 class="mb-2 fw-bold">{{ gericht.name }}</h5>
+
+  <!-- Beschreibung -->
+  <p class="text-muted mb-4">{{ gericht.beschreibung }}</p>
+
+  <!-- Abschnitt Zutaten -->
+  <h3 class="h6 mb-3">Zutaten entfernen oder austauschen:</h3>
+
+  <div class="zutaten-liste">
+    <label
+      *ngFor="let zutat of gericht.zutaten || []; let i = index"
+      class="form-check d-flex align-items-center mb-2"
+    >
+      <input
+        type="checkbox"
+        class="form-check-input me-2"
+        [value]="zutat"
+        [(ngModel)]="selectedZutaten[i]"
+      />
+      <span class="form-check-label">{{ zutat }}</span>
+    </label>
+  </div>
+</div>

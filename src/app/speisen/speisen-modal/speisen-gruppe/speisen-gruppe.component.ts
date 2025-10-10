@@ -1,6 +1,6 @@
 import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SpeisenGerichtComponent } from '../speisen-gericht/speisen-gericht.component';
+import { SpeisenGerichtComponent } from './speisen-gericht/speisen-gericht.component';
 
 @Component({
   selector: 'app-speisen-gruppe',

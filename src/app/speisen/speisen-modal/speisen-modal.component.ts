@@ -1,14 +1,15 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { SpeisenGruppeComponent } from '../speisen-gruppe/speisen-gruppe.component';
+import { SpeisenGruppeComponent } from './speisen-gruppe/speisen-gruppe.component';
 import { Speisekarte, Gericht } from '../../interfaces/speisekarte.interface';
 import { ZutatenModalComponent } from '../zutaten-modal/zutaten-modal.component';
+import { DeleteIngredientsComponent} from './delete-ingredients/delete-ingredients.component';
 
 @Component({
   selector: 'app-speisen-modal',
   standalone: true,
-  imports: [CommonModule, SpeisenGruppeComponent],
+  imports: [CommonModule, SpeisenGruppeComponent, DeleteIngredientsComponent],
   templateUrl: './speisen-modal.component.html',
   styleUrl: './speisen-modal.component.scss'
 })
@@ -19,14 +20,39 @@ export class SpeisenModalComponent {
   @Input() currentIndex: number = 0;
   @Input() speisen: Speisekarte = {};
 
+ gerichtZumBearbeiten: Gericht | null = null;
+  isDeleteIngredientsActive = false;
+
+  @ViewChild(DeleteIngredientsComponent) deleteIngredientsComp?: DeleteIngredientsComponent;
   constructor(
     public activeModal: NgbActiveModal,
     private modalService: NgbModal
   ) {}
 
+  openDeleteIngredients(gericht: Gericht) {
+    this.gerichtZumBearbeiten = gericht;
+    this.isDeleteIngredientsActive = true;
+  }
+
+  backToList() {
+    this.isDeleteIngredientsActive = false;
+    this.gerichtZumBearbeiten = null;
+  }
+
+  triggerSubmitFromFooter() {
+    this.deleteIngredientsComp?.submitSelection();
+  }
+
+  handleIngredientDelete(event: { gericht: Gericht; entfernteZutaten: string[] }) {
+    console.log('🧾 Gericht:', event.gericht);
+    console.log('🥩 Entfernte Zutaten:', event.entfernteZutaten);
+    this.backToList();
+  }
+
   close() {
     this.activeModal.close();
   }
+
 
   groupByUnterkategorie(
     gerichte: any[]
