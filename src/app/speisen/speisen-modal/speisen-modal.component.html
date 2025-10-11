@@ -2,14 +2,14 @@
   <h4 class="modal-title">{{ title }}</h4>
   <button type="button" class="btn-close" aria-label="Close" (click)="close()"></button>
 </div>
-<div class="modal-body">
 
-  <!-- 🧾 Standard Ansicht -->
-  <ng-container *ngIf="!isSizeSelectionActive && !isDeleteIngredientsActive; else sizeOrDeleteView">
+
+<div class="modal-body">
+  <!-- Standard Ansicht (Gerichtsliste) -->
+  <ng-container
+    *ngIf="!isSizeSelectionActive && !isDeleteIngredientsActive && !isAddIngredientsActive && !isOverviewActive; else stepView">
     <ng-container *ngIf="gerichte.length > 0; else keineDaten">
-      <app-speisen-gruppe
-        *ngFor="let gruppe of groupByUnterkategorie(gerichte)"
-        [gruppe]="gruppe"
+      <app-speisen-gruppe *ngFor="let gruppe of groupByUnterkategorie(gerichte)" [gruppe]="gruppe"
         (gerichtSelected)="openDeleteIngredients($event)">
       </app-speisen-gruppe>
     </ng-container>
@@ -19,11 +19,11 @@
     </ng-template>
   </ng-container>
 
-  <!-- 🍕 Größenwahl oder Zutaten löschen -->
-  <ng-template #sizeOrDeleteView>
+  <!-- Steps 1–4 -->
+  <ng-template #stepView>
 
-    <!-- 🍕 Schritt 1: Größenwahl -->
-    <ng-container *ngIf="isSizeSelectionActive; else deleteIngredientsView">
+    <!-- 🍕 Step 1: Größenwahl -->
+    <ng-container *ngIf="isSizeSelectionActive">
       <div class="fade-slide">
         <h5 class="mb-3">{{ selectedDish?.name }}</h5>
         <p class="text-muted mb-3">{{ selectedDish?.beschreibung }}</p>
@@ -31,66 +31,100 @@
 
         <div class="size-selection d-flex flex-column gap-2">
           <label class="form-check">
-            <input type="radio" class="form-check-input me-2" name="pizzaSize" value="30 cm" [(ngModel)]="selectedSize" />
+            <input type="radio" class="form-check-input me-2" name="pizzaSize" value="30 cm"
+              [(ngModel)]="selectedSize" />
             <span class="form-check-label">30 cm</span>
           </label>
 
           <label class="form-check">
-            <input type="radio" class="form-check-input me-2" name="pizzaSize" value="40 cm" [(ngModel)]="selectedSize" />
+            <input type="radio" class="form-check-input me-2" name="pizzaSize" value="40 cm"
+              [(ngModel)]="selectedSize" />
             <span class="form-check-label">40 cm</span>
           </label>
         </div>
       </div>
     </ng-container>
 
-    <!-- 🧾 Schritt 2: Zutaten entfernen -->
-    <ng-template #deleteIngredientsView>
+    <!-- 🧾 Step 2: Zutaten entfernen -->
+    <ng-container *ngIf="isDeleteIngredientsActive">
       <div class="fade-slide">
-        <app-delete-ingredients
-          [gericht]="selectedDish!"
-          (back)="backToList()"
-          (selectionSubmitted)="handleIngredientDelete($event)">
+        <app-delete-ingredients [gericht]="selectedDish!" (back)="backToList()"
+          (selectionSubmitted)="handleDeleteIngredientDelete($event)">
         </app-delete-ingredients>
       </div>
-    </ng-template>
+    </ng-container>
+
+    <!-- 🧂 Step 3: Zutaten hinzufügen -->
+    <ng-container *ngIf="isAddIngredientsActive">
+      <div class="fade-slide">
+        <app-add-ingredients [gericht]="selectedDish!" (back)="backToDelete()"
+          (selectionSubmitted)="handleAddIngredients($event)">
+        </app-add-ingredients>
+      </div>
+    </ng-container>
+
+    <!-- 📝 Step 4: Übersicht -->
+    <ng-container *ngIf="isOverviewActive">
+      <div class="fade-slide">
+        <app-overview [gericht]="selectedDish!" [selectedSize]="selectedSize" [deletedIngredients]="deletedIngredients"
+          [addedIngredients]="addedIngredients" [title]="title" (back)="backToAddIngredients()"
+          (addToCart)="finalizeOrder()">
+        </app-overview>
+
+      </div>
+    </ng-container>
 
   </ng-template>
 </div>
 
-<!-- ================= FOOTER ================= -->
 <div class="modal-footer navigation-footer">
-  <!-- Standard Footer -->
-  <ng-container *ngIf="!isSizeSelectionActive && !isDeleteIngredientsActive; else footerSwitch">
+
+  <!-- 📜 Standard Footer (Kategorie-Navigation) -->
+  <ng-container
+    *ngIf="!isSizeSelectionActive && !isDeleteIngredientsActive && !isAddIngredientsActive && !isOverviewActive; else stepFooter">
     <button class="arrow-btn" (click)="navigate('prev')" [disabled]="currentIndex === 0"> ← </button>
     <span class="page-info">{{ currentIndex + 1 }} / {{ kategorien.length }}</span>
-    <button class="arrow-btn" (click)="navigate('next')" [disabled]="currentIndex === kategorien.length - 1"> → </button>
+    <button class="arrow-btn" (click)="navigate('next')" [disabled]="currentIndex === kategorien.length - 1"> →
+    </button>
   </ng-container>
 
-  <!-- Footer für Größenwahl oder DeleteIngredients -->
-  <ng-template #footerSwitch>
+  <!-- 🧭 Schritt-Footer -->
+  <ng-template #stepFooter>
 
-    <!-- 🍕 Footer bei Größenwahl -->
-    <ng-container *ngIf="isSizeSelectionActive; else deleteIngredientsFooter">
-      <div class="delete-footer fade-slide d-flex justify-content-between align-items-center w-100">
-        <button type="button" class="btn btn-outline-secondary px-4" (click)="backToList()">Zurück</button>
-        <button
-          type="button"
-          class="btn btn-primary px-4"
-          [disabled]="!selectedSize"
-          (click)="selectSizeAndContinue()"
-        >
-          Weiter
-        </button>
+    <!-- 🍕 Step 1: Größenwahl -->
+<ng-container *ngIf="isSizeSelectionActive">
+  <div class="footer d-flex justify-content-between w-100 fade-slide">
+    <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
+    <button type="button" class="btn-ross" [disabled]="!selectedSize" (click)="selectSizeAndContinue()">
+      Weiter
+    </button>
+  </div>
+</ng-container>
+
+<!-- 🧾 Step 2 -->
+<ng-container *ngIf="isDeleteIngredientsActive">
+  <div class="footer d-flex justify-content-between w-100 fade-slide">
+    <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
+    <button type="button" class="btn-ross" (click)="triggerSubmitFromFooter()">Weiter</button>
+  </div>
+</ng-container>
+
+<!-- 🧂 Step 3 -->
+<ng-container *ngIf="isAddIngredientsActive">
+  <div class="footer d-flex justify-content-between w-100 fade-slide">
+    <button type="button" class="btn-outline-ross" (click)="backToDelete()">Zurück</button>
+    <button type="button" class="btn-ross" (click)="triggerAddIngredientsSubmit()">Weiter</button>
+  </div>
+</ng-container>
+
+
+    <!-- 📝 Step 4: Übersicht -->
+    <ng-container *ngIf="isOverviewActive">
+      <div class="footer d-flex justify-content-between w-100 fade-slide">
+        <button type="button" class="btn btn-outline-secondary px-4" (click)="backToAddIngredients()">Zurück</button>
+        <button type="button" class="btn btn-success px-4" (click)="finalizeOrder()">🛒 In den Warenkorb</button>
       </div>
     </ng-container>
-
-    <!-- 🧾 Footer für DeleteIngredients -->
-    <ng-template #deleteIngredientsFooter>
-      <div class="delete-footer fade-slide d-flex justify-content-between align-items-center w-100">
-        <button type="button" class="btn btn-outline-secondary px-4" (click)="backToList()">Zurück</button>
-        <button type="button" class="btn btn-primary px-4" (click)="triggerSubmitFromFooter()">Weiter</button>
-      </div>
-    </ng-template>
 
   </ng-template>
 </div>

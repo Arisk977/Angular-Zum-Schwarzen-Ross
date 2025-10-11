@@ -5,11 +5,13 @@ import { SpeisenGruppeComponent } from './speisen-gruppe/speisen-gruppe.componen
 import { Speisekarte, Gericht } from '../../interfaces/speisekarte.interface';
 import { DeleteIngredientsComponent } from './delete-ingredients/delete-ingredients.component';
 import { FormsModule } from '@angular/forms';
+import { AddIngredientsComponent } from './add-ingredients/add-ingredients.component';
+import { OverviewComponent } from './overview/overview.component';
 
 @Component({
   selector: 'app-speisen-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, SpeisenGruppeComponent, DeleteIngredientsComponent],
+  imports: [CommonModule, FormsModule, SpeisenGruppeComponent, DeleteIngredientsComponent, AddIngredientsComponent, OverviewComponent],
   templateUrl: './speisen-modal.component.html',
   styleUrl: './speisen-modal.component.scss'
 })
@@ -20,60 +22,81 @@ export class SpeisenModalComponent {
   @Input() currentIndex: number = 0;
   @Input() speisen: Speisekarte = {};
 
-  selectedDish: Gericht | null = null;
-  isDeleteIngredientsActive = false;
   isSizeSelectionActive = false;
-  selectedSize: string | null = null
+  isDeleteIngredientsActive = false;
+  isAddIngredientsActive = false;
+  isOverviewActive = false;
 
+  selectedDish: any = null;
+  selectedSize: string | null = null;
+  deletedIngredients: string[] = [];
+  addedIngredients: string[] = [];
+
+  @ViewChild(AddIngredientsComponent) addIngredientsComp?: AddIngredientsComponent;
   @ViewChild(DeleteIngredientsComponent) deleteIngredientsComp?: DeleteIngredientsComponent;
   constructor(
     public activeModal: NgbActiveModal,
     private modalService: NgbModal
   ) { }
 
-openDeleteIngredients(dish: Gericht) {
-  this.selectedDish = dish;
+  openDeleteIngredients(dish: Gericht) {
+    this.selectedDish = dish;
 
-  const price = dish.preis;
-  const hasSizeOptions =
-    typeof price === 'object' &&
-    price !== null &&
-    ('30cm' in price || '40cm' in price);
+    const price = dish.preis;
+    const hasSizeOptions =
+      typeof price === 'object' &&
+      price !== null &&
+      ('30cm' in price || '40cm' in price);
 
-  if (hasSizeOptions) {
-    this.isSizeSelectionActive = true;
+    if (hasSizeOptions) {
+      this.isSizeSelectionActive = true;
+      this.isDeleteIngredientsActive = false;
+    } else {
+      this.isDeleteIngredientsActive = true;
+      this.isSizeSelectionActive = false;
+    }
+  }
+
+
+  selectSizeAndContinue() {
+    if (this.selectedSize) {
+      console.log('✅ Gewählte Größe:', this.selectedSize);
+      this.isSizeSelectionActive = false;
+      this.isDeleteIngredientsActive = true;
+    }
+  }
+
+  backToList() {
     this.isDeleteIngredientsActive = false;
-  } else {
-    this.isDeleteIngredientsActive = true;
     this.isSizeSelectionActive = false;
+    this.selectedSize = null;
+    this.selectedDish = null;
   }
-}
-
-
-selectSizeAndContinue() {
-  if (this.selectedSize) {
-    console.log('✅ Gewählte Größe:', this.selectedSize);
-    this.isSizeSelectionActive = false;
-    this.isDeleteIngredientsActive = true;
-  }
-}
-
-backToList() {
-  this.isDeleteIngredientsActive = false;
-  this.isSizeSelectionActive = false;
-  this.selectedSize = null;
-  this.selectedDish = null;
-}
 
   triggerSubmitFromFooter() {
     this.deleteIngredientsComp?.submitSelection();
   }
 
-  handleIngredientDelete(event: { gericht: Gericht; entfernteZutaten: string[] }) {
+  handleDeleteIngredientDelete(event: { gericht: Gericht; entfernteZutaten: string[] }) {
     console.log('🧾 Gericht:', event.gericht);
     console.log('🥩 Entfernte Zutaten:', event.entfernteZutaten);
-    this.backToList();
+    const excludedCategories = [
+      'Vorspeisen',
+      'Dessert & Extras',
+      'Getränke'
+    ];
+    const canAddIngredients = !excludedCategories.includes(this.title);
+    
+    this.deletedIngredients = event.entfernteZutaten;
+    if (canAddIngredients) {
+      this.openAddIngredients();
+    } else {
+      this.openOverview();
+    }
+
   }
+
+
 
   close() {
     this.activeModal.close();
@@ -121,4 +144,49 @@ backToList() {
       }
     }
   }
+  openAddIngredients() {
+    this.isSizeSelectionActive = false;
+    this.isDeleteIngredientsActive = false;
+    this.isAddIngredientsActive = true;
+    this.isOverviewActive = false;
+  }
+
+  handleAddIngredients(selectedExtras: string[]) {
+    this.addedIngredients = selectedExtras;
+    this.openOverview();
+  }
+
+  triggerAddIngredientsSubmit() {
+    this.addIngredientsComp?.submitSelection();
+  }
+
+
+  openOverview() {
+    this.isSizeSelectionActive = false;
+    this.isDeleteIngredientsActive = false;
+    this.isAddIngredientsActive = false;
+    this.isOverviewActive = true;
+  }
+
+  backToDelete() {
+    this.isAddIngredientsActive = false;
+    this.isDeleteIngredientsActive = true;
+  }
+
+  backToAddIngredients() {
+    this.isOverviewActive = false;
+    this.isAddIngredientsActive = true;
+  }
+
+  finalizeOrder() {
+    const order = {
+      ...this.selectedDish,
+      size: this.selectedSize,
+      removed: this.deletedIngredients,
+      added: this.addedIngredients
+    };
+    console.log('🛒 Bestellung:', order);
+    this.close();
+  }
+
 }

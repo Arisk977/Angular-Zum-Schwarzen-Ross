@@ -15,17 +15,29 @@ export class DeleteIngredientsComponent {
   @Output() selectionSubmitted = new EventEmitter<{ gericht: Gericht; entfernteZutaten: string[] }>();
   @Output() back = new EventEmitter<void>();
 
-  selectedZutaten: boolean[] = [];
+  selectedIngredients: string[] = [];
+  
+  toggleIngredient(ingredient: string) {
+    const index = this.selectedIngredients.indexOf(ingredient);
+    if (index > -1) {
+      this.selectedIngredients.splice(index, 1);
+    } else {
+      this.selectedIngredients.push(ingredient);
+    }
+  }
+
+  isSelected(ingredient: string): boolean {
+    return this.selectedIngredients.includes(ingredient);
+  }
 
   submitSelection() {
-    const gewaehlteZutaten =
-      this.gericht.zutaten?.filter((_, i) => this.selectedZutaten[i]) || [];
-
-    console.log('✅ Ausgewählte Zutaten zum Entfernen:', gewaehlteZutaten);
-
     this.selectionSubmitted.emit({
       gericht: this.gericht,
-      entfernteZutaten: gewaehlteZutaten
+      entfernteZutaten: this.selectedIngredients
     });
+  }
+
+  resetSelection() {
+    this.selectedIngredients = [];
   }
 }

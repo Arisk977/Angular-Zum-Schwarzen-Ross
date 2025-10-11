@@ -1,0 +1,19 @@
+<h5 class="mb-3">{{ gericht?.name }}</h5>
+
+<p *ngIf="title === 'Pizzen' && gericht?.preis && (gericht?.preis['30cm'] || gericht?.preis['40cm'])">
+  <strong>Gewählte Größe:</strong> {{ selectedSize || '–' }}
+</p>
+
+<div *ngIf="deletedIngredients.length">
+  <strong>Entfernte Zutaten:</strong>
+  <ul>
+    <li *ngFor="let zutat of deletedIngredients">{{ zutat }}</li>
+  </ul>
+</div>
+
+<div *ngIf="addedIngredients.length">
+  <strong>Zusätzliche Zutaten:</strong>
+  <ul>
+    <li *ngFor="let extra of addedIngredients">{{ extra }}</li>
+  </ul>
+</div>

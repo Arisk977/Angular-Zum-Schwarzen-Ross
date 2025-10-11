@@ -1,12 +1,14 @@
+/* ===========================
+   Modal Body
+=========================== */
 .modal-body {
   min-height: 70vh;
   overflow: hidden;
-  padding: 1rem 1.5rem;
+  padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
 
-  // Scrollbar dezent anpassen
   &::-webkit-scrollbar {
     width: 6px;
   }
@@ -17,57 +19,47 @@
   }
 }
 
+/* ===========================
+   Modal Header
+=========================== */
 .modal-header {
   position: relative;
   background: rgba(160, 0, 0, 0.85);
   color: white;
   font-family: 'Kalam', sans-serif;
-  font-size: 1.4rem;
+  font-size: 22px;
   letter-spacing: 1px;
   border-bottom: none;
-  padding: 0.8rem 1.2rem;
+  padding: 13px 19px;
 }
 
+/* ===========================
+   Modal Footer
+=========================== */
 .modal-footer {
   border-top: none;
-  padding: 0.8rem 1.2rem;
+  padding: 13px 19px;
   display: flex;
   justify-content: flex-end;
 }
 
-.btn-outline-secondary {
-  border-color: rgb(160, 0, 0);
-  color: rgb(160, 0, 0);
-
-  &:hover {
-    background-color: rgb(160, 0, 0);
-    color: white;
-  }
-}
-
-.btn-close:focus,
-.btn-close:active {
-  outline: none !important;
-  box-shadow: none !important;
-}
-
-
-
 .navigation-footer {
   width: 100%;
   justify-content: center;
-  /* zentriert alles */
   gap: 20px;
   border-top: none;
-  padding: 1rem 0;
+  padding: 16px 0;
 }
 
 .page-info {
   font-family: 'Kalam', sans-serif;
-  font-size: 1.2rem;
+  font-size: 19px;
   color: rgb(160, 0, 0);
 }
 
+/* ===========================
+   Arrow Navigation
+=========================== */
 .arrow-btn {
   background: none;
   border: none;
@@ -93,55 +85,87 @@
   }
 }
 
+/* ===========================
+   Buttons
+=========================== */
+.btn-outline-secondary {
+  border-color: rgb(160, 0, 0);
+  color: rgb(160, 0, 0);
 
-.detail-wrapper {
-  min-height: 200px;
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-  animation: fadeIn 0.3s ease; // als Fallback falls Animationsmodul deaktiviert
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateX(30px);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateX(0);
+  &:hover {
+    background-color: rgb(160, 0, 0);
+    color: white;
   }
 }
 
+.btn-close:focus,
+.btn-close:active {
+  outline: none !important;
+  box-shadow: none !important;
+}
+
+.delete-footer {
+  padding: 12px 16px;
+  background-color: #f8f9fa;
+  border-top: 1px solid #dee2e6;
+  border-bottom-left-radius: 8px;
+  border-bottom-right-radius: 8px;
+
+  .btn {
+    min-width: 110px;
+  }
+
+  .btn-primary {
+    background-color: rgb(160, 0, 0);
+    border-color: rgb(160, 0, 0);
+    font-weight: 500;
+
+    &:hover {
+      background-color: darken(rgb(160, 0, 0), 8%);
+      border-color: darken(rgb(160, 0, 0), 8%);
+    }
+  }
+}
+
+/* ===========================
+   Page & Detail Wrapper
+=========================== */
 .page-container {
   position: relative;
   width: 100%;
-  min-height: 300px; // damit es nicht zusammenklappt
-  overflow: hidden; // 👉 kein Scrollbalken mehr
+  min-height: 300px;
+  overflow: hidden;
 }
 
 .page {
-  position: absolute; // 👉 Seiten übereinanderlegen
+  position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
 
 .detail-wrapper {
+  min-height: 200px;
   display: flex;
   flex-direction: column;
   gap: 12px;
+  animation: fadeIn 0.3s ease;
 }
 
+/* ===========================
+   Textarea
+=========================== */
 textarea {
   width: 100%;
   resize: vertical;
 }
 
+/* ===========================
+   Größen-Buttons
+=========================== */
 .size-options {
   display: flex;
-  gap: 1rem;
+  gap: 16px;
   justify-content: center;
 
   .btn {
@@ -160,11 +184,14 @@ textarea {
   }
 }
 
+/* ===========================
+   Zutaten Buttons
+=========================== */
 .extras {
   display: flex;
   flex-wrap: wrap;
   gap: 8px;
-  margin-top: 1rem;
+  margin-top: 16px;
 
   .extra-btn {
     padding: 6px 12px;
@@ -181,30 +208,57 @@ textarea {
   }
 }
 
+.btn-ross {
+  background-color: rgb(160, 0, 0) !important;
+  color: #fff;
+  border: 1px solid rgb(160, 0, 0);
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: background-color 0.2s ease, transform 0.05s ease;
 
-.delete-footer {
-  padding: 0.75rem 1rem; // Etwas mehr Luft nach innen
-  background-color: #f8f9fa; // Heller Hintergrund für Kontrast
-  border-top: 1px solid #dee2e6; // dezente Trennlinie zum Body
-  border-bottom-left-radius: 0.5rem;
-  border-bottom-right-radius: 0.5rem;
-
-  .btn {
-    min-width: 110px; // Einheitliche Button-Breite
+  &:hover{
+    background-color: transparent !important;
+    color: rgb(160, 0, 0);
   }
 
-  .btn-primary {
-    background-color: rgb(160, 0, 0);
-    border-color: rgb(160, 0, 0);
-    font-weight: 500;
+  &:hover:not(:disabled) {
+    background-color: rgba(160, 0, 0, 0.85);
+    border-color: rgba(160, 0, 0, 0.85);
+  }
 
-    &:hover {
-      background-color: darken(rgb(160, 0, 0), 8%);
-      border-color: darken(rgb(160, 0, 0), 8%);
-    }
+  &:disabled {
+    background-color: rgba(160, 0, 0, 0.4);
+    border-color: rgba(160, 0, 0, 0.4);
+    cursor: not-allowed;
+  }
+
+  &:active {
+    transform: translateY(1px);
   }
 }
 
+.btn-outline-ross {
+  background-color: transparent;
+  color: rgb(160, 0, 0);
+  border: 1px solid rgb(160, 0, 0);
+  padding: 10px 24px;
+  font-size: 15px;
+  font-weight: 500;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+
+  &:hover {
+    background-color: rgb(160, 0, 0);
+    color: #fff;
+  }
+}
+
+
+/* ===========================
+   Animationen
+=========================== */
 .fade-slide {
   animation: fadeSlideIn 0.35s ease forwards;
 }
@@ -212,10 +266,22 @@ textarea {
 @keyframes fadeSlideIn {
   0% {
     opacity: 0;
-    transform: translateX(40px); // 👈 Start leicht rechts außerhalb
+    transform: translateX(40px);
   }
 
   100% {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateX(30px);
+  }
+
+  to {
     opacity: 1;
     transform: translateX(0);
   }
