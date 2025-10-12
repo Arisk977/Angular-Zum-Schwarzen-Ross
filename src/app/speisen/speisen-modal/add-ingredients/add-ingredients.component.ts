@@ -12,6 +12,7 @@ export class AddIngredientsComponent {
   @Input() gericht: any;
   @Output() back = new EventEmitter<void>();
   @Output() selectionSubmitted = new EventEmitter<string[]>();
+  @Output() selectionChanged = new EventEmitter<string[]>();
 
   selectedExtras: string[] = [];
 
@@ -26,6 +27,7 @@ export class AddIngredientsComponent {
     } else {
       this.selectedExtras.splice(index, 1);
     }
+      this.selectionChanged.emit(this.selectedExtras);
   }
 
   submitSelection() {

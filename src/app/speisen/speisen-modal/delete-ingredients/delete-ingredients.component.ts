@@ -14,6 +14,7 @@ export class DeleteIngredientsComponent {
   @Input() gericht!: Gericht;
   @Output() selectionSubmitted = new EventEmitter<{ gericht: Gericht; entfernteZutaten: string[] }>();
   @Output() back = new EventEmitter<void>();
+  @Output() selectionChanged = new EventEmitter<string[]>();
 
   selectedIngredients: string[] = [];
   
@@ -24,6 +25,8 @@ export class DeleteIngredientsComponent {
     } else {
       this.selectedIngredients.push(ingredient);
     }
+    
+  this.selectionChanged.emit(this.selectedIngredients);
   }
 
   isSelected(ingredient: string): boolean {

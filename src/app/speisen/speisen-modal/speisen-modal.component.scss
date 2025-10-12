@@ -286,3 +286,19 @@ textarea {
     transform: translateX(0);
   }
 }
+
+
+.preis-live {
+  font-weight: 600;
+  font-size: 1.2rem;
+  color: rgb(160, 0, 0);
+}
+
+.preis-uebersicht {
+  font-size: 1.4rem;
+  color: rgb(0, 0, 0);
+}
+
+.preis-live.changed {
+  transform: scale(1.1);
+}

@@ -49,7 +49,7 @@
     <ng-container *ngIf="isDeleteIngredientsActive">
       <div class="fade-slide">
         <app-delete-ingredients [gericht]="selectedDish!" (back)="backToList()"
-          (selectionSubmitted)="handleDeleteIngredientDelete($event)">
+          (selectionChanged)="liveDeleteUpdate($event)" (selectionSubmitted)="handleDeleteIngredientDelete($event)">
         </app-delete-ingredients>
       </div>
     </ng-container>
@@ -58,7 +58,7 @@
     <ng-container *ngIf="isAddIngredientsActive">
       <div class="fade-slide">
         <app-add-ingredients [gericht]="selectedDish!" (back)="backToDelete()"
-          (selectionSubmitted)="handleAddIngredients($event)">
+          (selectionChanged)="liveAddUpdate($event)" (selectionSubmitted)="handleAddIngredients($event)">
         </app-add-ingredients>
       </div>
     </ng-container>
@@ -66,13 +66,21 @@
     <!-- 📝 Step 4: Übersicht -->
     <ng-container *ngIf="isOverviewActive">
       <div class="fade-slide">
+
         <app-overview [gericht]="selectedDish!" [selectedSize]="selectedSize" [deletedIngredients]="deletedIngredients"
           [addedIngredients]="addedIngredients" [title]="title" (back)="backToAddIngredients()"
           (addToCart)="finalizeOrder()">
         </app-overview>
 
+        <!-- 💰 Preisübersicht -->
+        <div class="preis-uebersicht mt-4 text-end">
+          <span class="preis-label fw-bold me-2">Gesamtpreis:</span>
+          <span class="preis-betrag fs-4">{{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}</span>
+        </div>
+
       </div>
     </ng-container>
+
 
   </ng-template>
 </div>
@@ -92,39 +100,55 @@
   <ng-template #stepFooter>
 
     <!-- 🍕 Step 1: Größenwahl -->
-<ng-container *ngIf="isSizeSelectionActive">
-  <div class="footer d-flex justify-content-between w-100 fade-slide">
-    <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
-    <button type="button" class="btn-ross" [disabled]="!selectedSize" (click)="selectSizeAndContinue()">
-      Weiter
-    </button>
-  </div>
-</ng-container>
+    <ng-container *ngIf="isSizeSelectionActive">
+      <div class="footer d-flex justify-content-between w-100 fade-slide align-items-center">
+        <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
+        <div class="preis-live" *ngIf="finalPrice > 0">
+          {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+        <button type="button" class="btn-ross" [disabled]="!selectedSize" (click)="selectSizeAndContinue()">
+          Weiter
+        </button>
+      </div>
+    </ng-container>
 
-<!-- 🧾 Step 2 -->
-<ng-container *ngIf="isDeleteIngredientsActive">
-  <div class="footer d-flex justify-content-between w-100 fade-slide">
-    <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
-    <button type="button" class="btn-ross" (click)="triggerSubmitFromFooter()">Weiter</button>
-  </div>
-</ng-container>
 
-<!-- 🧂 Step 3 -->
-<ng-container *ngIf="isAddIngredientsActive">
-  <div class="footer d-flex justify-content-between w-100 fade-slide">
-    <button type="button" class="btn-outline-ross" (click)="backToDelete()">Zurück</button>
-    <button type="button" class="btn-ross" (click)="triggerAddIngredientsSubmit()">Weiter</button>
-  </div>
-</ng-container>
+    <!-- 🧾 Step 2 -->
+    <ng-container *ngIf="isDeleteIngredientsActive">
+      <div class="footer d-flex justify-content-between w-100 fade-slide align-items-center">
+        <button type="button" class="btn-outline-ross" (click)="backToList()">Zurück</button>
+        <div class="preis-live">
+          {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+        <button type="button" class="btn-ross" (click)="triggerSubmitFromFooter()">Weiter</button>
+      </div>
+    </ng-container>
+
+
+    <!-- 🧂 Step 3 -->
+    <ng-container *ngIf="isAddIngredientsActive">
+      <div class="footer d-flex justify-content-between w-100 fade-slide align-items-center">
+        <button type="button" class="btn-outline-ross" (click)="backToDelete()">Zurück</button>
+        <div class="preis-live">
+          {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
+        <button type="button" class="btn-ross" (click)="triggerAddIngredientsSubmit()">Weiter</button>
+      </div>
+    </ng-container>
 
 
     <!-- 📝 Step 4: Übersicht -->
     <ng-container *ngIf="isOverviewActive">
-      <div class="footer d-flex justify-content-between w-100 fade-slide">
+      <div class="footer d-flex justify-content-between w-100 fade-slide align-items-center">
         <button type="button" class="btn btn-outline-secondary px-4" (click)="backToAddIngredients()">Zurück</button>
+        <div class="preis-live fw-bold fs-5" [class.changed]="priceChanged">
+          {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
+        </div>
         <button type="button" class="btn btn-success px-4" (click)="finalizeOrder()">🛒 In den Warenkorb</button>
       </div>
     </ng-container>
 
+
   </ng-template>
+
 </div>

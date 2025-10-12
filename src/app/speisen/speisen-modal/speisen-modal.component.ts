@@ -7,6 +7,8 @@ import { DeleteIngredientsComponent } from './delete-ingredients/delete-ingredie
 import { FormsModule } from '@angular/forms';
 import { AddIngredientsComponent } from './add-ingredients/add-ingredients.component';
 import { OverviewComponent } from './overview/overview.component';
+import ingredientsDataJson from './../../../assets/json/ingredients.json';
+import { IngredientsJson } from './../../interfaces/ingredients.interface';
 
 @Component({
   selector: 'app-speisen-modal',
@@ -26,11 +28,15 @@ export class SpeisenModalComponent {
   isDeleteIngredientsActive = false;
   isAddIngredientsActive = false;
   isOverviewActive = false;
+  priceChanged = false;
 
   selectedDish: any = null;
   selectedSize: string | null = null;
   deletedIngredients: string[] = [];
   addedIngredients: string[] = [];
+  basePrice: number = 0;
+  finalPrice: number = 0;
+
 
   @ViewChild(AddIngredientsComponent) addIngredientsComp?: AddIngredientsComponent;
   @ViewChild(DeleteIngredientsComponent) deleteIngredientsComp?: DeleteIngredientsComponent;
@@ -39,32 +45,40 @@ export class SpeisenModalComponent {
     private modalService: NgbModal
   ) { }
 
-  openDeleteIngredients(dish: Gericht) {
-    this.selectedDish = dish;
+openDeleteIngredients(dish: Gericht) {
+  this.selectedDish = dish;
+  const price = dish.preis;
 
-    const price = dish.preis;
-    const hasSizeOptions =
-      typeof price === 'object' &&
-      price !== null &&
-      ('30cm' in price || '40cm' in price);
+  const hasSizeOptions =
+    typeof price === 'object' &&
+    price !== null &&
+    ('30cm' in price || '40cm' in price);
 
-    if (hasSizeOptions) {
-      this.isSizeSelectionActive = true;
-      this.isDeleteIngredientsActive = false;
-    } else {
-      this.isDeleteIngredientsActive = true;
-      this.isSizeSelectionActive = false;
-    }
+  if (hasSizeOptions) {
+    // 👉 Preis wird erst nach Größenauswahl gesetzt
+    this.isSizeSelectionActive = true;
+    this.isDeleteIngredientsActive = false;
+  } else {
+    // 👉 Gericht ohne Größen — Basispreis direkt setzen
+    this.basePrice = price as number;
+    this.finalPrice = this.basePrice;
+    this.isDeleteIngredientsActive = true;
+    this.isSizeSelectionActive = false;
   }
+}
 
 
-  selectSizeAndContinue() {
-    if (this.selectedSize) {
-      console.log('✅ Gewählte Größe:', this.selectedSize);
-      this.isSizeSelectionActive = false;
-      this.isDeleteIngredientsActive = true;
-    }
+
+selectSizeAndContinue() {
+  if (this.selectedSize) {
+    const preis = this.selectedDish.preis[this.selectedSize];
+    this.basePrice = preis;
+    this.finalPrice = this.basePrice;
+    this.isSizeSelectionActive = false;
+    this.isDeleteIngredientsActive = true;
   }
+}
+
 
   backToList() {
     this.isDeleteIngredientsActive = false;
@@ -78,22 +92,17 @@ export class SpeisenModalComponent {
   }
 
   handleDeleteIngredientDelete(event: { gericht: Gericht; entfernteZutaten: string[] }) {
-    console.log('🧾 Gericht:', event.gericht);
-    console.log('🥩 Entfernte Zutaten:', event.entfernteZutaten);
-    const excludedCategories = [
-      'Vorspeisen',
-      'Dessert & Extras',
-      'Getränke'
-    ];
-    const canAddIngredients = !excludedCategories.includes(this.title);
-    
     this.deletedIngredients = event.entfernteZutaten;
+    this.calculateFinalPrice(); // 💰 Preis nach Änderung berechnen
+
+    const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
+    const canAddIngredients = !excludedCategories.includes(this.title);
+
     if (canAddIngredients) {
       this.openAddIngredients();
     } else {
       this.openOverview();
     }
-
   }
 
 
@@ -102,91 +111,149 @@ export class SpeisenModalComponent {
     this.activeModal.close();
   }
 
-  groupByUnterkategorie(
-    gerichte: any[]
-  ): { unterKategorie: string | null; gerichte: any[] }[] {
-    const gruppen: Record<string, any[]> = {};
+  groupByUnterkategorie(gerichte: any[]): {
+    unterKategorie: string | null; gerichte: any[]
+  }[] {
 
-    for (const g of gerichte) {
-      const key = g.unterKategorie || '';
-      if (!gruppen[key]) gruppen[key] = [];
-      gruppen[key].push(g);
-    }
+  const gruppen: Record<string, any[]> = {};
 
-    return Object.entries(gruppen).map(([unterKategorie, gerichte]) => ({
-      unterKategorie: unterKategorie || null,
-      gerichte
-    }));
+  for (const g of gerichte) {
+    const key = g.unterKategorie || '';
+    if (!gruppen[key]) gruppen[key] = [];
+    gruppen[key].push(g);
   }
 
-  navigate(direction: 'prev' | 'next') {
-    if (direction === 'prev' && this.currentIndex > 0) {
-      this.currentIndex--;
-    } else if (direction === 'next' && this.currentIndex < this.kategorien.length - 1) {
-      this.currentIndex++;
-    } else {
-      return;
-    }
+  return Object.entries(gruppen).map(([unterKategorie, gerichte]) => ({
+    unterKategorie: unterKategorie || null,
+    gerichte
+  }));
+}
 
-    const nextTitle = this.kategorien[this.currentIndex];
-    const kategorie = this.speisen[nextTitle];
+navigate(direction: 'prev' | 'next') {
+  if (direction === 'prev' && this.currentIndex > 0) {
+    this.currentIndex--;
+  } else if (direction === 'next' && this.currentIndex < this.kategorien.length - 1) {
+    this.currentIndex++;
+  } else {
+    return;
+  }
 
-    this.title = nextTitle;
-    this.gerichte = [];
+  const nextTitle = this.kategorien[this.currentIndex];
+  const kategorie = this.speisen[nextTitle];
 
-    if (Array.isArray(kategorie)) {
-      this.gerichte = kategorie;
-    } else if (typeof kategorie === 'object' && kategorie !== null) {
-      for (const [unterKategorie, gerichte] of Object.entries(
-        kategorie as Record<string, Gericht[]>
-      )) {
-        this.gerichte.push(...gerichte.map(g => ({ ...g, unterKategorie })));
-      }
+  this.title = nextTitle;
+  this.gerichte = [];
+
+  if (Array.isArray(kategorie)) {
+    this.gerichte = kategorie;
+  } else if (typeof kategorie === 'object' && kategorie !== null) {
+    for (const [unterKategorie, gerichte] of Object.entries(
+      kategorie as Record<string, Gericht[]>
+    )) {
+      this.gerichte.push(...gerichte.map(g => ({ ...g, unterKategorie })));
     }
   }
-  openAddIngredients() {
-    this.isSizeSelectionActive = false;
-    this.isDeleteIngredientsActive = false;
-    this.isAddIngredientsActive = true;
-    this.isOverviewActive = false;
-  }
+}
+openAddIngredients() {
+  this.isSizeSelectionActive = false;
+  this.isDeleteIngredientsActive = false;
+  this.isAddIngredientsActive = true;
+  this.isOverviewActive = false;
+}
 
   handleAddIngredients(selectedExtras: string[]) {
     this.addedIngredients = selectedExtras;
+    this.calculateFinalPrice(); // 💰 Preis neu berechnen
     this.openOverview();
   }
 
-  triggerAddIngredientsSubmit() {
-    this.addIngredientsComp?.submitSelection();
-  }
+triggerAddIngredientsSubmit() {
+  this.addIngredientsComp?.submitSelection();
+}
 
 
-  openOverview() {
-    this.isSizeSelectionActive = false;
-    this.isDeleteIngredientsActive = false;
-    this.isAddIngredientsActive = false;
-    this.isOverviewActive = true;
+openOverview() {
+  // 🧮 falls finalPrice noch nicht gesetzt wurde
+  if (this.finalPrice === 0 && this.selectedDish?.preis) {
+    if (typeof this.selectedDish.preis === 'number') {
+      this.basePrice = this.selectedDish.preis;
+    } else if (this.selectedSize) {
+      this.basePrice = this.selectedDish.preis[this.selectedSize];
+    }
+    this.finalPrice = this.basePrice;
   }
 
-  backToDelete() {
-    this.isAddIngredientsActive = false;
-    this.isDeleteIngredientsActive = true;
-  }
+  this.isSizeSelectionActive = false;
+  this.isDeleteIngredientsActive = false;
+  this.isAddIngredientsActive = false;
+  this.isOverviewActive = true;
+}
 
-  backToAddIngredients() {
-    this.isOverviewActive = false;
-    this.isAddIngredientsActive = true;
-  }
+
+backToDelete() {
+  this.isAddIngredientsActive = false;
+  this.isDeleteIngredientsActive = true;
+}
+
+backToAddIngredients() {
+  this.isOverviewActive = false;
+  this.isAddIngredientsActive = true;
+}
 
   finalizeOrder() {
     const order = {
-      ...this.selectedDish,
-      size: this.selectedSize,
-      removed: this.deletedIngredients,
-      added: this.addedIngredients
+      gerichtNummer: this.selectedDish.nummer,
+      title: this.selectedDish.name,
+      basisZutaten: this.selectedDish.zutaten || [],
+      zutatenEntfernt: this.deletedIngredients,
+      zutatenHinzugefügt: this.addedIngredients,
+      groesse: this.selectedSize,
+      preis: this.finalPrice
     };
+
     console.log('🛒 Bestellung:', order);
     this.close();
   }
+
+  getIngredientPrice(ingredient: string): number {
+    const ingredientsData = ingredientsDataJson as IngredientsJson;
+    const sizeKey = this.selectedSize === '40 cm' ? '40cm' : null;
+    const sizePrices = sizeKey ? ingredientsData[sizeKey] || {} : {};
+    
+    return sizePrices[ingredient] ?? ingredientsData.zutaten[ingredient] ?? 0;
+  }
+
+calculateFinalPrice() {
+  let price = this.basePrice;
+
+  this.addedIngredients.forEach(ing => {
+    const isInBase = this.selectedDish.zutaten?.includes(ing);
+    const isSwapping =
+      this.deletedIngredients.length > 0 &&
+      this.deletedIngredients.length === this.addedIngredients.length;
+
+    if (isInBase) return;
+    if (isSwapping) return;
+
+    price += this.getIngredientPrice(ing);
+  });
+
+  this.finalPrice = price;
+
+  // ✨ Animations-Trigger
+  this.priceChanged = true;
+  setTimeout(() => (this.priceChanged = false), 150);
+}
+
+
+liveDeleteUpdate(removed: string[]) {
+  this.deletedIngredients = removed;
+  this.calculateFinalPrice();
+}
+
+liveAddUpdate(added: string[]) {
+  this.addedIngredients = added;
+  this.calculateFinalPrice();
+}
 
 }

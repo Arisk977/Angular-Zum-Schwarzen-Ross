@@ -1,106 +1,76 @@
 {
-    "zutaten": {
-        "vorspeisen": {},
-        "salate": {"kostenlos": [
-            "Senfsoße",
-            "Joghurtsoße",
-            "Essig Öl",
-            "Balsamico"
-        ],
-            "0.50€": [
-                "Champignons",
-                "Mais",
-                "Rucola",
-                "Paprika",
-                "Zwiebeln",
-                "Schinken",
-                "Käse",
-                "Peperonie",
-                "Oliven",
-                "Karotten",
-                "Weißkraut"
-            ],
-            "1.00€": [
-                "Mozzarella",
-                "Schafskäse",
-                "Garnelen",
-                "Thunfisch",
-                "Hähnchenfleisch",
-                "gekochtes Ei"
-            ]
-        },
-        "kleine_gerichte": {},
-        "burger": {},
-        "überbackene_nudeln": {},
-        "nudelgerichte": {
-            "0.50€": [
-                "viel Soße"
-            ],
-            "1.00€": [
-                "Käse überbacken"
-            ]
-        },
-        "pizzen": {
-            "kostenlos": [
-                "Tomatensoße",
-                "Tabasco",
-                "Hollandaise Soße",
-                "Barbecue Soße",
-                "Knoblauchsoße",
-                "scharf"
-            ],
-            "0.50€": [
-                "Salami",
-                "Schinken",
-                "Peperoniwurst",
-                "Champignons",
-                "Mais",
-                "Rucola",
-                "Paprika",
-                "Artischocken",
-                "Kapern",
-                "Ananas",
-                "Zwiebeln",
-                "Sucuk",
-                "Jalapeño",
-                "Peperonie",
-                "Oliven"
-            ],
-            "1.00€": [
-                "Thunfisch",
-                "Krabben",
-                "Sardellen",
-                "Gorgonzola",
-                "Mozzarella",
-                "Schafskäse",
-                "Käse",
-                "Hähnchenfleisch",
-                "Spiegelei",
-                "Hackfleisch",
-                "Parmesan"
-            ]
-        },
-        "schnitzelgerichte": {
-            "0.50€": [
-                "viel Soße",
-                "Soße extra verpackt"
-            ]
-        },
-        "unsere_spezialitäten": {
-            "0.50€": [
-                "viel Soße",
-                "Soße extra verpackt"
-            ]
-        },
-        "argentinische_rindersteaks": {},
-        "fischgerichte": {},
-        "indische_und_pakistanische_spezialitäten": {
-            "0.50€": [
-                "viel Soße",
-                "Soße extra verpackt"
-            ]
-        },
-        "dessert_und_extras": {},
-        "getränke": {}
-    }
+  "zutaten": {
+    "Tomatensoße": 0.50,
+    "Tabasco": 0.50,
+    "Hollandaise Soße": 0.50,
+    "Barbecue Soße": 0.50,
+    "Knoblauchsoße": 0.50,
+    "scharf": 0.50,
+
+    "Salami": 0.50,
+    "Schinken": 0.50,
+    "Peperoniwurst": 0.50,
+    "Champignons": 0.50,
+    "Mais": 0.50,
+    "Rucola": 0.50,
+    "Paprika": 0.50,
+    "Artischocken": 0.50,
+    "Kapern": 0.50,
+    "Ananas": 0.50,
+    "Zwiebeln": 0.50,
+    "Sucuk": 0.50,
+    "Jalapeño": 0.50,
+    "Peperonie": 0.50,
+    "Oliven": 0.50,
+
+    "Thunfisch": 1.00,
+    "Krabben": 1.00,
+    "Sardellen": 1.00,
+    "Gorgonzola": 1.00,
+    "Mozzarella": 1.00,
+    "Schafskäse": 1.00,
+    "Käse": 1.00,
+    "Hähnchenfleisch": 1.00,
+    "Spiegelei": 1.00,
+    "Hackfleisch": 1.00,
+    "Parmesan": 1.00,
+
+    "Putenfleisch": 1.00,
+    "viel Soße": 0.50,
+    "Soße extra verpackt": 0.50,
+    "Senfsoße": 0.50,
+    "Joghurtsoße": 0.50,
+    "Essig Öl": 0.50,
+    "Balsamico": 0.50,
+    "gekochtes Ei": 1.00
+  },
+  "40cm": {
+    "Salami": 1.50,
+    "Schinken": 1.50,
+    "Peperoniwurst": 1.50,
+    "Champignons": 1.50,
+    "Mais": 1.50,
+    "Rucola": 1.50,
+    "Paprika": 1.50,
+    "Artischocken": 1.50,
+    "Kapern": 1.50,
+    "Ananas": 1.50,
+    "Zwiebeln": 1.50,
+    "Sucuk": 1.50,
+    "Jalapeño": 1.50,
+    "Peperonie": 1.50,
+    "Oliven": 1.50,
+
+    "Thunfisch": 2.00,
+    "Krabben": 2.00,
+    "Sardellen": 2.00,
+    "Gorgonzola": 2.00,
+    "Mozzarella": 2.00,
+    "Schafskäse": 2.00,
+    "Käse": 2.00,
+    "Hähnchenfleisch": 2.00,
+    "Spiegelei": 2.00,
+    "Hackfleisch": 2.00,
+    "Parmesan": 2.00
+  }
 }
