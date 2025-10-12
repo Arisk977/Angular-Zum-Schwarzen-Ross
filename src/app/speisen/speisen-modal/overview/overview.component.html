@@ -1,19 +1,83 @@
-<h5 class="mb-3">{{ gericht?.name }}</h5>
+<div class="overview-container">
+  <!-- 🥇 Gericht -->
+  <div class="gericht-header">
+    <h4 class="gericht-name mb-1">{{ gericht?.name }}</h4>
+    <p class="gericht-beschreibung" *ngIf="gericht?.beschreibung">
+      {{ gericht?.beschreibung }}
+    </p>
+  </div>
 
-<p *ngIf="title === 'Pizzen' && gericht?.preis && (gericht?.preis['30cm'] || gericht?.preis['40cm'])">
-  <strong>Gewählte Größe:</strong> {{ selectedSize || '–' }}
-</p>
+  <!-- 🍕 Größenwahl nur bei Pizza -->
+  <div *ngIf="title === 'Pizzen' && gericht?.preis['40cm']" class="groessenwahl mt-3">
+    <label><strong>Größe:</strong></label>
+    <div class="groessen-buttons">
+      <button type="button" class="btn" [class.active]="selectedSize === '30cm'" (click)="selectSize('30cm')">
+        30 cm
+      </button>
+      <button type="button" class="btn" [class.active]="selectedSize === '40cm'" (click)="selectSize('40cm')"
+        *ngIf="gericht?.preis['40cm']">
+        40 cm
+      </button>
+    </div>
+  </div>
 
-<div *ngIf="deletedIngredients.length">
-  <strong>Entfernte Zutaten:</strong>
-  <ul>
-    <li *ngFor="let zutat of deletedIngredients">{{ zutat }}</li>
-  </ul>
+  <!-- ❌ Entfernte Zutaten -->
+  <div class="zutaten-section mt-3">
+    <label> <span class="nav-link-text" (click)="onGoToDelete()">
+        Zutaten entfernen:
+      </span></label>
+    <div class="zutaten-tags">
+      <span class="tag removed" *ngFor="let zutat of deletedIngredients">
+        {{ zutat }}
+      </span>
+    </div>
+  </div>
+
+  <!-- ➕ Zusätzliche Zutaten -->
+  <div class="zutaten-section mt-3">
+    <label> <span class="nav-link-text" (click)="onGoToAdd()">
+        Zutaten hinzufügen:
+      </span></label>
+    <div class="zutaten-tags">
+      <span class="tag added" *ngFor="let extra of addedIngredients">
+        {{ extra }}
+      </span>
+    </div>
+  </div>
+
+ <!-- 📝 Extrawunsch -->
+<div class="extrawunsch-section mt-3">
+  <label for="extrawunsch" class="nav-link-text">
+    Extrawunsch:
+  </label>
+  <textarea
+    id="extrawunsch"
+    class="extrawunsch-textarea"
+    [(ngModel)]="extrawunsch"
+    placeholder="z. B. ohne Zwiebeln, extra scharf ..."
+    maxlength="40"
+  ></textarea>
 </div>
 
-<div *ngIf="addedIngredients.length">
-  <strong>Zusätzliche Zutaten:</strong>
-  <ul>
-    <li *ngFor="let extra of addedIngredients">{{ extra }}</li>
-  </ul>
+  <!-- 💰 Preisberechnung -->
+  <div class="preis-section mt-4">
+    <div class="preis-item">
+      <span>Basispreis:</span>
+      <span>{{ basePrice | currency:'EUR' }}</span>
+    </div>
+    <div class="preis-item">
+      <span>Zusätzliche Zutaten:</span>
+      <span>+ {{ extraPrice | currency:'EUR' }}</span>
+    </div>
+    <hr />
+    <div class="preis-item total">
+      <strong>Endpreis:</strong>
+      <strong>{{ totalPrice | currency:'EUR' }}</strong>
+    </div>
+    <!-- 💰 Preisübersicht -->
+    <div class="preis-uebersicht mt-4 text-end">
+      <span class="preis-label fw-bold me-2">Gesamtpreis:</span>
+      <span class="preis-betrag fs-4">{{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}</span>
+    </div>
+  </div>
 </div>

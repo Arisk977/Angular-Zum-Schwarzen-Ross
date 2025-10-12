@@ -68,15 +68,10 @@
       <div class="fade-slide">
 
         <app-overview [gericht]="selectedDish!" [selectedSize]="selectedSize" [deletedIngredients]="deletedIngredients"
-          [addedIngredients]="addedIngredients" [title]="title" (back)="backToAddIngredients()"
-          (addToCart)="finalizeOrder()">
+          [addedIngredients]="addedIngredients" [title]="title" [finalPrice]="finalPrice"
+          (goToDelete)="goToDeleteIngredients()" (goToAdd)="goToAddIngredients()" (addToCart)="finalizeOrder()">
         </app-overview>
 
-        <!-- 💰 Preisübersicht -->
-        <div class="preis-uebersicht mt-4 text-end">
-          <span class="preis-label fw-bold me-2">Gesamtpreis:</span>
-          <span class="preis-betrag fs-4">{{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}</span>
-        </div>
 
       </div>
     </ng-container>
@@ -139,11 +134,7 @@
 
     <!-- 📝 Step 4: Übersicht -->
     <ng-container *ngIf="isOverviewActive">
-      <div class="footer d-flex justify-content-between w-100 fade-slide align-items-center">
-        <button type="button" class="btn btn-outline-secondary px-4" (click)="backToAddIngredients()">Zurück</button>
-        <div class="preis-live fw-bold fs-5" [class.changed]="priceChanged">
-          {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
-        </div>
+      <div class="fade-slide align-items-center">
         <button type="button" class="btn btn-success px-4" (click)="finalizeOrder()">🛒 In den Warenkorb</button>
       </div>
     </ng-container>

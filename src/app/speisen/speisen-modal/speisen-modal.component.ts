@@ -55,17 +55,22 @@ openDeleteIngredients(dish: Gericht) {
     ('30cm' in price || '40cm' in price);
 
   if (hasSizeOptions) {
-    // 👉 Preis wird erst nach Größenauswahl gesetzt
-    this.isSizeSelectionActive = true;
-    this.isDeleteIngredientsActive = false;
+    // 👉 Standardgröße setzen
+    this.selectedSize = '30cm';
+    this.basePrice = price['30cm'];
+    this.finalPrice = this.basePrice;
   } else {
-    // 👉 Gericht ohne Größen — Basispreis direkt setzen
     this.basePrice = price as number;
     this.finalPrice = this.basePrice;
-    this.isDeleteIngredientsActive = true;
-    this.isSizeSelectionActive = false;
   }
+
+  // 👉 Direkt zur Overview
+  this.isOverviewActive = true;
+  this.isSizeSelectionActive = false;
+  this.isDeleteIngredientsActive = false;
+  this.isAddIngredientsActive = false;
 }
+
 
 
 
@@ -104,8 +109,6 @@ selectSizeAndContinue() {
       this.openOverview();
     }
   }
-
-
 
   close() {
     this.activeModal.close();
@@ -254,6 +257,19 @@ liveDeleteUpdate(removed: string[]) {
 liveAddUpdate(added: string[]) {
   this.addedIngredients = added;
   this.calculateFinalPrice();
+}
+
+
+goToDeleteIngredients() {
+  this.isOverviewActive = false;
+  this.isDeleteIngredientsActive = true;
+  this.isAddIngredientsActive = false;
+}
+
+goToAddIngredients() {
+  this.isOverviewActive = false;
+  this.isDeleteIngredientsActive = false;
+  this.isAddIngredientsActive = true;
 }
 
 }

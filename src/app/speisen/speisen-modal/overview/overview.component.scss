@@ -49,3 +49,196 @@ p {
     transform: translateX(0);
   }
 }
+
+.overview-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-left: 24px;
+  padding-right: 24px;
+  gap:16px;
+
+  .gericht-header {
+    text-align: center;
+
+    .gericht-name {
+      font-size: 1.3rem;
+      font-weight: 600;
+      color: rgb(160, 0, 0);
+    }
+
+    .gericht-beschreibung {
+      font-size: 0.95rem;
+      color: #444;
+    }
+  }
+
+  .groessenwahl {
+    text-align: center;
+
+    .groessen-buttons {
+      display: flex;
+      justify-content: center;
+      gap: 0.5rem;
+      margin-top: 0.5rem;
+
+      .btn {
+        border: 1px solid #ccc;
+        background: #f9f9f9;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.9rem;
+        cursor: pointer;
+
+        &.active {
+          background: rgb(160, 0, 0);
+          color: #fff;
+          border-color: rgb(160, 0, 0);
+        }
+      }
+    }
+  }
+
+  .zutaten-section {
+    label {
+      font-weight: 600;
+      display: block;
+      margin-bottom: 0.4rem;
+    }
+
+    .zutaten-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.4rem;
+    }
+
+    .tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      background: #eee;
+      border: 1px solid #ccc;
+
+      &.removed {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      &.added {
+        background: #d4edda;
+        color: #155724;
+      }
+    }
+  }
+
+  .preis-section {
+    .preis-item {
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.95rem;
+      padding: 0.3rem 0;
+    }
+
+    .total {
+      font-size: 1.1rem;
+      color: rgb(160, 0, 0);
+    }
+
+    hr {
+      margin: 0.5rem 0;
+    }
+  }
+}
+
+.zutaten-section {
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .nav-link-text {
+    cursor: pointer;
+    color: #333;
+    font-size: 0.95rem;
+    text-decoration: none;
+    position: relative;
+    display: inline-block;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: rgb(160, 0, 0);
+    }
+
+    /* Unterstreichung beim Hover */
+    &::after {
+      content: '';
+      position: absolute;
+      left: 0;
+      bottom: -2px;
+      width: 0%;
+      height: 1px;
+      background-color: rgb(160, 0, 0);
+      transition: width 0.25s ease;
+    }
+
+    &:hover::after {
+      width: 100%;
+    }
+  }
+
+  .zutaten-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.4rem;
+    margin-top: 0.3rem;
+
+    .tag {
+      padding: 0.25rem 0.6rem;
+      border-radius: 16px;
+      font-size: 0.8rem;
+      background: #eee;
+      border: 1px solid #ccc;
+
+      &.removed {
+        background: #f8d7da;
+        color: #721c24;
+      }
+
+      &.added {
+        background: #d4edda;
+        color: #155724;
+      }
+    }
+  }
+}
+
+.extrawunsch-section {
+  display: flex;
+  gap: 32px;
+  label {
+    display: block;
+    margin-bottom: 0.4rem;
+    font-weight: 600;
+  }
+
+  .extrawunsch-textarea {
+    width: 100%;
+    min-height: 70px;
+    padding: 0.5rem;
+    font-size: 0.9rem;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    resize: vertical;
+    transition: border-color 0.2s ease;
+
+    &:focus {
+      outline: none;
+      border-color: rgb(160, 0, 0);
+      box-shadow: 0 0 0 1px rgb(160, 0, 0);
+    }
+  }
+}
+
+
