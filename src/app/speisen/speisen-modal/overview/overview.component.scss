@@ -57,10 +57,11 @@ p {
   justify-content: center;
   padding-left: 24px;
   padding-right: 24px;
-  gap:16px;
+  gap: 8px;
 
   .gericht-header {
     text-align: center;
+    margin-bottom: -30px;
 
     .gericht-name {
       font-size: 1.3rem;
@@ -75,7 +76,10 @@ p {
   }
 
   .groessenwahl {
-    text-align: center;
+   display: flex;
+   justify-content: flex-start;
+   align-items: center;
+   gap: 80px;
 
     .groessen-buttons {
       display: flex;

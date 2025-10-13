@@ -60,24 +60,21 @@
 </div>
 
   <!-- 💰 Preisberechnung -->
-  <div class="preis-section mt-4">
-    <div class="preis-item">
-      <span>Basispreis:</span>
-      <span>{{ basePrice | currency:'EUR' }}</span>
-    </div>
-    <div class="preis-item">
-      <span>Zusätzliche Zutaten:</span>
-      <span>+ {{ extraPrice | currency:'EUR' }}</span>
-    </div>
-    <hr />
-    <div class="preis-item total">
-      <strong>Endpreis:</strong>
-      <strong>{{ totalPrice | currency:'EUR' }}</strong>
-    </div>
-    <!-- 💰 Preisübersicht -->
-    <div class="preis-uebersicht mt-4 text-end">
-      <span class="preis-label fw-bold me-2">Gesamtpreis:</span>
-      <span class="preis-betrag fs-4">{{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}</span>
-    </div>
+<div class="preis-section mt-4">
+  <div class="preis-item">
+    <span>Basispreis:</span>
+    <span>{{ basePrice | currency:'EUR' }}</span>
+  </div>
+
+  <div class="preis-item">
+    <span>Zusätzliche Zutaten:</span>
+    <span>+ {{ extraPrice | currency:'EUR' }}</span>
+  </div>
+
+  <hr />
+
+  <div class="preis-item total">
+    <strong>Endpreis:</strong>
+    <strong>{{ finalPrice | currency:'EUR' }}</strong>
   </div>
 </div>
