@@ -221,6 +221,7 @@ p {
 .extrawunsch-section {
   display: flex;
   gap: 32px;
+
   label {
     display: block;
     margin-bottom: 0.4rem;
@@ -229,12 +230,15 @@ p {
 
   .extrawunsch-textarea {
     width: 100%;
-    min-height: 70px;
-    padding: 0.5rem;
-    font-size: 0.9rem;
+    height: 60px;        // ca. 2 Zeilen bei 16px Schriftgröße
+    max-height: 60px;
+    padding: 8px;
+    font-size: 14px;
+    line-height: 20px;
     border: 1px solid #ccc;
     border-radius: 8px;
-    resize: vertical;
+    resize: none;        // verhindert manuelles Vergrößern
+    overflow: hidden;    // kein Scrollbalken
     transition: border-color 0.2s ease;
 
     &:focus {
@@ -244,5 +248,3 @@ p {
     }
   }
 }
-
-

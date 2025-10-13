@@ -46,7 +46,7 @@
         <app-overview [gericht]="selectedDish!" [selectedSize]="selectedSize" [deletedIngredients]="deletedIngredients"
           [addedIngredients]="addedIngredients" [title]="title" [finalPrice]="finalPrice"   (sizeChanged)="onSizeChanged($event)"
           [extraPrice]="calculateExtraPrice()" [basePrice]="basePrice" (goToDelete)="goToDeleteIngredients()"
-          (goToAdd)="goToAddIngredients()" (addToCart)="finalizeOrder($event)">
+          (goToAdd)="goToAddIngredients()">
         </app-overview>
 
 

@@ -23,7 +23,6 @@ export class OverviewComponent implements OnInit {
 
 
   @Output() back = new EventEmitter<void>();
-  @Output() addToCart = new EventEmitter<{ extrawunsch: string }>();
   @Output() sizeChanged = new EventEmitter<string>();
   @Output() goToDelete = new EventEmitter<void>();
   @Output() goToAdd = new EventEmitter<void>();
@@ -39,12 +38,12 @@ export class OverviewComponent implements OnInit {
   selectSize(size: string) {
     this.sizeChanged.emit(size);
   }
-  onAddToCart() {
-    this.addToCart.emit({
-      extrawunsch: this.extrawunsch
-    });
+  
+  onInputChange() {
+  if (this.extrawunsch) {
+    this.extrawunsch = this.extrawunsch.replace(/[\r\n]+/g, ' ');
   }
-
+}
 
   onBack() {
     this.back.emit();

@@ -50,13 +50,16 @@
   <label for="extrawunsch" class="nav-link-text">
     Extrawunsch:
   </label>
-  <textarea
-    id="extrawunsch"
-    class="extrawunsch-textarea"
-    [(ngModel)]="extrawunsch"
-    placeholder="z. B. ohne Zwiebeln, extra scharf ..."
-    maxlength="40"
-  ></textarea>
+<textarea
+  id="extrawunsch"
+  class="extrawunsch-textarea"
+  [(ngModel)]="extrawunsch"
+  placeholder="z. B. ohne Zwiebeln, extra scharf ..."
+  maxlength="40"
+  (keydown.enter)="$event.preventDefault()"
+  (input)="onInputChange()"
+></textarea>
+
 </div>
 
   <!-- 💰 Preisberechnung -->
