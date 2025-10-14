@@ -31,7 +31,6 @@
           <strong>Extrawunsch:</strong> {{ item.extrawunsch }}
         </div>
 
-        <!-- 💰 Preis pro Artikel -->
         <div class="item-detail price">
           <strong>Preis:</strong>
           {{ item.preis | currency:'EUR':'symbol':'1.2-2' }}
@@ -52,10 +51,6 @@
     </div>
   </div>
 </ng-container>
-
-
-
-
 
   <!-- Footer -->
   <div class="cart-footer" *ngIf="(cartItems$ | async)?.length">

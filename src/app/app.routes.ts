@@ -2,6 +2,7 @@ import { Routes } from '@angular/router';
 import { SpeisenComponent } from './speisen/speisen.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './register/register.component';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -10,5 +11,6 @@ export const routes: Routes = [
   { path: 'register', component: RegisterComponent },
   { path: 'warenkorb', loadComponent: () => import('./warenkorb/warenkorb.component').then(m => m.WarenkorbComponent) },
   { path: 'bestellungen', loadComponent: () => import('./bestellungen/bestellungen.component').then(m => m.BestellungenComponent) },
+  { path: 'checkout', component: CheckoutComponent },
 
 ];

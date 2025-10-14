@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, OnInit } from '@angular/core';
 import { Auth, onAuthStateChanged, signOut, User } from '@angular/fire/auth';
-import { Firestore, doc, getDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, onSnapshot } from '@angular/fire/firestore';
 import { RouterModule } from '@angular/router';
 import { WarenkorbComponent } from '../../../warenkorb/warenkorb.component';
 
@@ -22,16 +22,46 @@ export class HeaderComponent implements OnInit {
 
   constructor(private auth: Auth, private firestore: Firestore) { }
 
-  ngOnInit() {
+ ngOnInit() {
     onAuthStateChanged(this.auth, (user: User | null) => {
       if (user) {
         this.isLoggedIn = true;
         this.setUserAvatar(user);
+        this.startCartListener(user.uid);
       } else {
         this.isLoggedIn = false;
         this.menuOpen = false;
+        this.stopCartListener();
+        this.cartCount = 0;
       }
     });
+  }
+
+  ngOnDestroy() {
+    this.stopCartListener();
+  }
+
+  private unsubscribeCartListener?: () => void;
+
+    private startCartListener(uid: string) {
+    const userRef = doc(this.firestore, 'users', uid);
+
+    this.unsubscribeCartListener = onSnapshot(userRef, snapshot => {
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        const cart = Array.isArray(data['cart']) ? data['cart'] : [];
+        this.updateCartCount(cart.length);
+      } else {
+        this.updateCartCount(0);
+      }
+    });
+  }
+
+  private stopCartListener() {
+    if (this.unsubscribeCartListener) {
+      this.unsubscribeCartListener();
+      this.unsubscribeCartListener = undefined;
+    }
   }
 
   updateCartCount(newCount: number) {

@@ -1,0 +1,64 @@
+.checkout-container {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
+
+  h2 {
+    margin-bottom: 1rem;
+    color: rgb(160, 0, 0);
+  }
+
+  .cart-item {
+    border-bottom: 1px solid #ddd;
+    padding: 0.75rem 0;
+  }
+
+  .total-sum {
+    font-size: 1.2rem;
+    margin-top: 0.5rem;
+    text-align: right;
+  }
+
+  .delivery-options {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    label {
+      cursor: pointer;
+    }
+  }
+
+  .form-group {
+    margin-top: 0.75rem;
+    display: flex;
+    flex-direction: column;
+
+    label {
+      font-weight: 600;
+      margin-bottom: 0.25rem;
+    }
+
+    input {
+      padding: 0.5rem;
+      border-radius: 8px;
+      border: 1px solid #ccc;
+    }
+  }
+
+  .checkout-footer {
+    margin-top: 1.5rem;
+  }
+}
+input.invalid {
+  border: 2px solid #d9534f;
+  background-color: #fff5f5;
+}
+
+.error-message {
+  color: #d9534f;
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+}

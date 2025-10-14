@@ -1,6 +1,6 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
 import { CartService, CartItem } from './../shared/services/cart.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
@@ -15,7 +15,7 @@ export class WarenkorbComponent implements OnInit {
   @Input() isOpen = false;
   cartItems$!: Observable<CartItem[]>;
 
-  constructor(private cartService: CartService) {}
+  constructor(private cartService: CartService, private router: Router) {}
 
 ngOnInit(): void {
   this.cartItems$ = this.cartService.cart$;
@@ -25,6 +25,9 @@ ngOnInit(): void {
   })
 }
 
+ checkout(): void {
+    this.router.navigate(['/checkout']);
+  }
 
 ngOnDestroy(): void {
   this.cartService.stopCartListener();
@@ -41,7 +44,7 @@ ngOnDestroy(): void {
     this.cartService.addToCart(item);
   }
 
-decreaseQuantity(item: CartItem) {
+  decreaseQuantity(item: CartItem) {
   if (item.quantity > 1) {
     item.quantity--;
     this.cartService['cartSubject'].next(this.cartService.getItems());
@@ -59,7 +62,4 @@ decreaseQuantity(item: CartItem) {
     this.isOpen = false;
   }
 
-  checkout() {
-    alert('Zur Kasse - Funktion folgt 🔜');
-  }
 }
