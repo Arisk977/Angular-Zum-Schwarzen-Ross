@@ -3,11 +3,15 @@
 =========================== */
 .modal-body {
   min-height: 70vh;
-  overflow: hidden;
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
   padding: 16px 24px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(160, 0, 0, 0.6) transparent;
 
   &::-webkit-scrollbar {
     width: 6px;
@@ -41,6 +45,13 @@
   padding: 13px 19px;
   display: flex;
   justify-content: flex-end;
+}
+
+.footer-buttons{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 32px;
 }
 
 .navigation-footer {

@@ -6,25 +6,59 @@
     <button class="close-btn" (click)="closeCart()">×</button>
   </div>
 
-  <!-- scrollbarer Bereich -->
-  <div class="cart-body" *ngIf="cartItems.length > 0; else emptyCart">
-    <div class="cart-item" *ngFor="let item of cartItems; let i = index">
+<ng-container *ngIf="(cartItems$ | async) as cartItems">
+  <div class="cart-body" *ngIf="cartItems.length; else emptyCart">
+    <div class="cart-item" *ngFor="let item of cartItems; let i = index" [ngClass]="{ 'alt-bg': i % 2 === 1 }">
+
       <div class="item-info">
-        <h3>{{ item.name }}</h3>
-        <p>{{ item.description }}</p>
+        <h3>{{ item.title }}</h3>
+
+        <div class="item-detail">
+          <strong>Hinzugefügt:</strong>
+          {{ item.zutatenHinzugefuegt.length ? item.zutatenHinzugefuegt.join(', ') : '–' }}
+        </div>
+
+        <div class="item-detail">
+          <strong>Entfernt:</strong>
+          {{ item.zutatenEntfernt.length ? item.zutatenEntfernt.join(', ') : '–' }}
+        </div>
+
+        <div class="item-detail" *ngIf="item.groesse">
+          <strong>Größe:</strong> {{ item.groesse }}
+        </div>
+
+        <div class="item-detail" *ngIf="item.extrawunsch">
+          <strong>Extrawunsch:</strong> {{ item.extrawunsch }}
+        </div>
+
+        <!-- 💰 Preis pro Artikel -->
+        <div class="item-detail price">
+          <strong>Preis:</strong>
+          {{ item.preis | currency:'EUR':'symbol':'1.2-2' }}
+          <span *ngIf="item.quantity > 1">
+            × {{ item.quantity }} = 
+            <strong>{{ (item.preis * item.quantity) | currency:'EUR':'symbol':'1.2-2' }}</strong>
+          </span>
+        </div>
       </div>
 
       <div class="item-controls">
-        <button (click)="decreaseQuantity(i)">−</button>
+        <button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">−</button>
         <span>{{ item.quantity }}</span>
-        <button (click)="increaseQuantity(i)">+</button>
-        <button class="remove" (click)="removeItem(i)">✕</button>
+        <button (click)="increaseQuantity(item)">+</button>
+        <button class="remove" (click)="removeItem(item)">✕</button>
       </div>
+
     </div>
   </div>
+</ng-container>
 
-  <!-- fixierter Footer -->
-  <div class="cart-footer" *ngIf="cartItems.length > 0">
+
+
+
+
+  <!-- Footer -->
+  <div class="cart-footer" *ngIf="(cartItems$ | async)?.length">
     <div class="total">
       Gesamt: <strong>{{ getTotal() | currency:'EUR' }}</strong>
     </div>
