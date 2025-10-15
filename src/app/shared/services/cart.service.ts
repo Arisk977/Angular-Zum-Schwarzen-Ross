@@ -3,19 +3,8 @@ import { BehaviorSubject } from 'rxjs';
 import { Firestore, doc, updateDoc, getDoc, setDoc } from '@angular/fire/firestore';
 import { Auth } from '@angular/fire/auth';
 import { onSnapshot } from 'firebase/firestore';
+import { CartItem } from 'app/interfaces/cart-item.interface';
 
-export interface CartItem {
-  id?: string;
-  gerichtNummer?: number;
-  title: string;
-  groesse?: string;
-  basisZutaten: string[];
-  zutatenEntfernt: string[];
-  zutatenHinzugefuegt: string[];
-  preis: number;
-  extrawunsch?: string;
-  quantity: number;
-}
 
 @Injectable({
   providedIn: 'root'

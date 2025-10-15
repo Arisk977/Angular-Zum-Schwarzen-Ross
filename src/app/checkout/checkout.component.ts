@@ -2,10 +2,12 @@ import { Component, OnInit, ViewChildren, QueryList } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, NgModel } from '@angular/forms';
 import { Observable, firstValueFrom } from 'rxjs';
-import { CartItem, CartService } from '../shared/services/cart.service';
+import { CartService } from '../shared/services/cart.service';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 import { HeaderComponent } from 'app/shared/component/header/header.component';
+import { Order } from 'app/interfaces/order.interface';
+import { CartItem } from 'app/interfaces/cart-item.interface';
 
 @Component({
   selector: 'app-checkout',
@@ -15,14 +17,10 @@ import { HeaderComponent } from 'app/shared/component/header/header.component';
   styleUrls: ['./checkout.component.scss']
 })
 export class CheckoutComponent implements OnInit {
-  // 🛒 Warenkorb
   cartItems$!: Observable<CartItem[]>;
   totalPrice: number = 0;
-
-  // 🚚 Lieferoption
   deliveryType: 'abholung' | 'lieferung' | null = null;
 
-  // 📋 Formularfelder
   checkoutForm = {
     firstName: '',
     lastName: '',
@@ -35,108 +33,108 @@ export class CheckoutComponent implements OnInit {
     houseNumber: ''
   };
 
-  // 👉 Alle ngModel Felder referenzieren (für visuelle Validierung)
   @ViewChildren(NgModel) formFields!: QueryList<NgModel>;
 
   constructor(
     private cartService: CartService,
     private firestore: Firestore,
     private auth: Auth
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     this.cartItems$ = this.cartService.cart$;
     this.cartService.cart$.subscribe(items => {
       this.totalPrice = items.reduce((acc, item) => acc + (item.preis || 0), 0);
     });
-     onAuthStateChanged(this.auth, async (user: User | null) => {
+    onAuthStateChanged(this.auth, async (user: User | null) => {
       if (user) {
         await this.loadUserData(user.uid);
       }
     });
   }
 
-private async loadUserData(uid: string): Promise<void> {
-  try {
-    const userRef = doc(this.firestore, 'users', uid);
-    const snapshot = await getDoc(userRef);
+  private async loadUserData(uid: string): Promise<void> {
+    try {
+      const userRef = doc(this.firestore, 'users', uid);
+      const snapshot = await getDoc(userRef);
 
-    if (snapshot.exists()) {
-      const data = snapshot.data();
-
-      // 🧍 Personendaten
-      this.checkoutForm.firstName = data['vorname'] || '';
-      this.checkoutForm.lastName = data['nachname'] || '';
-      this.checkoutForm.phone = data['telefonnummer'] || '';
-
-      // 🏡 Adressdaten (verschachtelt)
-      if (data['adresse']) {
-        const adresse = data['adresse'] as any;
-        this.checkoutForm.street = adresse['strasse'] || '';
-        this.checkoutForm.houseNumber = adresse['hausnummer'] || '';
-        this.checkoutForm.city = adresse['ort'] || '';
-        this.checkoutForm.zip = adresse['plz'] || '';
+      if (snapshot.exists()) {
+        const data = snapshot.data();
+        this.checkoutPersonalData(data);
+        if (data['adresse']) {
+          const address = data['adresse'] as any;
+          this.checkoutAddress(address);
+        }
       }
+    } catch (err) {
+      console.error('❌ Fehler beim Laden der Userdaten:', err);
     }
-  } catch (err) {
-    console.error('❌ Fehler beim Laden der Userdaten:', err);
   }
+
+  checkoutPersonalData(data: any) {
+    this.checkoutForm.firstName = data['vorname'] || '';
+    this.checkoutForm.lastName = data['nachname'] || '';
+    this.checkoutForm.phone = data['telefonnummer'] || '';
+  }
+
+  checkoutAddress(address: any) {
+    this.checkoutForm.street = address['strasse'] || '';
+    this.checkoutForm.houseNumber = address['hausnummer'] || '';
+    this.checkoutForm.city = address['ort'] || '';
+    this.checkoutForm.zip = address['plz'] || '';
+  }
+
+async finalizeOrder(): Promise<void> {
+  this.formFields.forEach(field => field.control.markAsTouched());
+
+  const cartItems = await firstValueFrom(this.cartService.cart$);
+  this.formValidation(cartItems);
+
+  const order = this.buildOrder(cartItems);
+
+  await this.saveOrderInFirestore(order);
 }
 
+private buildOrder(cartItems: CartItem[]): Order {
+  const fullAddress = `${this.checkoutForm.street} ${this.checkoutForm.houseNumber}, ${this.checkoutForm.zip} ${this.checkoutForm.city}`;
+  const fullName = `${this.checkoutForm.firstName} ${this.checkoutForm.lastName}`;
+  const userData = this.auth.currentUser;
 
-  async finalizeOrder(): Promise<void> {
-    // 🔸 Alle Felder als "benutzt" markieren, um Fehler visuell anzuzeigen
-    this.formFields.forEach(field => field.control.markAsTouched());
+  return {
+    userId: userData?.uid || null,
+    name: fullName,
+    phone: this.checkoutForm.phone,
+    address: this.deliveryType === 'lieferung' ? fullAddress : null,
+    abholung: this.deliveryType === 'abholung',
+    lieferung: this.deliveryType === 'lieferung',
+    uhrzeit:
+      this.deliveryType === 'abholung'
+        ? this.checkoutForm.pickupTime || null
+        : this.checkoutForm.deliveryTime || null,
+    items: cartItems,
+    total: this.totalPrice,
+    timestamp: new Date().toISOString(),
+    status: 'offen'
+  };
+}
 
-    const fullAddress = `${this.checkoutForm.street} ${this.checkoutForm.houseNumber}, ${this.checkoutForm.zip} ${this.checkoutForm.city}`;
-    const fullName = `${this.checkoutForm.firstName} ${this.checkoutForm.lastName}`;
-    const userData = this.auth.currentUser;
-    const cartItems = await firstValueFrom(this.cartService.cart$);
-
-    // 🧭 Validierung
+  formValidation(cartItems: any) {
     if (!this.deliveryType) {
       return;
     }
-
-    if (
-      !this.checkoutForm.firstName.trim() ||
-      !this.checkoutForm.lastName.trim() ||
-      !this.checkoutForm.phone.trim()
-    ) {
+    if (!this.checkoutForm.firstName.trim() || !this.checkoutForm.lastName.trim() || !this.checkoutForm.phone.trim()) {
       return;
     }
-
-    if (
-      this.deliveryType === 'lieferung' &&
-      (!this.checkoutForm.city.trim() ||
-        !this.checkoutForm.zip.trim() ||
-        !this.checkoutForm.street.trim() ||
-        !this.checkoutForm.houseNumber.trim())
-    ) {
+    if (this.deliveryType === 'lieferung' && (!this.checkoutForm.city.trim() || !this.checkoutForm.zip.trim() ||
+      !this.checkoutForm.street.trim() || !this.checkoutForm.houseNumber.trim())) {
       return;
     }
-
     if (!cartItems || cartItems.length === 0) {
       return;
     }
+  }
 
-    const order = {
-      userId: userData?.uid || null,
-      name: fullName,
-      phone: this.checkoutForm.phone,
-      address: this.deliveryType === 'lieferung' ? fullAddress : null,
-      abholung: this.deliveryType === 'abholung',
-      lieferung: this.deliveryType === 'lieferung',
-      uhrzeit:
-        this.deliveryType === 'abholung'
-          ? this.checkoutForm.pickupTime || null
-          : this.checkoutForm.deliveryTime || null,
-      items: cartItems,
-      total: this.totalPrice,
-      timestamp: new Date().toISOString(),
-      status: 'offen'
-    };
-
+  async saveOrderInFirestore(order: any) {
     try {
       // 🔥 Bestellung in Firestore speichern
       const orderId = Date.now().toString();
@@ -154,3 +152,5 @@ private async loadUserData(uid: string): Promise<void> {
     }
   }
 }
+
+

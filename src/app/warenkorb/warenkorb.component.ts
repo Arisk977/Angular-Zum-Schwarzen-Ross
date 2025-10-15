@@ -1,9 +1,10 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { CartService, CartItem } from './../shared/services/cart.service';
+import { CartService} from './../shared/services/cart.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
+import { CartItem } from 'app/interfaces/cart-item.interface';
 
 @Component({
   selector: 'app-warenkorb',
