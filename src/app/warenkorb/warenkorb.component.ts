@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';
-import { CartService} from './../shared/services/cart.service';
+import { CartService } from './../shared/services/cart.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CartItem } from 'app/interfaces/cart-item.interface';
@@ -16,25 +16,23 @@ export class WarenkorbComponent implements OnInit {
   @Input() isOpen = false;
   cartItems$!: Observable<CartItem[]>;
 
-  constructor(private cartService: CartService, private router: Router) {}
+  constructor(private cartService: CartService, private router: Router) { }
 
-ngOnInit(): void {
-  this.cartItems$ = this.cartService.cart$;
+  ngOnInit(): void {
+    this.cartItems$ = this.cartService.cart$;
 
     this.cartItems$.subscribe(items => {
-    console.log('🧾 Aktuelle Warenkorb-Daten:', items);
-  })
-}
+      console.log('🧾 Aktuelle Warenkorb-Daten:', items);
+    })
+  }
 
- checkout(): void {
+  checkout(): void {
     this.router.navigate(['/checkout']);
   }
 
-ngOnDestroy(): void {
-  this.cartService.stopCartListener();
-}
-
-
+  ngOnDestroy(): void {
+    this.cartService.stopCartListener();
+  }
 
   getTotal(): number {
     return this.cartService.getTotal();
@@ -46,12 +44,12 @@ ngOnDestroy(): void {
   }
 
   decreaseQuantity(item: CartItem) {
-  if (item.quantity > 1) {
-    item.quantity--;
-    this.cartService['cartSubject'].next(this.cartService.getItems());
-    this['cartService']['updateFirestoreCart']();
+    if (item.quantity > 1) {
+      item.quantity--;
+      this.cartService['cartSubject'].next(this.cartService.getItems());
+      this['cartService']['updateFirestoreCart']();
+    }
   }
-}
 
 
   removeItem(item: CartItem) {

@@ -6,9 +6,10 @@
   border-radius: 16px;
   box-shadow: 0 0 12px rgba(0, 0, 0, 0.1);
 
-  h2 {
-    margin-bottom: 1rem;
+  h1 {
+    margin-bottom: 24px;
     color: rgb(160, 0, 0);
+    text-align: center;
   }
 
   .cart-item {
@@ -24,9 +25,11 @@
 
   .delivery-options {
     display: flex;
-    gap: 1rem;
-    margin-top: 1rem;
-    label {
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+   
+ label {
       cursor: pointer;
     }
   }
@@ -61,4 +64,107 @@ input.invalid {
   color: #d9534f;
   font-size: 0.85rem;
   margin-top: 0.25rem;
+}
+
+.delivery-error{
+  text-align: end;
+  margin-top: -20px;
+}
+
+.item-info{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+h4, h3{
+  color: #a30000;
+}
+
+.left-side{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-start;
+}
+
+.right-side{
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: flex-end;
+}
+
+.zutaten-tags {
+  margin-top: 8px;
+
+  strong {
+    margin-right: 8px;
+  }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 10px;
+    border-radius: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    margin: 0 4px 4px 0; 
+    line-height: 1.4;
+  }
+}
+
+
+  .tag-added {
+    background-color: #d1f7d1;
+    color: #207520;
+    border: 1px solid #4caf50;
+  }
+
+  .tag-removed {
+    background-color: #f9d6d6;
+    color: #a30000;
+    border: 1px solid #d32f2f;
+  }
+
+.checkout-footer{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.checkout-button{
+  padding:  12px 24px;
+  background-color: #a30000;
+  color: white;
+  border: 1px solid black;
+  border-radius: 15px;
+  &:hover{
+    cursor: pointer;
+    background-color: white;
+    color: #a30000;
+    border: 1px solid #a30000;
+    transition: 150ms ease-in-out;
+  }
+}
+
+.city, .address{
+  display: flex;
+  gap: 16px;
+
+  .form-group {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .form-group:first-child {
+    flex: 0 0 70%;
+  }
+
+  .form-group:last-child {
+    flex: 0 0 27%;
+  }
+
+  input {
+    width: 100%;
+  }
 }

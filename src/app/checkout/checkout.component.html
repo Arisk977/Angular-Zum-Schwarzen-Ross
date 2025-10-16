@@ -1,242 +1,235 @@
 <app-header></app-header>
 <div class="checkout-container">
   <!-- 🧾 Überschrift -->
-  <h2 class="checkout-title">Bestellung aufgeben</h2>
+  <h1 class="checkout-title">Bestellung aufgeben</h1>
 
   <!-- 🛒 Warenkorbübersicht -->
   <div class="cart-overview" *ngIf="(cartItems$ | async) as cartItems">
     <div class="cart-item" *ngFor="let item of cartItems">
+      <h4>{{ item.title }}</h4>
       <div class="item-info">
-        <h4>{{ item.title }}</h4>
+        <div class="left-side">
+
+          <div class="zutaten-tags">
+            <strong>Hinzugefügt:</strong>
+            <ng-container *ngIf="item.zutatenHinzugefuegt?.length; else noAdded">
+              <span *ngFor="let zutat of item.zutatenHinzugefuegt" class="tag tag-added">
+                {{ zutat }}
+              </span>
+            </ng-container>
+            <ng-template #noAdded>
+              <span class="tag tag-empty">-</span>
+            </ng-template>
+          </div>
+
+          <div class="zutaten-tags">
+            <strong>Entfernt:</strong>
+            <ng-container *ngIf="item.zutatenEntfernt?.length; else noRemoved">
+              <span *ngFor="let zutat of item.zutatenEntfernt" class="tag tag-removed">
+                {{ zutat }}
+              </span>
+            </ng-container>
+            <ng-template #noRemoved>
+              <span class="tag tag-empty">-</span>
+            </ng-template>
+          </div>
+
+
+        </div>
+
+        <div class="right-side">
+          <p><strong>Menge:</strong> {{ item.quantity }}</p>
+          <p>
+            <strong>Preis:</strong>
+            {{ item.preis | currency:'EUR' }} x {{ item.quantity }} =
+            {{ (item.preis * item.quantity) | currency:'EUR' }}
+          </p>
+        </div>
         <p *ngIf="item.groesse"><strong>Größe:</strong> {{ item.groesse }}</p>
-        <p *ngIf="item.zutatenHinzugefuegt?.length">
-          <strong>Hinzugefügt:</strong> {{ item.zutatenHinzugefuegt.join(', ') }}
-        </p>
-        <p *ngIf="item.zutatenEntfernt?.length">
-          <strong>Entfernt:</strong> {{ item.zutatenEntfernt.join(', ') }}
-        </p>
-        <p><strong>Preis:</strong> {{ item.preis | currency: 'EUR' }}</p>
       </div>
     </div>
 
     <!-- 💰 Gesamtsumme -->
     <div class="total-sum">
-      <strong>Gesamtsumme:</strong> {{ totalPrice | currency: 'EUR' }}
+      <strong>Gesamtsumme:</strong> {{ totalPrice | currency:'EUR' }}
     </div>
   </div>
 
-  <hr />
 
-  <!-- 🚚 Lieferoptionen -->
+  <hr />
+  <form #checkoutFormRef="ngForm" (ngSubmit)="finalizeOrder(checkoutFormRef)">
+    <!-- 🚚 Lieferoption -->
+    <div>
   <div class="delivery-options">
     <h3>Lieferoption</h3>
+
     <label>
-      <input type="radio" name="deliveryType" value="abholung" [(ngModel)]="deliveryType" />
+      <input
+        type="radio"
+        name="deliveryType"
+        value="abholung"
+        [(ngModel)]="deliveryType"
+        required
+      />
       Zur Abholung
     </label>
 
     <label>
-      <input type="radio" name="deliveryType" value="lieferung" [(ngModel)]="deliveryType" />
+      <input
+        type="radio"
+        name="deliveryType"
+        value="lieferung"
+        [(ngModel)]="deliveryType"
+        required
+      />
       Nach Hause liefern
     </label>
+   
   </div>
-
-  <!-- 🧍 Formularfelder für Abholung -->
-  <div class="pickup-form" *ngIf="deliveryType === 'abholung'">
-    <h4>Abholinformationen</h4>
-
-    <!-- Vorname -->
-    <div class="form-group">
-      <label for="firstName">Vorname *</label>
-      <input
-        type="text"
-        id="firstName"
-        [(ngModel)]="checkoutForm.firstName"
-        name="firstName"
-        required
-        #firstNameRef="ngModel"
-        [class.invalid]="firstNameRef.invalid && firstNameRef.touched"
-      />
-      <div class="error-message" *ngIf="firstNameRef.invalid && firstNameRef.touched">
-        Bitte Vornamen eingeben.
-      </div>
+ <div class="error-message delivery-error" *ngIf="checkoutFormRef.submitted && !deliveryType">
+      Bitte wähle eine Lieferoption.
     </div>
-
-    <!-- Nachname -->
-    <div class="form-group">
-      <label for="lastName">Nachname *</label>
-      <input
-        type="text"
-        id="lastName"
-        [(ngModel)]="checkoutForm.lastName"
-        name="lastName"
-        required
-        #lastNameRef="ngModel"
-        [class.invalid]="lastNameRef.invalid && lastNameRef.touched"
-      />
-      <div class="error-message" *ngIf="lastNameRef.invalid && lastNameRef.touched">
-        Bitte Nachnamen eingeben.
-      </div>
-    </div>
-
-    <!-- Telefonnummer -->
-    <div class="form-group">
-      <label for="phone">Telefonnummer *</label>
-      <input
-        type="tel"
-        id="phone"
-        [(ngModel)]="checkoutForm.phone"
-        name="phone"
-        required
-        #phoneRef="ngModel"
-        [class.invalid]="phoneRef.invalid && phoneRef.touched"
-      />
-      <div class="error-message" *ngIf="phoneRef.invalid && phoneRef.touched">
-        Bitte Telefonnummer eingeben.
-      </div>
-    </div>
-
-    <!-- Uhrzeit optional -->
-    <div class="form-group">
-      <label for="pickupTime">Bestimmte Uhrzeit (optional)</label>
-      <input type="time" id="pickupTime" [(ngModel)]="checkoutForm.pickupTime" />
-    </div>
-  </div>
-
-  <!-- 🏡 Formularfelder für Lieferung -->
-  <div class="delivery-form" *ngIf="deliveryType === 'lieferung'">
-    <h4>Lieferinformationen</h4>
-
-    <!-- Vorname -->
-    <div class="form-group">
-      <label for="firstName-delivery">Vorname *</label>
-      <input
-        type="text"
-        id="firstName-delivery"
-        [(ngModel)]="checkoutForm.firstName"
-        name="firstNameDelivery"
-        required
-        #firstNameDeliveryRef="ngModel"
-        [class.invalid]="firstNameDeliveryRef.invalid && firstNameDeliveryRef.touched"
-      />
-      <div class="error-message" *ngIf="firstNameDeliveryRef.invalid && firstNameDeliveryRef.touched">
-        Bitte Vornamen eingeben.
-      </div>
-    </div>
-
-    <!-- Nachname -->
-    <div class="form-group">
-      <label for="lastName-delivery">Nachname *</label>
-      <input
-        type="text"
-        id="lastName-delivery"
-        [(ngModel)]="checkoutForm.lastName"
-        name="lastNameDelivery"
-        required
-        #lastNameDeliveryRef="ngModel"
-        [class.invalid]="lastNameDeliveryRef.invalid && lastNameDeliveryRef.touched"
-      />
-      <div class="error-message" *ngIf="lastNameDeliveryRef.invalid && lastNameDeliveryRef.touched">
-        Bitte Nachnamen eingeben.
-      </div>
-    </div>
-
-    <!-- Ort -->
-    <div class="form-group">
-      <label for="city">Ort *</label>
-      <input
-        type="text"
-        id="city"
-        [(ngModel)]="checkoutForm.city"
-        name="city"
-        required
-        #cityRef="ngModel"
-        [class.invalid]="cityRef.invalid && cityRef.touched"
-      />
-      <div class="error-message" *ngIf="cityRef.invalid && cityRef.touched">
-        Bitte Ort eingeben.
-      </div>
-    </div>
-
-    <!-- PLZ -->
-    <div class="form-group">
-      <label for="zip">PLZ *</label>
-      <input
-        type="text"
-        id="zip"
-        [(ngModel)]="checkoutForm.zip"
-        name="zip"
-        required
-        #zipRef="ngModel"
-        [class.invalid]="zipRef.invalid && zipRef.touched"
-      />
-      <div class="error-message" *ngIf="zipRef.invalid && zipRef.touched">
-        Bitte PLZ eingeben.
-      </div>
-    </div>
-
-    <!-- Straße -->
-    <div class="form-group">
-      <label for="street">Straße *</label>
-      <input
-        type="text"
-        id="street"
-        [(ngModel)]="checkoutForm.street"
-        name="street"
-        required
-        #streetRef="ngModel"
-        [class.invalid]="streetRef.invalid && streetRef.touched"
-      />
-      <div class="error-message" *ngIf="streetRef.invalid && streetRef.touched">
-        Bitte Straße eingeben.
-      </div>
-    </div>
-
-    <!-- Hausnummer -->
-    <div class="form-group">
-      <label for="houseNumber">Hausnummer *</label>
-      <input
-        type="text"
-        id="houseNumber"
-        [(ngModel)]="checkoutForm.houseNumber"
-        name="houseNumber"
-        required
-        #houseNumberRef="ngModel"
-        [class.invalid]="houseNumberRef.invalid && houseNumberRef.touched"
-      />
-      <div class="error-message" *ngIf="houseNumberRef.invalid && houseNumberRef.touched">
-        Bitte Hausnummer eingeben.
-      </div>
-    </div>
-
-    <!-- Telefonnummer -->
-    <div class="form-group">
-      <label for="phone-delivery">Telefonnummer *</label>
-      <input
-        type="tel"
-        id="phone-delivery"
-        [(ngModel)]="checkoutForm.phone"
-        name="phoneDelivery"
-        required
-        #phoneDeliveryRef="ngModel"
-        [class.invalid]="phoneDeliveryRef.invalid && phoneDeliveryRef.touched"
-      />
-      <div class="error-message" *ngIf="phoneDeliveryRef.invalid && phoneDeliveryRef.touched">
-        Bitte Telefonnummer eingeben.
-      </div>
-    </div>
-
-    <!-- Uhrzeit optional -->
-    <div class="form-group">
-      <label for="deliveryTime">Bestimmte Uhrzeit (optional)</label>
-      <input type="time" id="deliveryTime" [(ngModel)]="checkoutForm.deliveryTime" />
-    </div>
-  </div>
-
-  <!-- 🪙 Bezahlbutton -->
-  <div class="checkout-footer">
-    <button type="button" class="btn btn-primary btn-lg w-100" (click)="finalizeOrder()">
-      Zur Bezahlung
-    </button>
-  </div>
 </div>
+
+
+    <!-- 🧍 Formularfelder für Abholung -->
+    <div class="pickup-form" *ngIf="deliveryType === 'abholung'">
+      <!-- Vorname -->
+      <div class="form-group">
+        <label for="firstName">Vorname *</label>
+        <input type="text" id="firstName" [(ngModel)]="checkoutForm.firstName" name="firstName" required
+          #firstNameRef="ngModel"
+          [class.invalid]="firstNameRef.invalid && (firstNameRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="firstNameRef.invalid && (firstNameRef.touched || checkoutFormRef.submitted)">
+          Bitte Vornamen eingeben.
+        </div>
+      </div>
+
+      <!-- Nachname -->
+      <div class="form-group">
+        <label for="lastName">Nachname *</label>
+        <input type="text" id="lastName" [(ngModel)]="checkoutForm.lastName" name="lastName" required
+          #lastNameRef="ngModel"
+          [class.invalid]="lastNameRef.invalid && (lastNameRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="lastNameRef.invalid && (lastNameRef.touched || checkoutFormRef.submitted)">
+          Bitte Nachnamen eingeben.
+        </div>
+      </div>
+
+      <!-- Telefonnummer -->
+      <div class="form-group">
+        <label for="phone">Telefonnummer *</label>
+        <input type="tel" id="phone" [(ngModel)]="checkoutForm.phone" name="phone" required #phoneRef="ngModel"
+          [class.invalid]="phoneRef.invalid && (phoneRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="phoneRef.invalid && (phoneRef.touched || checkoutFormRef.submitted)">
+          Bitte Telefonnummer eingeben.
+        </div>
+      </div>
+
+      <!-- Uhrzeit optional -->
+      <div class="form-group">
+        <label for="pickupTime">Bestimmte Uhrzeit (optional)</label>
+        <input type="time" id="pickupTime" [(ngModel)]="checkoutForm.pickupTime" />
+      </div>
+    </div>
+
+    <!-- 🏡 Formularfelder für Lieferung -->
+    <div class="delivery-form" *ngIf="deliveryType === 'lieferung'">
+      <!-- Vorname -->
+      <div class="form-group">
+        <label for="firstName-delivery">Vorname *</label>
+        <input type="text" id="firstName-delivery" [(ngModel)]="checkoutForm.firstName" name="firstNameDelivery"
+          required #firstNameDeliveryRef="ngModel"
+          [class.invalid]="firstNameDeliveryRef.invalid && (firstNameDeliveryRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message"
+          *ngIf="firstNameDeliveryRef.invalid && (firstNameDeliveryRef.touched || checkoutFormRef.submitted)">
+          Bitte Vornamen eingeben.
+        </div>
+      </div>
+
+      <!-- Nachname -->
+      <div class="form-group">
+        <label for="lastName-delivery">Nachname *</label>
+        <input type="text" id="lastName-delivery" [(ngModel)]="checkoutForm.lastName" name="lastNameDelivery" required
+          #lastNameDeliveryRef="ngModel"
+          [class.invalid]="lastNameDeliveryRef.invalid && (lastNameDeliveryRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message"
+          *ngIf="lastNameDeliveryRef.invalid && (lastNameDeliveryRef.touched || checkoutFormRef.submitted)">
+          Bitte Nachnamen eingeben.
+        </div>
+      </div>
+
+      <!-- Ort -->
+       <div class="city">
+      <div class="form-group">
+        <label for="city">Ort *</label>
+        <input type="text" id="city" [(ngModel)]="checkoutForm.city" name="city" required #cityRef="ngModel"
+          [class.invalid]="cityRef.invalid && (cityRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="cityRef.invalid && (cityRef.touched || checkoutFormRef.submitted)">
+          Bitte Ort eingeben.
+        </div>
+      </div>
+
+      <!-- PLZ -->
+      <div class="form-group">
+        <label for="zip">PLZ *</label>
+        <input type="text" id="zip" [(ngModel)]="checkoutForm.zip" name="zip" required #zipRef="ngModel"
+          [class.invalid]="zipRef.invalid && (zipRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="zipRef.invalid && (zipRef.touched || checkoutFormRef.submitted)">
+          Bitte PLZ eingeben.
+        </div>
+      </div>
+       </div>
+
+
+      <!-- Straße -->
+       <div class="address">
+        <div class="form-group">
+        <label for="street">Straße *</label>
+        <input type="text" id="street" [(ngModel)]="checkoutForm.street" name="street" required #streetRef="ngModel"
+          [class.invalid]="streetRef.invalid && (streetRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message" *ngIf="streetRef.invalid && (streetRef.touched || checkoutFormRef.submitted)">
+          Bitte Straße eingeben.
+        </div>
+      </div>
+
+      <!-- Hausnummer -->
+      <div class="form-group">
+        <label for="houseNumber">Hausnummer *</label>
+        <input type="text" id="houseNumber" [(ngModel)]="checkoutForm.houseNumber" name="houseNumber" required
+          #houseNumberRef="ngModel"
+          [class.invalid]="houseNumberRef.invalid && (houseNumberRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message"
+          *ngIf="houseNumberRef.invalid && (houseNumberRef.touched || checkoutFormRef.submitted)">
+          Bitte Hausnummer eingeben.
+        </div>
+      </div>
+       </div>
+      
+
+      <!-- Telefonnummer -->
+      <div class="form-group">
+        <label for="phone-delivery">Telefonnummer *</label>
+        <input type="tel" id="phone-delivery" [(ngModel)]="checkoutForm.phone" name="phoneDelivery" required
+          #phoneDeliveryRef="ngModel"
+          [class.invalid]="phoneDeliveryRef.invalid && (phoneDeliveryRef.touched || checkoutFormRef.submitted)" />
+        <div class="error-message"
+          *ngIf="phoneDeliveryRef.invalid && (phoneDeliveryRef.touched || checkoutFormRef.submitted)">
+          Bitte Telefonnummer eingeben.
+        </div>
+      </div>
+
+      <!-- Uhrzeit optional -->
+      <div class="form-group">
+        <label for="deliveryTime">Bestimmte Uhrzeit (optional)</label>
+        <input type="time" id="deliveryTime" [(ngModel)]="checkoutForm.deliveryTime" />
+      </div>
+    </div>
+
+    <!-- 🪙 Bezahlbutton -->
+    <div class="checkout-footer">
+      <button type="submit" class="checkout-button">
+        Zur Bezahlung
+      </button>
+    </div>
+  </form>
