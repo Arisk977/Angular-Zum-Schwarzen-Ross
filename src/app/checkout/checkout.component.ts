@@ -45,8 +45,6 @@ export class CheckoutComponent implements OnInit {
 
   ngOnInit(): void {
    this.setupCartSubscription();
-
-  // 🟢 beim erneuten Betreten der Seite
   this.router.events
     .pipe(filter(e => e instanceof NavigationEnd))
     .subscribe((e: any) => {
@@ -64,7 +62,6 @@ export class CheckoutComponent implements OnInit {
 
 private setupCartSubscription() {
   this.cartItems$ = this.cartService.cart$;
-
   this.cartService.cart$.subscribe(items => {
     this.totalPrice = items.reduce(
       (acc, item) => acc + (item.preis * item.quantity),
@@ -109,10 +106,7 @@ private setupCartSubscription() {
   if (form.invalid) {
     return;
   }
-
     const cartItems = await firstValueFrom(this.cartService.cart$);
-
-
     const order = this.buildOrder(cartItems);
 
     await this.saveOrderInFirestore(order);
@@ -139,22 +133,6 @@ private setupCartSubscription() {
       timestamp: new Date().toISOString(),
       status: 'offen'
     };
-  }
-
-  formValidation(cartItems: any) {
-    if (!this.deliveryType) {
-      return;
-    }
-    if (!this.checkoutForm.firstName.trim() || !this.checkoutForm.lastName.trim() || !this.checkoutForm.phone.trim()) {
-      return;
-    }
-    if (this.deliveryType === 'lieferung' && (!this.checkoutForm.city.trim() || !this.checkoutForm.zip.trim() ||
-      !this.checkoutForm.street.trim() || !this.checkoutForm.houseNumber.trim())) {
-      return;
-    }
-    if (!cartItems || cartItems.length === 0) {
-      return;
-    }
   }
 
   async saveOrderInFirestore(order: any) {

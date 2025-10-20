@@ -1,17 +1,26 @@
 <h5 class="heading">{{ gericht.name }}</h5>
 <p class="subtext">{{ gericht.beschreibung }}</p>
 
-<h6 class="section-title">Ingredients entfernen oder austauschen:</h6>
+<div class="delete-ingredients">
+  <div class="extras-container">
+    <h6 class="section-title">Zutaten entfernen oder austauschen:</h6>
+    <div class="btn-container">
+       <button type="button" class="pill-btn" *ngFor="let ingredient of gericht?.zutaten || []"
+      [class.active]="isSelected(ingredient)" (click)="toggleIngredient(ingredient)">
+      {{ ingredient }}
+    </button>
+    </div>
+   
+  </div>
 
-<div class="extras-container">
-  <button
-    type="button"
-    class="pill-btn"
-    *ngFor="let ingredient of gericht?.zutaten || []"
-    [class.active]="isSelected(ingredient)"
-    (click)="toggleIngredient(ingredient)"
-  >
-    {{ ingredient }}
-  </button>
+  <div class="extras-container" *ngIf="shouldShowSalatExtras()">
+    <h6 class="section-title">Salat ohne:</h6>
+    <div class="btn-container">
+      <button type="button" class="pill-btn" *ngFor="let extra of salatExtras"
+      [class.active]="isSalatExtraSelected(extra)" (click)="toggleSalatExtra(extra)">
+      {{ extra }}
+    </button>
+    </div>
+    
+  </div>
 </div>
-

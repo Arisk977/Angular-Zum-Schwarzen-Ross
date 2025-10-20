@@ -21,17 +21,7 @@
   margin-bottom: 16px;     /* 1rem */
 }
 
-.section-title {
-  font-size: 16px;         /* 1rem */
-  font-weight: 600;
-  margin: 0 0 12px 0;      /* 0 0 0.75rem 0 */
-}
 
-.extras-container {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;               /* 0.6rem leicht aufgerundet */
-}
 
 /* Einheitliche Pillen-Buttons (keine .btn von Bootstrap verwenden!) */
 .pill-btn {
@@ -59,6 +49,34 @@
 
   &:active {
     transform: translateY(1px);
+  }
+}
+
+.delete-ingredients{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 64px;
+  width: 100%;
+  margin-top: 32px;
+
+}
+
+.extras-container{
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  >.btn-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    gap: 16px;
+
   }
 }
 

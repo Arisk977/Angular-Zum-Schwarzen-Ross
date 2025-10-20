@@ -16,6 +16,8 @@ export class DeleteIngredientsComponent {
   @Output() back = new EventEmitter<void>();
   @Output() selectionChanged = new EventEmitter<string[]>();
 
+  salatExtras: string[] = ['Grüner Salat', 'Karotten', 'Weißkraut', 'Tomaten', 'Gurken', 'Senfsoße'];
+    selectedSalatExtras: string[] = [];
   selectedIngredients: string[] = [];
   
   toggleIngredient(ingredient: string) {
@@ -29,8 +31,22 @@ export class DeleteIngredientsComponent {
   this.selectionChanged.emit(this.selectedIngredients);
   }
 
+    toggleSalatExtra(extra: string) {
+    const index = this.selectedSalatExtras.indexOf(extra);
+    if (index > -1) {
+      this.selectedSalatExtras.splice(index, 1);
+    } else {
+      this.selectedSalatExtras.push(extra);
+    }
+    this.selectionChanged.emit([...this.selectedIngredients, ...this.selectedSalatExtras]);
+  }
+
   isSelected(ingredient: string): boolean {
     return this.selectedIngredients.includes(ingredient);
+  }
+
+    isSalatExtraSelected(extra: string): boolean {
+    return this.selectedSalatExtras.includes(extra);
   }
 
   submitSelection() {
@@ -42,5 +58,11 @@ export class DeleteIngredientsComponent {
 
   resetSelection() {
     this.selectedIngredients = [];
+  }
+
+    shouldShowSalatExtras(): boolean {
+    const hasSalat = this.gericht?.zutaten?.includes('Salat');
+    const salatSelected = this.selectedIngredients.includes('Salat');
+    return !!hasSalat && !salatSelected;
   }
 }

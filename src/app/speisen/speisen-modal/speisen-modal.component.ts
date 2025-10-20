@@ -201,9 +201,27 @@ export class SpeisenModalComponent {
 
   calculateExtraPrice(): number {
   this.normalizeIngredients();
-  return this.calcDelta();
+  return this.calcExtra();
 }
 
+private calcExtra(): number {
+  const removedTotal = this.deletedIngredients
+    .map(i => this.priceOf(i))
+    .reduce((sum, price) => sum + price, 0);
+
+  const addedTotal = this.addedIngredients
+    .map(i => this.priceOf(i))
+    .reduce((sum, price) => sum + price, 0);
+
+  let diffCents = Math.round((addedTotal - removedTotal) * 100);
+
+  if (diffCents < 0) {
+    diffCents = 0;
+  }
+  const result = diffCents / 100;
+
+  return result;
+}
 
   onSizeChanged(size: string) {
     this.selectedSize = size;
@@ -233,30 +251,11 @@ private priceOf(ing: string): number {
   return Number(this.getIngredientPriceBySize(ing)) || 0;
 }
 
-private calcDelta(): number {
-  const added = this.addedIngredients.map(i => this.priceOf(i));
-  const removed = this.deletedIngredients.map(i => this.priceOf(i));
-
-  const pairs = Math.min(added.length, removed.length);
-  let cents = 0;
-
-  for (let i = 0; i < pairs; i++) {
-    const diff = added[i] - removed[i];
-    if (diff > 0) cents += Math.round(diff * 100);
-  }
-
-  for (let i = pairs; i < added.length; i++) {
-    cents += Math.round(added[i] * 100);
-  }
-
-  return cents / 100;
-}
-
 calculateFinalPrice() {
   this.normalizeIngredients();
 
   const base = this.basePrice || 0;
-  const delta = this.calcDelta();
+  const delta = this.calcExtra();
 
   const final = base + delta;
   this.finalPrice = Math.round(final * 100) / 100;
