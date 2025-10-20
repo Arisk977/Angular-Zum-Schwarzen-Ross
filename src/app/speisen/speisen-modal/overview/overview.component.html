@@ -23,26 +23,47 @@
 
   <!-- ❌ Entfernte Zutaten -->
   <div class="zutaten-section mt-3">
-    <label> <span class="nav-link-text" (click)="onGoToDelete()">
-        Zutaten entfernen:
-      </span></label>
-    <div class="zutaten-tags">
-      <span class="tag removed" *ngFor="let zutat of deletedIngredients">
-        {{ zutat }}
-      </span>
-    </div>
+  <label>
+    <span class="nav-link-text" (click)="onGoToDelete()">
+      Zutaten entfernen:
+    </span>
+  </label>
+
+  <!-- Normale Zutaten -->
+  <div class="zutaten-tags" *ngIf="deletedIngredients.zutaten.length > 0">
+    <span class="tag removed" *ngFor="let z of deletedIngredients.zutaten">
+      {{ z }}
+    </span>
   </div>
+
+  <!-- Salat Extras -->
+  <div class="zutaten-tags" *ngIf="deletedIngredients.salat.length > 0">
+    <span class="tag removed salat" *ngFor="let s of deletedIngredients.salat">
+      Salat ohne {{ s }}
+    </span>
+  </div>
+</div>
+
 
   <!-- ➕ Zusätzliche Zutaten -->
   <div class="zutaten-section mt-3">
     <label> <span class="nav-link-text" (click)="onGoToAdd()">
         Zutaten hinzufügen:
       </span></label>
-    <div class="zutaten-tags">
-      <span class="tag added" *ngFor="let extra of addedIngredients">
-        {{ extra }}
-      </span>
-    </div>
+   <!-- 🧂 Normale Zutaten -->
+<div class="zutaten-tags" *ngIf="addedIngredients.zutaten.length > 0">
+  <span class="tag added" *ngFor="let extra of addedIngredients.zutaten">
+    {{ extra }}
+  </span>
+</div>
+
+<!-- 🥗 Salat-Extras -->
+<div class="zutaten-tags" *ngIf="addedIngredients.salat.length > 0">
+  <span class="tag added salat" *ngFor="let extra of addedIngredients.salat">
+    Salat mit {{ extra }}
+  </span>
+</div>
+
   </div>
 
  <!-- 📝 Extrawunsch -->

@@ -13,8 +13,8 @@ export class OverviewComponent implements OnInit {
   @Input() title: string = '';
   @Input() gericht: any;
   @Input() selectedSize: string | null = null;
-  @Input() deletedIngredients: string[] = [];
-  @Input() addedIngredients: string[] = [];
+  @Input() deletedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
+  @Input() addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
   @Input() finalPrice: number = 0;
   @Input() basePrice: number = 0;
   @Input() extraPrice: number = 0;

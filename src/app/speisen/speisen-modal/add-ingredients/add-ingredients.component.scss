@@ -10,34 +10,49 @@ h5 {
   margin-bottom: 0.75rem;
 }
 
-p {
-  font-size: 0.95rem;
-  color: #555;
-  margin-bottom: 1rem;
+.add-ingredients{
+   display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 64px;
+  width: 100%;
+  margin-top: 32px;
 }
 
 .extras-container {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.6rem;
+  flex-direction: column;
+  justify-content: center;
+  align-items: flex-start;
+  gap: 16px;
+  >.btn-container{
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 90%;
+    gap: 16px;
+
+  }
 }
 
 .btn {
   padding: 0.4rem 0.8rem;
-  border: 1px solid rgb(160, 0, 0);
+  border: 1px solid #155724;
   border-radius: 20px;
   font-size: 0.9rem;
   transition: all 0.2s ease-in-out;
   background-color: #fff;
-  color: rgb(160, 0, 0);
+  color: #155724;
 
   &.active {
-    background-color: rgb(160, 0, 0);
+    background-color: #155724;
     color: #fff;
   }
 
   &:hover {
-    background-color: rgba(160, 0, 0, 0.85);
+    background-color: #155724;
     color: #fff;
     cursor: pointer;
   }

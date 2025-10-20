@@ -12,34 +12,54 @@ import { Gericht } from '../../../interfaces/speisekarte.interface';
 })
 export class DeleteIngredientsComponent {
   @Input() gericht!: Gericht;
-  @Output() selectionSubmitted = new EventEmitter<{ gericht: Gericht; entfernteZutaten: string[] }>();
+@Output() selectionSubmitted = new EventEmitter<{
+  gericht: Gericht;
+  entfernte: { zutaten: string[]; salat: string[] };
+}>();
   @Output() back = new EventEmitter<void>();
-  @Output() selectionChanged = new EventEmitter<string[]>();
+@Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
+
 
   salatExtras: string[] = ['Grüner Salat', 'Karotten', 'Weißkraut', 'Tomaten', 'Gurken', 'Senfsoße'];
-    selectedSalatExtras: string[] = [];
+  selectedSalatExtras: string[] = [];
   selectedIngredients: string[] = [];
   
-  toggleIngredient(ingredient: string) {
-    const index = this.selectedIngredients.indexOf(ingredient);
-    if (index > -1) {
-      this.selectedIngredients.splice(index, 1);
-    } else {
-      this.selectedIngredients.push(ingredient);
+toggleIngredient(ingredient: string) {
+  const index = this.selectedIngredients.indexOf(ingredient);
+  if (index > -1) {
+    this.selectedIngredients.splice(index, 1);
+  } else {
+    this.selectedIngredients.push(ingredient);
+
+    if (ingredient === 'Salat') {
+      this.selectedSalatExtras = [];
     }
-    
-  this.selectionChanged.emit(this.selectedIngredients);
   }
 
-    toggleSalatExtra(extra: string) {
-    const index = this.selectedSalatExtras.indexOf(extra);
-    if (index > -1) {
-      this.selectedSalatExtras.splice(index, 1);
-    } else {
-      this.selectedSalatExtras.push(extra);
-    }
-    this.selectionChanged.emit([...this.selectedIngredients, ...this.selectedSalatExtras]);
+  this.emitSelection();
+}
+
+toggleSalatExtra(extra: string) {
+  const index = this.selectedSalatExtras.indexOf(extra);
+  if (index > -1) {
+    this.selectedSalatExtras.splice(index, 1);
+  } else {
+    this.selectedSalatExtras.push(extra);
   }
+
+  this.emitSelection();
+}
+
+private emitSelection() {
+  const selectionObject = {
+    zutaten: [...this.selectedIngredients],
+    salat: [...this.selectedSalatExtras]
+  };
+
+  this.selectionChanged.emit(selectionObject);
+}
+
+
 
   isSelected(ingredient: string): boolean {
     return this.selectedIngredients.includes(ingredient);
@@ -49,12 +69,16 @@ export class DeleteIngredientsComponent {
     return this.selectedSalatExtras.includes(extra);
   }
 
-  submitSelection() {
-    this.selectionSubmitted.emit({
-      gericht: this.gericht,
-      entfernteZutaten: this.selectedIngredients
-    });
-  }
+submitSelection() {
+  this.selectionSubmitted.emit({
+    gericht: this.gericht,
+    entfernte: {
+      zutaten: [...this.selectedIngredients],
+      salat: [...this.selectedSalatExtras]
+    }
+  });
+}
+
 
   resetSelection() {
     this.selectedIngredients = [];

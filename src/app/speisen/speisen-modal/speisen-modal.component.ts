@@ -32,8 +32,8 @@ export class SpeisenModalComponent {
 
   selectedDish: any = null;
   selectedSize: string | null = null;
-  deletedIngredients: string[] = [];
-  addedIngredients: string[] = [];
+deletedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
+addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
   basePrice: number = 0;
   finalPrice: number = 0;
   extrawunsch: string = '';
@@ -94,19 +94,27 @@ export class SpeisenModalComponent {
     this.openOverview();
   }
 
-  handleDeleteIngredientDelete(event: { gericht: Gericht; entfernteZutaten: string[] }) {
-    this.deletedIngredients = event.entfernteZutaten;
-    this.calculateFinalPrice(); // 💰 Preis nach Änderung berechnen
+handleDeleteIngredientDelete(event: {
+  gericht: Gericht;
+  entfernte: { zutaten: string[]; salat: string[] };
+}) {
+  this.deletedIngredients = {
+    zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
+    salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
+  };
 
-    const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
-    const canAddIngredients = !excludedCategories.includes(this.title);
+  this.calculateFinalPrice(); // 💰
 
-    if (canAddIngredients) {
-      this.openAddIngredients();
-    } else {
-      this.openOverview();
-    }
+  const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
+  const canAddIngredients = !excludedCategories.includes(this.title);
+
+  if (canAddIngredients) {
+    this.openAddIngredients();
+  } else {
+    this.openOverview();
   }
+}
+
 
   close() {
     this.activeModal.close();
@@ -161,11 +169,14 @@ export class SpeisenModalComponent {
     this.isOverviewActive = false;
   }
 
-  handleAddIngredients(selectedExtras: string[]) {
-    this.addedIngredients = selectedExtras;
-    this.calculateFinalPrice();
-    this.openOverview();
-  }
+handleAddIngredients(added: { extras: string[]; salat: string[] }) {
+  this.addedIngredients = {
+    zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+    salat: added.salat.map(s => this.capitalizeFirstLetter(s))
+  };
+  this.calculateFinalPrice();
+  this.openOverview();
+}
 
   triggerAddIngredientsSubmit() {
     this.addIngredientsComp?.submitSelection();
@@ -188,10 +199,19 @@ export class SpeisenModalComponent {
     this.isOverviewActive = true;
   }
 
-  private normalizeIngredients() {
-    this.deletedIngredients = this.deletedIngredients.map(z => this.capitalizeFirstLetter(z));
-    this.addedIngredients = this.addedIngredients.map(z => this.capitalizeFirstLetter(z));
-  }
+private normalizeIngredients() {
+  this.deletedIngredients = {
+    zutaten: this.deletedIngredients.zutaten.map(z => this.capitalizeFirstLetter(z)),
+    salat:  this.deletedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
+  };
+
+  this.addedIngredients = {
+    zutaten: this.addedIngredients.zutaten.map(e => this.capitalizeFirstLetter(e)),
+    salat:  this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
+  };
+}
+
+
 
   private capitalizeFirstLetter(text: string): string {
     const trimmed = text.trim().toLowerCase();
@@ -205,22 +225,25 @@ export class SpeisenModalComponent {
 }
 
 private calcExtra(): number {
-  const removedTotal = this.deletedIngredients
+  const allRemoved = [
+    ...this.deletedIngredients.zutaten,
+    ...this.deletedIngredients.salat
+  ];
+  const allAdded = [...this.addedIngredients.zutaten, ...this.addedIngredients.salat];
+
+
+  const removedTotal = allRemoved
     .map(i => this.priceOf(i))
     .reduce((sum, price) => sum + price, 0);
 
-  const addedTotal = this.addedIngredients
+  const addedTotal = allAdded
     .map(i => this.priceOf(i))
     .reduce((sum, price) => sum + price, 0);
 
   let diffCents = Math.round((addedTotal - removedTotal) * 100);
+  if (diffCents < 0) diffCents = 0;
 
-  if (diffCents < 0) {
-    diffCents = 0;
-  }
-  const result = diffCents / 100;
-
-  return result;
+  return diffCents / 100;
 }
 
   onSizeChanged(size: string) {
@@ -265,35 +288,23 @@ calculateFinalPrice() {
 }
 
 
-  
-  
+  liveDeleteUpdate(removed: { zutaten: string[]; salat: string[] }) {
+  this.deletedIngredients = {
+    zutaten: removed.zutaten.map(z => this.capitalizeFirstLetter(z)),
+    salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
+  };
 
-//  async calculateDifference(price: number) {
-//     if (this.deletedIngredients.length && this.addedIngredients.length) {
-//       const minCount = Math.min(this.deletedIngredients.length, this.addedIngredients.length);
-//       for (let i = 0; i < minCount; i++) {
-//         const removed = this.deletedIngredients[i];
-//         const added = this.addedIngredients[i];
-      
-//         const removedPrice = this.getIngredientPriceBySize(removed);
-//         const addedPrice = this.getIngredientPriceBySize(added);
+  this.calculateFinalPrice();
+}
 
-//         if (addedPrice > removedPrice) {
-//          price += (addedPrice - removedPrice);
-//         }
-//       }
-//     }
-//   }
 
-  liveDeleteUpdate(removed: string[]) {
-    this.deletedIngredients = removed.map(z => this.capitalizeFirstLetter(z));
-    this.calculateFinalPrice();
-  }
-
-  liveAddUpdate(added: string[]) {
-    this.addedIngredients = added.map(z => this.capitalizeFirstLetter(z));
-    this.calculateFinalPrice();
-  }
+liveAddUpdate(added: { extras: string[]; salat: string[] }) {
+  this.addedIngredients = {
+   zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+    salat: added.salat.map(s => this.capitalizeFirstLetter(s))
+  };
+  this.calculateFinalPrice();
+}
 
 
 
