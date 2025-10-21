@@ -15,7 +15,6 @@ export class AddIngredientsComponent implements OnInit {
   @Input() title: string = '';
   @Input() preselectedExtras: { zutaten: string[], salat: string[] } = { zutaten: [], salat: [] };
 
-
   @Output() back = new EventEmitter<void>();
   @Output() selectionSubmitted = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
   @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
@@ -29,17 +28,18 @@ export class AddIngredientsComponent implements OnInit {
 
   ngOnInit() {
     this.loadExtrasForCategory();
-      if (this.preselectedExtras) {
-    this.selectedExtras = [...this.preselectedExtras.zutaten];
-    this.selectedSalatExtras = [...this.preselectedExtras.salat];
-  }
+    this.preSelection();
   }
 
-  ngOnChanges(){
-      if (this.preselectedExtras) {
-    this.selectedExtras = [...this.preselectedExtras.zutaten];
-    this.selectedSalatExtras = [...this.preselectedExtras.salat];
+  ngOnChanges() {
+    this.preSelection();
   }
+
+  private preSelection() {
+    if (this.preselectedExtras) {
+      this.selectedExtras = [...this.preselectedExtras.zutaten];
+      this.selectedSalatExtras = [...this.preselectedExtras.salat];
+    }
   }
 
   private loadExtrasForCategory() {

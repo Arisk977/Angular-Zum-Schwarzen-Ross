@@ -70,9 +70,6 @@ export class SpeisenModalComponent {
     this.isAddIngredientsActive = false;
   }
 
-
-
-
   selectSizeAndContinue() {
     if (this.selectedSize) {
       const preis = this.selectedDish.preis[this.selectedSize];
@@ -82,31 +79,10 @@ export class SpeisenModalComponent {
     }
   }
 
-
-  backToList() {
-    this.isDeleteIngredientsActive = false;
-    this.selectedSize = null;
-    this.selectedDish = null;
-  }
-
   triggerSubmitFromFooter() {
     this.deleteIngredientsComp?.submitSelection();
     this.openOverview();
   }
-
-  handleDeleteIngredientDelete(event: {
-    gericht: Gericht;
-    entfernte: { zutaten: string[]; salat: string[] };}) {
-    this.deletedIngredients = {
-      zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
-      salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
-    };
-    this.handleDeleteSubstitutions();
-    this.calculateFinalPrice();
-  
-    this.openOverview();
-  }
-
 
   close() {
     this.activeModal.close();
@@ -138,7 +114,6 @@ export class SpeisenModalComponent {
     } else {
       return;
     }
-
     const nextTitle = this.kategorien[this.currentIndex];
     const kategorie = this.speisen[nextTitle];
 
@@ -196,6 +171,17 @@ export class SpeisenModalComponent {
     });
   }
 
+    handleDeleteIngredientDelete(event: {
+    gericht: Gericht;
+    entfernte: { zutaten: string[]; salat: string[] };}) {
+    this.deletedIngredients = {
+      zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
+      salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
+    };
+    this.handleDeleteSubstitutions();
+    this.calculateFinalPrice();
+    this.openOverview();
+  }
 
   handleAddIngredients(added: { zutaten: string[]; salat: string[] }) {
     this.addedIngredients = {
@@ -204,7 +190,6 @@ export class SpeisenModalComponent {
     };
 
     this.handleAddSubstitutions();
-
     this.calculateFinalPrice();
     this.openOverview();
   }
@@ -214,7 +199,6 @@ export class SpeisenModalComponent {
     this.addIngredientsComp?.submitSelection();
     this.openOverview();
   }
-
 
   openOverview() {
     if (this.finalPrice === 0 && this.selectedDish?.preis) {
@@ -243,11 +227,6 @@ export class SpeisenModalComponent {
     };
   }
 
-  private capitalizeFirstLetter(text: string): string {
-    const trimmed = text.trim().toLowerCase();
-    return trimmed.charAt(0).toUpperCase() + trimmed.slice(1);
-  }
-
 
   calculateExtraPrice(): number {
     this.normalizeIngredients();
@@ -255,13 +234,8 @@ export class SpeisenModalComponent {
   }
 
   private calcExtra(): number {
-    const allRemoved = [
-      ...this.deletedIngredients.zutaten,
-      ...this.deletedIngredients.salat
-    ];
+    const allRemoved = [...this.deletedIngredients.zutaten, ...this.deletedIngredients.salat];
     const allAdded = [...this.addedIngredients.zutaten, ...this.addedIngredients.salat];
-
-
     const removedTotal = allRemoved
       .map(i => this.priceOf(i))
       .reduce((sum, price) => sum + price, 0);
@@ -337,7 +311,14 @@ export class SpeisenModalComponent {
     this.calculateFinalPrice();
   }
 
-
+  private capitalizeFirstLetter(text: string): string {
+  return text
+    .trim()
+    .toLowerCase()
+    .split(' ')
+    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+}
 
 
   goToDeleteIngredients() {
@@ -365,7 +346,6 @@ export class SpeisenModalComponent {
     };
   }
   }
-
 
   finalizeOrder() {
     const extrawunsch = this.overview.extrawunsch;

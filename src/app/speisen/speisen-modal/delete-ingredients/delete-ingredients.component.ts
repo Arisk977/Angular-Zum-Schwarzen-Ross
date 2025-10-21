@@ -15,93 +15,89 @@ export class DeleteIngredientsComponent {
   @Input() preselected: { zutaten: string[], salat: string[] } = { zutaten: [], salat: [] };
 
   @Output() selectionSubmitted = new EventEmitter<{
-  gericht: Gericht;
-  entfernte: { zutaten: string[]; salat: string[] };}>();
+    gericht: Gericht;
+    entfernte: { zutaten: string[]; salat: string[] };
+  }>();
   @Output() back = new EventEmitter<void>();
   @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
-
 
   salatExtras: string[] = ['Grüner Salat', 'Karotten', 'Weißkraut', 'Tomaten', 'Gurken', 'Senfsoße'];
   selectedSalatExtras: string[] = [];
   selectedIngredients: string[] = [];
-  
-ngOnInit() {
-  if (this.preselected) {
-    this.selectedIngredients = [...this.preselected.zutaten];
-    this.selectedSalatExtras = [...this.preselected.salat];
+
+  ngOnInit() {
+    this.preSelection();
   }
-}
 
-ngOnChanges() {
-  if (this.preselected) {
-    this.selectedIngredients = [...this.preselected.zutaten];
-    this.selectedSalatExtras = [...this.preselected.salat];
+  ngOnChanges() {
+    this.preSelection();
   }
-}
 
-
-
-toggleIngredient(ingredient: string) {
-  const index = this.selectedIngredients.indexOf(ingredient);
-  if (index > -1) {
-    this.selectedIngredients.splice(index, 1);
-  } else {
-    this.selectedIngredients.push(ingredient);
-
-    if (ingredient === 'Salat') {
-      this.selectedSalatExtras = [];
+  private preSelection() {
+    if (this.preselected) {
+      this.selectedIngredients = [...this.preselected.zutaten];
+      this.selectedSalatExtras = [...this.preselected.salat];
     }
   }
 
-  this.emitSelection();
-}
+  toggleIngredient(ingredient: string) {
+    const index = this.selectedIngredients.indexOf(ingredient);
+    if (index > -1) {
+      this.selectedIngredients.splice(index, 1);
+    } else {
+      this.selectedIngredients.push(ingredient);
 
-toggleSalatExtra(extra: string) {
-  const index = this.selectedSalatExtras.indexOf(extra);
-  if (index > -1) {
-    this.selectedSalatExtras.splice(index, 1);
-  } else {
-    this.selectedSalatExtras.push(extra);
+      if (ingredient === 'Salat') {
+        this.selectedSalatExtras = [];
+      }
+    }
+
+    this.emitSelection();
   }
 
-  this.emitSelection();
-}
+  toggleSalatExtra(extra: string) {
+    const index = this.selectedSalatExtras.indexOf(extra);
+    if (index > -1) {
+      this.selectedSalatExtras.splice(index, 1);
+    } else {
+      this.selectedSalatExtras.push(extra);
+    }
 
-private emitSelection() {
-  const selectionObject = {
-    zutaten: [...this.selectedIngredients],
-    salat: [...this.selectedSalatExtras]
-  };
+    this.emitSelection();
+  }
 
-  this.selectionChanged.emit(selectionObject);
-}
+  private emitSelection() {
+    const selectionObject = {
+      zutaten: [...this.selectedIngredients],
+      salat: [...this.selectedSalatExtras]
+    };
 
-
+    this.selectionChanged.emit(selectionObject);
+  }
 
   isSelected(ingredient: string): boolean {
     return this.selectedIngredients.includes(ingredient);
   }
 
-    isSalatExtraSelected(extra: string): boolean {
+  isSalatExtraSelected(extra: string): boolean {
     return this.selectedSalatExtras.includes(extra);
   }
 
-submitSelection() {
-  this.selectionSubmitted.emit({
-    gericht: this.gericht,
-    entfernte: {
-      zutaten: [...this.selectedIngredients],
-      salat: [...this.selectedSalatExtras]
-    }
-  });
-}
-
+  submitSelection() {
+    this.selectionSubmitted.emit({
+      gericht: this.gericht,
+      entfernte: {
+        zutaten: [...this.selectedIngredients],
+        salat: [...this.selectedSalatExtras]
+      }
+    });
+  }
 
   resetSelection() {
     this.selectedIngredients = [];
   }
 
-    shouldShowSalatExtras(): boolean {
+  shouldShowSalatExtras(): boolean {
     const hasSalat = this.gericht?.zutaten?.includes('Salat');
     const salatSelected = this.selectedIngredients.includes('Salat');
     return !!hasSalat && !salatSelected;

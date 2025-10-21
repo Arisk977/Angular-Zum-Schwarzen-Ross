@@ -20,8 +20,6 @@ export class OverviewComponent implements OnInit {
   @Input() extraPrice: number = 0;
   @Input() totalPrice: number = 0;
 
-
-
   @Output() back = new EventEmitter<void>();
   @Output() sizeChanged = new EventEmitter<string>();
   @Output() goToDelete = new EventEmitter<void>();

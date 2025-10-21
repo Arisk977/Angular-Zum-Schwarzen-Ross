@@ -24,7 +24,7 @@
     <!-- 🧾 Step 2: Zutaten entfernen -->
     <ng-container *ngIf="isDeleteIngredientsActive">
       <div class="fade-slide">
-        <app-delete-ingredients [gericht]="selectedDish!" (back)="backToList()"  [preselected]="deletedIngredients"
+        <app-delete-ingredients [gericht]="selectedDish!"   [preselected]="deletedIngredients"
           (selectionChanged)="liveDeleteUpdate($event)" (selectionSubmitted)="handleDeleteIngredientDelete($event)">
         </app-delete-ingredients>
       </div>

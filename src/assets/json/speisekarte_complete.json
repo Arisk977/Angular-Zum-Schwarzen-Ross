@@ -64,11 +64,11 @@
     {
       "nummer": 12,
       "name": "Tomatensalat",
-      "beschreibung": "Tomaten, Zwiebeln, Oliven*, Essig/Öl",
+      "beschreibung": "Tomaten, Rote Zwiebeln, Oliven*, Essig/Öl",
       "preis": 7.0,
       "zutaten": [
         "Tomaten",
-        "Zwiebeln",
+        "Rote Zwiebeln",
         "Oliven",
         "Essig/öl"
       ]
@@ -76,11 +76,11 @@
     {
       "nummer": "12a",
       "name": "Rucolasalat",
-      "beschreibung": "mit Kirschtomaten, rote Zwiebeln, Schinken*, Parmesan, Essig/Öl, Mozarella",
+      "beschreibung": "mit Kirschtomaten, Rote Zwiebeln, Schinken*, Parmesan, Essig/Öl, Mozarella",
       "preis": 9.0,
       "zutaten": [
         "Kirschtomaten",
-        "Rote zwiebeln",
+        "Rote Zwiebeln",
         "Schinken",
         "Parmesan",
         "Essig/öl",
@@ -283,7 +283,7 @@
       "zutaten": [
         "Rindfleisch",
         "Grüner salat",
-        "Rote zwiebeln",
+        "Rote Zwiebeln",
         "Tomaten",
         "Gurken",
         "Käse",
@@ -298,7 +298,7 @@
       "zutaten": [
         "Käse",
         "Grüner salat",
-        "Rote zwiebeln",
+        "Rote Zwiebeln",
         "Tomaten",
         "Gurken",
         "Pommes",
@@ -313,7 +313,7 @@
       "zutaten": [
         "Veganes patty",
         "Grüner salat",
-        "Rote zwiebeln",
+        "Rote Zwiebeln",
         "Tomaten",
         "Gurken",
         "Ketchup",
@@ -1367,7 +1367,7 @@
     {
       "nummer": 422,
       "name": "Pizza Chicken BBQ",
-      "beschreibung": "Mit BBQ-Soße, Hähnchen, Mais, rote Zwiebeln",
+      "beschreibung": "Mit BBQ-Soße, Hähnchen, Mais, Rote Zwiebeln",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
@@ -1376,7 +1376,7 @@
         "Barbequesoße",
         "Hähnchen",
         "Mais",
-        "Rote zwiebeln",
+        "Rote Zwiebeln",
         "Käse"
       ]
     }
