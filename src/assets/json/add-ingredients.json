@@ -32,11 +32,20 @@
 "Schafskäse", "Scharf", "Schinken", "Sucuk", "Thunfisch", "Tomaten", "Zwiebeln"
 ]
   },
-  "Schnitzelgerichte": [
-    "Putenfleisch", "Schweinefleisch",
+  "Schnitzelgerichte":{ "default":[
+    "Putenfleisch",
     "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
     "Gebratene Zwiebeln", "Käse überbacken", "Schinken"
   ],
+  "Putenschnitzel Pizzaiola":[
+    "Schweinefleisch",
+    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Gebratene Zwiebeln", "Käse überbacken", "Schinken"
+  ],
+  "Schnitzel paniert (Wiener Art)":[
+    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten"
+  ]
+},
   "Unsere Spezialitäten": [
    "Putenfleisch", "Schweinefleisch",
    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 

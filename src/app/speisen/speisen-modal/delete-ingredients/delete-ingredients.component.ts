@@ -12,17 +12,35 @@ import { Gericht } from '../../../interfaces/speisekarte.interface';
 })
 export class DeleteIngredientsComponent {
   @Input() gericht!: Gericht;
+  @Input() preselected: { zutaten: string[], salat: string[] } = { zutaten: [], salat: [] };
+
   @Output() selectionSubmitted = new EventEmitter<{
   gericht: Gericht;
   entfernte: { zutaten: string[]; salat: string[] };}>();
   @Output() back = new EventEmitter<void>();
-@Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
+  @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
 
 
   salatExtras: string[] = ['Grüner Salat', 'Karotten', 'Weißkraut', 'Tomaten', 'Gurken', 'Senfsoße'];
   selectedSalatExtras: string[] = [];
   selectedIngredients: string[] = [];
   
+ngOnInit() {
+  if (this.preselected) {
+    this.selectedIngredients = [...this.preselected.zutaten];
+    this.selectedSalatExtras = [...this.preselected.salat];
+  }
+}
+
+ngOnChanges() {
+  if (this.preselected) {
+    this.selectedIngredients = [...this.preselected.zutaten];
+    this.selectedSalatExtras = [...this.preselected.salat];
+  }
+}
+
+
+
 toggleIngredient(ingredient: string) {
   const index = this.selectedIngredients.indexOf(ingredient);
   if (index > -1) {

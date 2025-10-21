@@ -1475,7 +1475,7 @@
         "Putenfleisch",
         "Bolognese",
         "Käse überbacken",
-        "Dazu pommes",
+        "Pommes",
         "Salat"
       ]
     },
@@ -1511,7 +1511,7 @@
       "preis": 11.5,
       "zutaten": [
         "Schweinefleisch",
-        "Einer pikanten soße",
+        "pikante soße",
         "Pommes frites",
         "Salat"
       ]
@@ -1535,7 +1535,7 @@
       "preis": 12.5,
       "zutaten": [
         "Schweinefleisch",
-        "2 spiegeleiern",
+        "Spiegelei",
         "Bratkartoffeln",
         "Salat"
       ]

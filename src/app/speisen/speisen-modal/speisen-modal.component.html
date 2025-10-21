@@ -24,7 +24,7 @@
     <!-- 🧾 Step 2: Zutaten entfernen -->
     <ng-container *ngIf="isDeleteIngredientsActive">
       <div class="fade-slide">
-        <app-delete-ingredients [gericht]="selectedDish!" (back)="backToList()"
+        <app-delete-ingredients [gericht]="selectedDish!" (back)="backToList()"  [preselected]="deletedIngredients"
           (selectionChanged)="liveDeleteUpdate($event)" (selectionSubmitted)="handleDeleteIngredientDelete($event)">
         </app-delete-ingredients>
       </div>
@@ -33,7 +33,7 @@
     <!-- 🧂 Step 3: Zutaten hinzufügen -->
     <ng-container *ngIf="isAddIngredientsActive">
       <div class="fade-slide">
-        <app-add-ingredients [gericht]="selectedDish!" [title]="title"
+        <app-add-ingredients [gericht]="selectedDish!" [title]="title"  [preselectedExtras]="addedIngredients"
           (selectionChanged)="liveAddUpdate($event)" (selectionSubmitted)="handleAddIngredients($event)">
         </app-add-ingredients>
       </div>

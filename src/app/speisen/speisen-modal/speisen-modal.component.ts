@@ -103,15 +103,8 @@ export class SpeisenModalComponent {
     };
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
-
-    const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
-    const canAddIngredients = !excludedCategories.includes(this.title);
-
-    if (canAddIngredients) {
-      this.openAddIngredients();
-    } else {
-      this.openOverview();
-    }
+  
+    this.openOverview();
   }
 
 
@@ -188,8 +181,6 @@ export class SpeisenModalComponent {
   });
 }
 
-
-
   private handleAddSubstitutions() {
     Object.entries(this.substitutions).forEach(([added, removed]) => {
       if (this.addedIngredients.zutaten.includes(added)) {
@@ -206,9 +197,9 @@ export class SpeisenModalComponent {
   }
 
 
-  handleAddIngredients(added: { extras: string[]; salat: string[] }) {
+  handleAddIngredients(added: { zutaten: string[]; salat: string[] }) {
     this.addedIngredients = {
-      zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+      zutaten: added.zutaten.map(e => this.capitalizeFirstLetter(e)),
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
@@ -336,9 +327,9 @@ export class SpeisenModalComponent {
     this.calculateFinalPrice();
   }
 
-  liveAddUpdate(added: { extras: string[]; salat: string[] }) {
+  liveAddUpdate(added: { zutaten: string[]; salat: string[] }) {
     this.addedIngredients = {
-      zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+      zutaten: added.zutaten.map(e => this.capitalizeFirstLetter(e)),
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
@@ -353,12 +344,26 @@ export class SpeisenModalComponent {
     this.isOverviewActive = false;
     this.isDeleteIngredientsActive = true;
     this.isAddIngredientsActive = false;
+
+     if (this.deleteIngredientsComp) {
+    this.deleteIngredientsComp.preselected = {
+      zutaten: [...this.deletedIngredients.zutaten],
+      salat: [...this.deletedIngredients.salat]
+    };
+  }
   }
 
   goToAddIngredients() {
     this.isOverviewActive = false;
     this.isDeleteIngredientsActive = false;
     this.isAddIngredientsActive = true;
+
+      if (this.addIngredientsComp) {
+    this.addIngredientsComp.preselectedExtras = {
+      zutaten: [...this.addedIngredients.zutaten],
+      salat: [...this.addedIngredients.salat]
+    };
+  }
   }
 
 

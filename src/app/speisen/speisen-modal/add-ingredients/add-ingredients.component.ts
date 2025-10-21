@@ -13,10 +13,12 @@ import extrasData from '../../../../assets/json/add-ingredients.json';
 export class AddIngredientsComponent implements OnInit {
   @Input() gericht: any;
   @Input() title: string = '';
+  @Input() preselectedExtras: { zutaten: string[], salat: string[] } = { zutaten: [], salat: [] };
+
 
   @Output() back = new EventEmitter<void>();
-  @Output() selectionSubmitted = new EventEmitter<{ extras: string[]; salat: string[] }>();
-  @Output() selectionChanged = new EventEmitter<{ extras: string[]; salat: string[] }>();
+  @Output() selectionSubmitted = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
+  @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
 
   selectedExtras: string[] = [];
   selectedSalatExtras: string[] = [];
@@ -27,6 +29,17 @@ export class AddIngredientsComponent implements OnInit {
 
   ngOnInit() {
     this.loadExtrasForCategory();
+      if (this.preselectedExtras) {
+    this.selectedExtras = [...this.preselectedExtras.zutaten];
+    this.selectedSalatExtras = [...this.preselectedExtras.salat];
+  }
+  }
+
+  ngOnChanges(){
+      if (this.preselectedExtras) {
+    this.selectedExtras = [...this.preselectedExtras.zutaten];
+    this.selectedSalatExtras = [...this.preselectedExtras.salat];
+  }
   }
 
   private loadExtrasForCategory() {
@@ -82,7 +95,7 @@ export class AddIngredientsComponent implements OnInit {
 
   private emitSelection() {
     const selectionObject = {
-      extras: [...this.selectedExtras],
+      zutaten: [...this.selectedExtras],
       salat: [...this.selectedSalatExtras]
     };
     this.selectionChanged.emit(selectionObject);
@@ -90,7 +103,7 @@ export class AddIngredientsComponent implements OnInit {
 
   submitSelection() {
     const selectionObject = {
-      extras: [...this.selectedExtras],
+      zutaten: [...this.selectedExtras],
       salat: [...this.selectedSalatExtras]
     };
     this.selectionSubmitted.emit(selectionObject);
