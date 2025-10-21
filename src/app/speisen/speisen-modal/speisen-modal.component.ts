@@ -32,8 +32,8 @@ export class SpeisenModalComponent {
 
   selectedDish: any = null;
   selectedSize: string | null = null;
-deletedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
-addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
+  deletedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
+  addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
   basePrice: number = 0;
   finalPrice: number = 0;
   extrawunsch: string = '';
@@ -94,26 +94,25 @@ addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat:
     this.openOverview();
   }
 
-handleDeleteIngredientDelete(event: {
-  gericht: Gericht;
-  entfernte: { zutaten: string[]; salat: string[] };
-}) {
-  this.deletedIngredients = {
-    zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
-    salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
-  };
+  handleDeleteIngredientDelete(event: {
+    gericht: Gericht;
+    entfernte: { zutaten: string[]; salat: string[] };}) {
+    this.deletedIngredients = {
+      zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
+      salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
+    };
+    this.handleDeleteSubstitutions();
+    this.calculateFinalPrice();
 
-  this.calculateFinalPrice(); // 💰
+    const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
+    const canAddIngredients = !excludedCategories.includes(this.title);
 
-  const excludedCategories = ['Vorspeisen', 'Dessert & Extras', 'Getränke'];
-  const canAddIngredients = !excludedCategories.includes(this.title);
-
-  if (canAddIngredients) {
-    this.openAddIngredients();
-  } else {
-    this.openOverview();
+    if (canAddIngredients) {
+      this.openAddIngredients();
+    } else {
+      this.openOverview();
+    }
   }
-}
 
 
   close() {
@@ -169,14 +168,56 @@ handleDeleteIngredientDelete(event: {
     this.isOverviewActive = false;
   }
 
-handleAddIngredients(added: { extras: string[]; salat: string[] }) {
-  this.addedIngredients = {
-    zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
-    salat: added.salat.map(s => this.capitalizeFirstLetter(s))
+  private substitutions: Record<string, string> = {
+    'Putenfleisch': 'Schweinefleisch',
   };
-  this.calculateFinalPrice();
-  this.openOverview();
+
+  private handleDeleteSubstitutions() {
+  Object.entries(this.substitutions).forEach(([added, removed]) => {
+    if (this.deletedIngredients.zutaten.includes(removed)) {
+      if (!this.addedIngredients.zutaten.includes(added)) {
+        this.addedIngredients.zutaten.push(added);
+      }
+    }
+    else {
+      const index = this.addedIngredients.zutaten.indexOf(added);
+      if (index !== -1) {
+        this.addedIngredients.zutaten.splice(index, 1);
+      }
+    }
+  });
 }
+
+
+
+  private handleAddSubstitutions() {
+    Object.entries(this.substitutions).forEach(([added, removed]) => {
+      if (this.addedIngredients.zutaten.includes(added)) {
+        if (!this.deletedIngredients.zutaten.includes(removed)) {
+          this.deletedIngredients.zutaten.push(removed);
+        }
+      } else {
+        const index = this.deletedIngredients.zutaten.indexOf(removed);
+        if (index !== -1) {
+          this.deletedIngredients.zutaten.splice(index, 1);
+        }
+      }
+    });
+  }
+
+
+  handleAddIngredients(added: { extras: string[]; salat: string[] }) {
+    this.addedIngredients = {
+      zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+      salat: added.salat.map(s => this.capitalizeFirstLetter(s))
+    };
+
+    this.handleAddSubstitutions();
+
+    this.calculateFinalPrice();
+    this.openOverview();
+  }
+
 
   triggerAddIngredientsSubmit() {
     this.addIngredientsComp?.submitSelection();
@@ -199,19 +240,17 @@ handleAddIngredients(added: { extras: string[]; salat: string[] }) {
     this.isOverviewActive = true;
   }
 
-private normalizeIngredients() {
-  this.deletedIngredients = {
-    zutaten: this.deletedIngredients.zutaten.map(z => this.capitalizeFirstLetter(z)),
-    salat:  this.deletedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
-  };
+  private normalizeIngredients() {
+    this.deletedIngredients = {
+      zutaten: this.deletedIngredients.zutaten.map(z => this.capitalizeFirstLetter(z)),
+      salat: this.deletedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
+    };
 
-  this.addedIngredients = {
-    zutaten: this.addedIngredients.zutaten.map(e => this.capitalizeFirstLetter(e)),
-    salat:  this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
-  };
-}
-
-
+    this.addedIngredients = {
+      zutaten: this.addedIngredients.zutaten.map(e => this.capitalizeFirstLetter(e)),
+      salat: this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
+    };
+  }
 
   private capitalizeFirstLetter(text: string): string {
     const trimmed = text.trim().toLowerCase();
@@ -220,31 +259,31 @@ private normalizeIngredients() {
 
 
   calculateExtraPrice(): number {
-  this.normalizeIngredients();
-  return this.calcExtra();
-}
+    this.normalizeIngredients();
+    return this.calcExtra();
+  }
 
-private calcExtra(): number {
-  const allRemoved = [
-    ...this.deletedIngredients.zutaten,
-    ...this.deletedIngredients.salat
-  ];
-  const allAdded = [...this.addedIngredients.zutaten, ...this.addedIngredients.salat];
+  private calcExtra(): number {
+    const allRemoved = [
+      ...this.deletedIngredients.zutaten,
+      ...this.deletedIngredients.salat
+    ];
+    const allAdded = [...this.addedIngredients.zutaten, ...this.addedIngredients.salat];
 
 
-  const removedTotal = allRemoved
-    .map(i => this.priceOf(i))
-    .reduce((sum, price) => sum + price, 0);
+    const removedTotal = allRemoved
+      .map(i => this.priceOf(i))
+      .reduce((sum, price) => sum + price, 0);
 
-  const addedTotal = allAdded
-    .map(i => this.priceOf(i))
-    .reduce((sum, price) => sum + price, 0);
+    const addedTotal = allAdded
+      .map(i => this.priceOf(i))
+      .reduce((sum, price) => sum + price, 0);
 
-  let diffCents = Math.round((addedTotal - removedTotal) * 100);
-  if (diffCents < 0) diffCents = 0;
+    let diffCents = Math.round((addedTotal - removedTotal) * 100);
+    if (diffCents < 0) diffCents = 0;
 
-  return diffCents / 100;
-}
+    return diffCents / 100;
+  }
 
   onSizeChanged(size: string) {
     this.selectedSize = size;
@@ -270,41 +309,43 @@ private calcExtra(): number {
   }
 
 
-private priceOf(ing: string): number {
-  return Number(this.getIngredientPriceBySize(ing)) || 0;
-}
+  private priceOf(ing: string): number {
+    return Number(this.getIngredientPriceBySize(ing)) || 0;
+  }
 
-calculateFinalPrice() {
-  this.normalizeIngredients();
+  calculateFinalPrice() {
+    this.normalizeIngredients();
 
-  const base = this.basePrice || 0;
-  const delta = this.calcExtra();
+    const base = this.basePrice || 0;
+    const delta = this.calcExtra();
 
-  const final = base + delta;
-  this.finalPrice = Math.round(final * 100) / 100;
+    const final = base + delta;
+    this.finalPrice = Math.round(final * 100) / 100;
 
-  this.priceChanged = true;
-  setTimeout(() => (this.priceChanged = false), 150);
-}
-
+    this.priceChanged = true;
+    setTimeout(() => (this.priceChanged = false), 150);
+  }
 
   liveDeleteUpdate(removed: { zutaten: string[]; salat: string[] }) {
-  this.deletedIngredients = {
-    zutaten: removed.zutaten.map(z => this.capitalizeFirstLetter(z)),
-    salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
-  };
+    this.deletedIngredients = {
+      zutaten: removed.zutaten.map(z => this.capitalizeFirstLetter(z)),
+      salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
+    };
 
-  this.calculateFinalPrice();
-}
+    this.handleDeleteSubstitutions();
+    this.calculateFinalPrice();
+  }
 
+  liveAddUpdate(added: { extras: string[]; salat: string[] }) {
+    this.addedIngredients = {
+      zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
+      salat: added.salat.map(s => this.capitalizeFirstLetter(s))
+    };
 
-liveAddUpdate(added: { extras: string[]; salat: string[] }) {
-  this.addedIngredients = {
-   zutaten: added.extras.map(e => this.capitalizeFirstLetter(e)),
-    salat: added.salat.map(s => this.capitalizeFirstLetter(s))
-  };
-  this.calculateFinalPrice();
-}
+    this.handleAddSubstitutions();
+    this.calculateFinalPrice();
+  }
+
 
 
 
@@ -324,12 +365,22 @@ liveAddUpdate(added: { extras: string[]; salat: string[] }) {
   finalizeOrder() {
     const extrawunsch = this.overview.extrawunsch;
 
+    const zutatenEntferntFlat = [
+      ...this.deletedIngredients.zutaten,
+      ...this.deletedIngredients.salat.map(s => `Salat ohne ${s}`)
+    ];
+
+    const zutatenHinzugefuegtFlat = [
+      ...this.addedIngredients.zutaten,
+      ...this.addedIngredients.salat.map(s => `Salat mit ${s}`)
+    ];
+
     const order = {
       gerichtNummer: this.selectedDish.nummer,
       title: this.selectedDish.name,
       beschreibung: this.selectedDish.beschreibung,
-      zutatenEntfernt: this.deletedIngredients,
-      zutatenHinzugefuegt: this.addedIngredients,
+      zutatenEntfernt: zutatenEntferntFlat,
+      zutatenHinzugefuegt: zutatenHinzugefuegtFlat,
       groesse: this.selectedSize,
       preis: this.finalPrice,
       extrawunsch: extrawunsch,
@@ -338,6 +389,7 @@ liveAddUpdate(added: { extras: string[]; salat: string[] }) {
 
     this.addToCart(order);
   }
+
 
   private async addToCart(order: any) {
     await this.cartService.addToCart(order);

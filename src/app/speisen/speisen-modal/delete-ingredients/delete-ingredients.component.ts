@@ -12,10 +12,9 @@ import { Gericht } from '../../../interfaces/speisekarte.interface';
 })
 export class DeleteIngredientsComponent {
   @Input() gericht!: Gericht;
-@Output() selectionSubmitted = new EventEmitter<{
+  @Output() selectionSubmitted = new EventEmitter<{
   gericht: Gericht;
-  entfernte: { zutaten: string[]; salat: string[] };
-}>();
+  entfernte: { zutaten: string[]; salat: string[] };}>();
   @Output() back = new EventEmitter<void>();
 @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
 

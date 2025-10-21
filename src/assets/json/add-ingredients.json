@@ -1,0 +1,58 @@
+{
+  "Vorspeisen": [],
+  "Salate": [
+    "Mais", "Tomaten", "Gurken", "Rote Zwiebeln", "Zwiebeln", "Thunfisch", "Oliven", "Schafskäse", "Mozarella", "Schinken", "Käse", "Rucola", "Gekochtes Ei", "Peperoni", "Karotten", "Paprika", "Weißkraut",
+    "Senfsoße", "Joghurtsoße", "Essig Öl", "Balsamico", "Scampis", "Hähnchen", "Pilze"
+  ],
+  "Kleine Gerichte": {
+    "Chicken-Nuggets 8 Stück":["Kroketten", "Reis", "Barbequesoße"],
+    "Kinder-Schnitzel":["Putenfleisch", "Kroketten", "Reis"]
+  },
+  "Burger": {
+        "default": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "Ketchup", "Extra Patty"],
+        "Crispy Chickenburger": ["Grüner Salat", "Rote Zwiebeln", "Saure Gurken", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "Ketchup", "Extra Patty"],        
+        "Veganer Burger": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "American Soße", "Extra Patty"]
+    },
+  "Überbackene Nudeln": {
+    "default":[
+    "Erbsen", "Pilze", "Mais", "Schinken", "Parmesan", "Peperoni", "Gorgonzola", "Lachs", "Paprika", "Spinat", "Kirschtomaten", "Knoblauch"
+  ],
+  "Lasagne": []
+  },
+  "Nudelgerichte": [
+    "Erbsen", "Pilze", "Mais", "Schinken", "Parmesan", "Peperoni", "Gorgonzola", "Lachs", "Paprika", "Spinat", "Kirschtomaten", "Knoblauch"
+  ],
+  "Pizzen": {
+    "default": [
+"Barbequesoße", "Chillisauce", "Creme Fraiche", "Currysoße", "Hollandaisesoße", "Tomatensoße", "Tabasco",
+"Ananas", "Artischocken", "Basilikum", "Bolognese", "Brokkoli", "Champignons", "gekochtes Ei", 
+"Spiegelei", "Spinat", "Gorgonzola", "Gouda", "Gyrosfleisch", "Hackfleisch", "Hähnchen", "Jalapeño", 
+"Käse", "Kirschtomaten", "Knoblauch", "Krabben", "Lachs", "Mais", "Meeresfrüchte", "Mozzarella", "Oliven", 
+"Paprika", "Parmesan", "Peperoni", "Peperoniwurst", "Pilze", "Rote Zwiebeln", "Rucola", "Salami", "Sardellen", 
+"Schafskäse", "Scharf", "Schinken", "Sucuk", "Thunfisch", "Tomaten", "Zwiebeln"
+]
+  },
+  "Schnitzelgerichte": [
+    "Putenfleisch", "Schweinefleisch",
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Gebratene Zwiebeln", "Käse überbacken", "Schinken"
+  ],
+  "Unsere Spezialitäten": [
+   "Putenfleisch", "Schweinefleisch",
+   "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+   "Gebratene Zwiebeln"
+  ],
+  "Argentinische Rindersteaks": [
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Gebratene Zwiebeln", "gebratene Pilze"
+  ],
+  "Fischgerichte": [
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten"
+  ],
+  "Indische & Pakistanische Spezialitäten":{
+    "default": ["Hähnchen", "Panier Käse", "Erbsen", "Kartoffel", "Spinat", "Mandeln", "Kokusmilch", "scharfe Peperoni"
+  ]
+  },
+  "Dessert & Extras": [],
+  "Getränke": []
+}

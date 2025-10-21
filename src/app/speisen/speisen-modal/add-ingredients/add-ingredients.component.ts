@@ -1,5 +1,7 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import extrasData from '../../../../assets/json/add-ingredients.json';
+
 
 @Component({
   selector: 'app-add-ingredients',
@@ -8,22 +10,55 @@ import { CommonModule } from '@angular/common';
   templateUrl: './add-ingredients.component.html',
   styleUrls: ['./add-ingredients.component.scss']
 })
-export class AddIngredientsComponent {
+export class AddIngredientsComponent implements OnInit {
   @Input() gericht: any;
-  @Output() back = new EventEmitter<void>();
+  @Input() title: string = '';
 
-  // ⚡️ Emit nun ein Objekt statt Array
+  @Output() back = new EventEmitter<void>();
   @Output() selectionSubmitted = new EventEmitter<{ extras: string[]; salat: string[] }>();
   @Output() selectionChanged = new EventEmitter<{ extras: string[]; salat: string[] }>();
 
   selectedExtras: string[] = [];
   selectedSalatExtras: string[] = [];
-
-  extrasList: string[] = [
-    'Oliven', 'Sucuk', 'Mais', 'Champignons', 'Mozzarella', 'Paprika'
-  ]; // später dynamisch aus JSON laden
+  extrasList: string[] = [];
 
   salatExtras: string[] = ['Joghurtsoße', 'Essig Öl', 'Balsamico', 'Mais', 'Paprika'];
+
+
+  ngOnInit() {
+    this.loadExtrasForCategory();
+  }
+
+  private loadExtrasForCategory() {
+    const category = this.title;
+    const dishName = this.gericht?.name || '';
+    const data: any = extrasData;
+
+    if (data[category]) {
+      const categoryData = data[category];
+      if (Array.isArray(categoryData)) {
+        this.extrasList = categoryData;
+      }
+      else if (typeof categoryData === 'object') {
+        this.extrasList = this.resolveExtrasForCategory(categoryData, dishName);
+      }
+      else {
+        this.extrasList = [];
+      }
+    } else {
+      this.extrasList = [];
+    }
+  }
+
+  private resolveExtrasForCategory(categoryData: any, dishName: string): string[] {
+    if (categoryData[dishName]) {
+      return categoryData[dishName];
+    } else if (categoryData['default']) {
+      return categoryData['default'];
+    } else {
+      return [];
+    }
+  }
 
   toggleExtra(extra: string) {
     const index = this.selectedExtras.indexOf(extra);
@@ -65,7 +100,7 @@ export class AddIngredientsComponent {
     return this.selectedSalatExtras.includes(extra);
   }
 
-    shouldShowSalatExtras(): boolean {
+  shouldShowSalatExtras(): boolean {
     const hasSalat = this.gericht?.zutaten?.includes('Salat');
     const salatSelected = this.selectedExtras.includes('Salat');
     return !!hasSalat && !salatSelected;
