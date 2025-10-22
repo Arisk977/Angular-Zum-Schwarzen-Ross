@@ -84,12 +84,30 @@ export class AddIngredientsComponent implements OnInit {
   }
 
   toggleSalatExtra(extra: string) {
+    const isSauce = this.sauceOptions.includes(extra);
     const index = this.selectedSalatExtras.indexOf(extra);
+
+    if (isSauce && index !== -1) {
+      this.selectedSalatExtras.splice(index, 1);
+      this.emitSelection();
+      return;
+    }
+
+    if (isSauce) {
+      this.selectedSalatExtras = this.selectedSalatExtras.filter(
+        s => !this.sauceOptions.includes(s)
+      );
+      this.selectedSalatExtras.push(extra);
+      this.emitSelection();
+      return;
+    }
+
     if (index === -1) {
       this.selectedSalatExtras.push(extra);
     } else {
       this.selectedSalatExtras.splice(index, 1);
     }
+
     this.emitSelection();
   }
 
@@ -111,6 +129,20 @@ export class AddIngredientsComponent implements OnInit {
 
   isSalatExtraSelected(extra: string): boolean {
     return this.selectedSalatExtras.includes(extra);
+  }
+
+  private sauceOptions = ['Joghurtsoße', 'Essig Öl', 'Balsamico'];
+
+  isOtherSauceSelected(extra: string): boolean {
+    const isSauce = this.sauceOptions.includes(extra);
+
+    if (!isSauce) return false;
+
+    const selectedSauces = this.selectedSalatExtras.filter(s =>
+      this.sauceOptions.includes(s)
+    );
+
+    return selectedSauces.length > 0 && !selectedSauces.includes(extra);
   }
 
   shouldShowSalatExtras(): boolean {

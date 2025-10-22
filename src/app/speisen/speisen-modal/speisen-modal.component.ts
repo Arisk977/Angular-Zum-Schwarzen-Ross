@@ -116,7 +116,6 @@ export class SpeisenModalComponent {
     }
     const nextTitle = this.kategorien[this.currentIndex];
     const kategorie = this.speisen[nextTitle];
-
     this.title = nextTitle;
     this.gerichte = [];
 
@@ -138,23 +137,24 @@ export class SpeisenModalComponent {
 
   private substitutions: Record<string, string> = {
     'Putenfleisch': 'Schweinefleisch',
+    'Schweinefleisch': 'Putenfleisch'
   };
 
   private handleDeleteSubstitutions() {
-  Object.entries(this.substitutions).forEach(([added, removed]) => {
-    if (this.deletedIngredients.zutaten.includes(removed)) {
-      if (!this.addedIngredients.zutaten.includes(added)) {
-        this.addedIngredients.zutaten.push(added);
+    Object.entries(this.substitutions).forEach(([added, removed]) => {
+      if (this.deletedIngredients.zutaten.includes(removed)) {
+        if (!this.addedIngredients.zutaten.includes(added)) {
+          this.addedIngredients.zutaten.push(added);
+        }
       }
-    }
-    else {
-      const index = this.addedIngredients.zutaten.indexOf(added);
-      if (index !== -1) {
-        this.addedIngredients.zutaten.splice(index, 1);
+      else {
+        const index = this.addedIngredients.zutaten.indexOf(added);
+        if (index !== -1) {
+          this.addedIngredients.zutaten.splice(index, 1);
+        }
       }
-    }
-  });
-}
+    });
+  }
 
   private handleAddSubstitutions() {
     Object.entries(this.substitutions).forEach(([added, removed]) => {
@@ -171,13 +171,45 @@ export class SpeisenModalComponent {
     });
   }
 
-    handleDeleteIngredientDelete(event: {
+  private saladSubstitutions: Record<string, string> = {
+    'Joghurtsoße': 'Senfsoße',
+    'Essig Öl': 'Senfsoße',
+    'Balsamico': 'Senfsoße'
+  };
+
+  private handleSaladAddSubstitutions() {
+    Object.entries(this.saladSubstitutions).forEach(([added, removed]) => {
+      const normalizedAdded = added.toLowerCase();
+      const normalizedSalat = this.addedIngredients.salat.map(s => s.toLowerCase());
+
+      if (normalizedSalat.includes(normalizedAdded)) {
+        if (!this.deletedIngredients.salat.includes(removed)) {
+          this.deletedIngredients.salat.push(removed);
+        }
+      } else {
+        const stillHasOtherSauce = Object.keys(this.saladSubstitutions).some(other =>
+          normalizedSalat.includes(other.toLowerCase())
+        );
+
+        if (!stillHasOtherSauce) {
+          const index = this.deletedIngredients.salat.indexOf(removed);
+          if (index !== -1) {
+            this.deletedIngredients.salat.splice(index, 1);
+          }
+        }
+      }
+    });
+  }
+
+  handleDeleteIngredientDelete(event: {
     gericht: Gericht;
-    entfernte: { zutaten: string[]; salat: string[] };}) {
+    entfernte: { zutaten: string[]; salat: string[] };
+  }) {
     this.deletedIngredients = {
       zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
       salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
     };
+
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
     this.openOverview();
@@ -189,6 +221,7 @@ export class SpeisenModalComponent {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
     this.openOverview();
@@ -226,7 +259,6 @@ export class SpeisenModalComponent {
       salat: this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s))
     };
   }
-
 
   calculateExtraPrice(): number {
     this.normalizeIngredients();
@@ -307,18 +339,19 @@ export class SpeisenModalComponent {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
   }
 
   private capitalizeFirstLetter(text: string): string {
-  return text
-    .trim()
-    .toLowerCase()
-    .split(' ')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
-    .join(' ');
-}
+    return text
+      .trim()
+      .toLowerCase()
+      .split(' ')
+      .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+      .join(' ');
+  }
 
 
   goToDeleteIngredients() {
@@ -326,12 +359,12 @@ export class SpeisenModalComponent {
     this.isDeleteIngredientsActive = true;
     this.isAddIngredientsActive = false;
 
-     if (this.deleteIngredientsComp) {
-    this.deleteIngredientsComp.preselected = {
-      zutaten: [...this.deletedIngredients.zutaten],
-      salat: [...this.deletedIngredients.salat]
-    };
-  }
+    if (this.deleteIngredientsComp) {
+      this.deleteIngredientsComp.preselected = {
+        zutaten: [...this.deletedIngredients.zutaten],
+        salat: [...this.deletedIngredients.salat]
+      };
+    }
   }
 
   goToAddIngredients() {
@@ -339,12 +372,12 @@ export class SpeisenModalComponent {
     this.isDeleteIngredientsActive = false;
     this.isAddIngredientsActive = true;
 
-      if (this.addIngredientsComp) {
-    this.addIngredientsComp.preselectedExtras = {
-      zutaten: [...this.addedIngredients.zutaten],
-      salat: [...this.addedIngredients.salat]
-    };
-  }
+    if (this.addIngredientsComp) {
+      this.addIngredientsComp.preselectedExtras = {
+        zutaten: [...this.addedIngredients.zutaten],
+        salat: [...this.addedIngredients.salat]
+      };
+    }
   }
 
   finalizeOrder() {

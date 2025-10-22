@@ -21,7 +21,7 @@
       <button
         class="btn"
        *ngFor="let extra of salatExtras"
-      [class.active]="isSalatExtraSelected(extra)" (click)="toggleSalatExtra(extra)">
+      [class.active]="isSalatExtraSelected(extra)" (click)="toggleSalatExtra(extra)" [disabled]="isOtherSauceSelected(extra)">
         {{ extra }}
       </button>
     </div>
