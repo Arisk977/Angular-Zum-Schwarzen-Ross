@@ -2,28 +2,24 @@
 <p class="subtext">{{ gericht.beschreibung }}</p>
 
 <div class="add-ingredients">
-<div class="extras-container">
-  <h6>Wähle zusätzliche Zutaten:</h6>
-  <div class="btn-container">
-    <button
-      *ngFor="let extra of extrasList"
-      class="btn"
-      [class.active]="selectedExtras.includes(extra)"
-      (click)="toggleExtra(extra)">
-      {{ extra }}
-    </button>
-  </div>
-</div>
-
-<div class="extras-container" *ngIf="shouldShowSalatExtras()">
-  <h6>Salat mit:</h6>
+  <div class="extras-container">
+    <h6>Wähle zusätzliche Zutaten:</h6>
     <div class="btn-container">
-      <button
-        class="btn"
-       *ngFor="let extra of salatExtras"
-      [class.active]="isSalatExtraSelected(extra)" (click)="toggleSalatExtra(extra)" [disabled]="isOtherSauceSelected(extra)">
+      <button *ngFor="let extra of extrasList" class="btn" [class.active]="selectedExtras.includes(extra)"
+        (click)="toggleExtra(extra)" [disabled]="isOtherSideSelected(extra)">
+        {{ extra }}
+      </button>
+
+    </div>
+  </div>
+
+  <div class="extras-container" *ngIf="shouldShowSalatExtras()">
+    <h6>Salat mit:</h6>
+    <div class="btn-container">
+      <button class="btn" *ngFor="let extra of salatExtras" [class.active]="isSalatExtraSelected(extra)"
+        (click)="toggleSalatExtra(extra)" [disabled]="isOtherSauceSelected(extra)">
         {{ extra }}
       </button>
     </div>
-</div>
+  </div>
 </div>

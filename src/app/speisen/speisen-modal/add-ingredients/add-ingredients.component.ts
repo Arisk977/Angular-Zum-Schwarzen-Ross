@@ -24,7 +24,8 @@ export class AddIngredientsComponent implements OnInit {
   extrasList: string[] = [];
 
   salatExtras: string[] = ['Joghurtsoße', 'Essig Öl', 'Balsamico', 'Mais', 'Paprika'];
-
+  private sideOptions = ['Pommes', 'Reis', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
+  private sauceOptions = ['Joghurtsoße', 'Essig Öl', 'Balsamico'];
 
   ngOnInit() {
     this.loadExtrasForCategory();
@@ -73,24 +74,66 @@ export class AddIngredientsComponent implements OnInit {
     }
   }
 
+
+
   toggleExtra(extra: string) {
     const index = this.selectedExtras.indexOf(extra);
+
+    const handled = this.handleSideSelection(extra, index);
+    if (handled) return;
+
     if (index === -1) {
       this.selectedExtras.push(extra);
     } else {
       this.selectedExtras.splice(index, 1);
     }
+
     this.emitSelection();
   }
+
+  private handleSideSelection(extra: string, index: number): boolean {
+    const isSide = this.sideOptions.includes(extra);
+
+    if (isSide && index !== -1) {
+      this.selectedExtras.splice(index, 1);
+      this.emitSelection();
+      return true;
+    }
+
+    if (isSide) {
+      this.selectedExtras = this.selectedExtras.filter(
+        e => !this.sideOptions.includes(e)
+      );
+      this.selectedExtras.push(extra);
+      this.emitSelection();
+      return true;
+    }
+
+    return false;
+  }
+
 
   toggleSalatExtra(extra: string) {
     const isSauce = this.sauceOptions.includes(extra);
     const index = this.selectedSalatExtras.indexOf(extra);
+    const handled = this.disableSaladSauces(isSauce, index, extra);
 
+    if (handled) return;
+
+    if (index === -1) {
+      this.selectedSalatExtras.push(extra);
+    } else {
+      this.selectedSalatExtras.splice(index, 1);
+    }
+
+    this.emitSelection();
+  }
+
+  disableSaladSauces(isSauce: boolean, index: number, extra: string): boolean {
     if (isSauce && index !== -1) {
       this.selectedSalatExtras.splice(index, 1);
       this.emitSelection();
-      return;
+      return true;
     }
 
     if (isSauce) {
@@ -99,16 +142,10 @@ export class AddIngredientsComponent implements OnInit {
       );
       this.selectedSalatExtras.push(extra);
       this.emitSelection();
-      return;
+      return true;
     }
 
-    if (index === -1) {
-      this.selectedSalatExtras.push(extra);
-    } else {
-      this.selectedSalatExtras.splice(index, 1);
-    }
-
-    this.emitSelection();
+    return false;
   }
 
   private emitSelection() {
@@ -131,7 +168,18 @@ export class AddIngredientsComponent implements OnInit {
     return this.selectedSalatExtras.includes(extra);
   }
 
-  private sauceOptions = ['Joghurtsoße', 'Essig Öl', 'Balsamico'];
+  isOtherSideSelected(extra: string): boolean {
+  const isSide = this.sideOptions.includes(extra);
+
+  if (!isSide) return false;
+
+  const selectedSides = this.selectedExtras.filter(s =>
+    this.sideOptions.includes(s)
+  );
+
+  return selectedSides.length > 0 && !selectedSides.includes(extra);
+}
+
 
   isOtherSauceSelected(extra: string): boolean {
     const isSauce = this.sauceOptions.includes(extra);

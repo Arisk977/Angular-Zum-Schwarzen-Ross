@@ -34,13 +34,24 @@ export class SpeisenModalComponent {
   selectedSize: string | null = null;
   deletedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
   addedIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
+  originalIngredients: { zutaten: string[]; salat: string[] } = { zutaten: [], salat: [] };
   basePrice: number = 0;
   finalPrice: number = 0;
   extrawunsch: string = '';
+  private substitutions: Record<string, string> = {
+    'Putenfleisch': 'Schweinefleisch',
+    'Schweinefleisch': 'Putenfleisch'
+  };
+  private sideSubstitutions: Record<string, string> = {};
+  private sideOptions = ['Reis', 'Pommes', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
+  private sauceOptions = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
+  private readonly BASE_SAUCE = 'Senfsoße';
+
 
   @ViewChild(OverviewComponent) overview!: OverviewComponent;
   @ViewChild(AddIngredientsComponent) addIngredientsComp?: AddIngredientsComponent;
   @ViewChild(DeleteIngredientsComponent) deleteIngredientsComp?: DeleteIngredientsComponent;
+
   constructor(
     public activeModal: NgbActiveModal,
     private modalService: NgbModal,
@@ -50,6 +61,10 @@ export class SpeisenModalComponent {
   openDishOverview(dish: Gericht) {
     this.selectedDish = dish;
     const price = dish.preis;
+    this.originalIngredients = {
+      zutaten: dish.zutaten ? [...dish.zutaten] : [],
+      salat: []
+    };
 
     const hasSizeOptions =
       typeof price === 'object' &&
@@ -135,12 +150,61 @@ export class SpeisenModalComponent {
     this.isOverviewActive = false;
   }
 
-  private substitutions: Record<string, string> = {
-    'Putenfleisch': 'Schweinefleisch',
-    'Schweinefleisch': 'Putenfleisch'
-  };
+
+  private applyGenericSubstitution(
+  activeAdded: string[],
+  deletedTarget: string[],
+  substitutions: Record<string, string>
+) {
+  Object.entries(substitutions).forEach(([added, removed]) => {
+    if (activeAdded.includes(added)) {
+      if (!deletedTarget.includes(removed)) {
+        deletedTarget.push(removed);
+      }
+    } else {
+      const stillHasOther = Object.entries(substitutions).some(
+        ([otherAdded, otherRemoved]) =>
+          otherRemoved === removed && activeAdded.includes(otherAdded)
+      );
+
+      if (!stillHasOther) {
+        const index = deletedTarget.indexOf(removed);
+        if (index !== -1) {
+          deletedTarget.splice(index, 1);
+        }
+      }
+    }
+  });
+}
+
+
+
+  private getSideOption(): string | null {
+    if (!this.originalIngredients || !this.originalIngredients.zutaten) return null;
+    return this.originalIngredients.zutaten.find(z => this.sideOptions.includes(z)) || null;
+  }
+
+private addSideSubstitutions() {
+  const originalSide = this.getSideOption();
+  if (!originalSide) return;
+
+  this.sideSubstitutions = {};
+
+  this.sideOptions.forEach(side => {
+    if (side !== originalSide) {
+      this.sideSubstitutions[side] = originalSide;
+    }
+  });
+}
 
   private handleDeleteSubstitutions() {
+      const originalSide = this.getSideOption();
+  if (originalSide && !this.deletedIngredients.zutaten.includes(originalSide)) {
+    this.addedIngredients.zutaten = this.addedIngredients.zutaten.filter(
+      z => !this.sideOptions.includes(z)
+    );
+  }
+
     Object.entries(this.substitutions).forEach(([added, removed]) => {
       if (this.deletedIngredients.zutaten.includes(removed)) {
         if (!this.addedIngredients.zutaten.includes(added)) {
@@ -156,20 +220,17 @@ export class SpeisenModalComponent {
     });
   }
 
-  private handleAddSubstitutions() {
-    Object.entries(this.substitutions).forEach(([added, removed]) => {
-      if (this.addedIngredients.zutaten.includes(added)) {
-        if (!this.deletedIngredients.zutaten.includes(removed)) {
-          this.deletedIngredients.zutaten.push(removed);
-        }
-      } else {
-        const index = this.deletedIngredients.zutaten.indexOf(removed);
-        if (index !== -1) {
-          this.deletedIngredients.zutaten.splice(index, 1);
-        }
-      }
-    });
-  }
+private handleAddSubstitutions() {
+  this.addSideSubstitutions();
+  const activeAdded = this.addedIngredients.zutaten;
+  this.handleSideAddSubstitutions(activeAdded);
+  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.substitutions);
+}
+
+private handleSideAddSubstitutions(activeAdded: string[]) {
+  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.sideSubstitutions);
+}
+
 
   private saladSubstitutions: Record<string, string> = {
     'Joghurtsoße': 'Senfsoße',
@@ -177,29 +238,22 @@ export class SpeisenModalComponent {
     'Balsamico': 'Senfsoße'
   };
 
-  private handleSaladAddSubstitutions() {
-    Object.entries(this.saladSubstitutions).forEach(([added, removed]) => {
-      const normalizedAdded = added.toLowerCase();
-      const normalizedSalat = this.addedIngredients.salat.map(s => s.toLowerCase());
+private handleSaladAddSubstitutions() {
+  const activeAdded = this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s));
+  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.salat, this.saladSubstitutions);
+}
 
-      if (normalizedSalat.includes(normalizedAdded)) {
-        if (!this.deletedIngredients.salat.includes(removed)) {
-          this.deletedIngredients.salat.push(removed);
-        }
-      } else {
-        const stillHasOtherSauce = Object.keys(this.saladSubstitutions).some(other =>
-          normalizedSalat.includes(other.toLowerCase())
-        );
+private handleSaladDeleteSubstitutions() {
 
-        if (!stillHasOtherSauce) {
-          const index = this.deletedIngredients.salat.indexOf(removed);
-          if (index !== -1) {
-            this.deletedIngredients.salat.splice(index, 1);
-          }
-        }
-      }
-    });
+  if (!this.deletedIngredients.salat.includes(this.BASE_SAUCE)) {
+    this.addedIngredients.salat = this.addedIngredients.salat.filter(
+      s => !this.sauceOptions.includes(s) || s === this.BASE_SAUCE
+    );
   }
+}
+
+
+
 
   handleDeleteIngredientDelete(event: {
     gericht: Gericht;
@@ -210,6 +264,7 @@ export class SpeisenModalComponent {
       salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
     this.openOverview();
@@ -329,6 +384,7 @@ export class SpeisenModalComponent {
       salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
   }
