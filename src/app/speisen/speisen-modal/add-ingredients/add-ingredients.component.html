@@ -6,7 +6,7 @@
     <h6>Wähle zusätzliche Zutaten:</h6>
     <div class="btn-container">
       <button *ngFor="let extra of extrasList" class="btn" [class.active]="selectedExtras.includes(extra)"
-        (click)="toggleExtra(extra)" [disabled]="isOtherSideSelected(extra)">
+        (click)="toggleExtra(extra)" [disabled]="isOtherSideSelected(extra) || disabledAddSauces.includes(extra)">
         {{ extra }}
       </button>
 

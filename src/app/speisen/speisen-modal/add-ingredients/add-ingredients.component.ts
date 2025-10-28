@@ -14,6 +14,8 @@ export class AddIngredientsComponent implements OnInit {
   @Input() gericht: any;
   @Input() title: string = '';
   @Input() preselectedExtras: { zutaten: string[], salat: string[] } = { zutaten: [], salat: [] };
+  @Input() disabledAddSauces: string[] = [];
+
 
   @Output() back = new EventEmitter<void>();
   @Output() selectionSubmitted = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
@@ -76,42 +78,66 @@ export class AddIngredientsComponent implements OnInit {
 
 
 
-  toggleExtra(extra: string) {
-    const index = this.selectedExtras.indexOf(extra);
+toggleExtra(extra: string) {
+  if (this.handleSideSelection(extra)) return;
+  if (this.handleSauceSelection(extra)) return;
+  this.handleStandardExtra(extra);
+}
 
-    const handled = this.handleSideSelection(extra, index);
-    if (handled) return;
+private handleStandardExtra(extra: string) {
+  const index = this.selectedExtras.indexOf(extra);
 
-    if (index === -1) {
-      this.selectedExtras.push(extra);
-    } else {
-      this.selectedExtras.splice(index, 1);
-    }
+  if (index === -1) {
+    this.selectedExtras.push(extra);
+  } else {
+    this.selectedExtras.splice(index, 1);
+  }
 
+  this.emitSelection();
+}
+
+
+private handleSauceSelection(extra: string): boolean {
+  const index = this.selectedExtras.indexOf(extra);
+  const isSauce = this.sauceOptions.includes(extra);
+
+  if (!isSauce) return false;
+
+  if (index !== -1) {
+    this.selectedExtras.splice(index, 1);
+    this.disabledAddSauces = [];
     this.emitSelection();
+    return true;
   }
 
-  private handleSideSelection(extra: string, index: number): boolean {
-    const isSide = this.sideOptions.includes(extra);
+  this.selectedExtras = this.selectedExtras.filter(
+    e => !this.sauceOptions.includes(e)
+  );
+  this.selectedExtras.push(extra);
+  this.disabledAddSauces = this.sauceOptions.filter(s => s !== extra);
+  this.emitSelection();
+  return true;
+}
 
-    if (isSide && index !== -1) {
-      this.selectedExtras.splice(index, 1);
-      this.emitSelection();
-      return true;
-    }
+private handleSideSelection(extra: string): boolean {
+  const index = this.selectedExtras.indexOf(extra);
+  const isSide = this.sideOptions.includes(extra);
 
-    if (isSide) {
-      this.selectedExtras = this.selectedExtras.filter(
-        e => !this.sideOptions.includes(e)
-      );
-      this.selectedExtras.push(extra);
-      this.emitSelection();
-      return true;
-    }
+  if (!isSide) return false;
 
-    return false;
+  if (index !== -1) {
+    this.selectedExtras.splice(index, 1);
+    this.emitSelection();
+    return true;
   }
 
+  this.selectedExtras = this.selectedExtras.filter(
+    e => !this.sideOptions.includes(e)
+  );
+  this.selectedExtras.push(extra);
+  this.emitSelection();
+  return true;
+}
 
   toggleSalatExtra(extra: string) {
     const isSauce = this.sauceOptions.includes(extra);

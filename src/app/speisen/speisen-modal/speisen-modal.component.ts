@@ -38,6 +38,7 @@ export class SpeisenModalComponent {
   basePrice: number = 0;
   finalPrice: number = 0;
   extrawunsch: string = '';
+  disabledAddSauces: string[] = [];
   private substitutions: Record<string, string> = {
     'Putenfleisch': 'Schweinefleisch',
     'Schweinefleisch': 'Putenfleisch'
@@ -54,7 +55,6 @@ export class SpeisenModalComponent {
 
   constructor(
     public activeModal: NgbActiveModal,
-    private modalService: NgbModal,
     private cartService: CartService
   ) { }
 
@@ -150,60 +150,57 @@ export class SpeisenModalComponent {
     this.isOverviewActive = false;
   }
 
-
   private applyGenericSubstitution(
-  activeAdded: string[],
-  deletedTarget: string[],
-  substitutions: Record<string, string>
-) {
-  Object.entries(substitutions).forEach(([added, removed]) => {
-    if (activeAdded.includes(added)) {
-      if (!deletedTarget.includes(removed)) {
-        deletedTarget.push(removed);
-      }
-    } else {
-      const stillHasOther = Object.entries(substitutions).some(
-        ([otherAdded, otherRemoved]) =>
-          otherRemoved === removed && activeAdded.includes(otherAdded)
-      );
+    activeAdded: string[],
+    deletedTarget: string[],
+    substitutions: Record<string, string>
+  ) {
+    Object.entries(substitutions).forEach(([added, removed]) => {
+      if (activeAdded.includes(added)) {
+        if (!deletedTarget.includes(removed)) {
+          deletedTarget.push(removed);
+        }
+      } else {
+        const stillHasOther = Object.entries(substitutions).some(
+          ([otherAdded, otherRemoved]) =>
+            otherRemoved === removed && activeAdded.includes(otherAdded)
+        );
 
-      if (!stillHasOther) {
-        const index = deletedTarget.indexOf(removed);
-        if (index !== -1) {
-          deletedTarget.splice(index, 1);
+        if (!stillHasOther) {
+          const index = deletedTarget.indexOf(removed);
+          if (index !== -1) {
+            deletedTarget.splice(index, 1);
+          }
         }
       }
-    }
-  });
-}
-
-
+    });
+  }
 
   private getSideOption(): string | null {
     if (!this.originalIngredients || !this.originalIngredients.zutaten) return null;
     return this.originalIngredients.zutaten.find(z => this.sideOptions.includes(z)) || null;
   }
 
-private addSideSubstitutions() {
-  const originalSide = this.getSideOption();
-  if (!originalSide) return;
+  private addSideSubstitutions() {
+    const originalSide = this.getSideOption();
+    if (!originalSide) return;
 
-  this.sideSubstitutions = {};
+    this.sideSubstitutions = {};
 
-  this.sideOptions.forEach(side => {
-    if (side !== originalSide) {
-      this.sideSubstitutions[side] = originalSide;
-    }
-  });
-}
+    this.sideOptions.forEach(side => {
+      if (side !== originalSide) {
+        this.sideSubstitutions[side] = originalSide;
+      }
+    });
+  }
 
   private handleDeleteSubstitutions() {
-      const originalSide = this.getSideOption();
-  if (originalSide && !this.deletedIngredients.zutaten.includes(originalSide)) {
-    this.addedIngredients.zutaten = this.addedIngredients.zutaten.filter(
-      z => !this.sideOptions.includes(z)
-    );
-  }
+    const originalSide = this.getSideOption();
+    if (originalSide && !this.deletedIngredients.zutaten.includes(originalSide)) {
+      this.addedIngredients.zutaten = this.addedIngredients.zutaten.filter(
+        z => !this.sideOptions.includes(z)
+      );
+    }
 
     Object.entries(this.substitutions).forEach(([added, removed]) => {
       if (this.deletedIngredients.zutaten.includes(removed)) {
@@ -220,17 +217,16 @@ private addSideSubstitutions() {
     });
   }
 
-private handleAddSubstitutions() {
-  this.addSideSubstitutions();
-  const activeAdded = this.addedIngredients.zutaten;
-  this.handleSideAddSubstitutions(activeAdded);
-  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.substitutions);
-}
+  private handleAddSubstitutions() {
+    this.addSideSubstitutions();
+    const activeAdded = this.addedIngredients.zutaten;
+    this.handleSideAddSubstitutions(activeAdded);
+    this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.substitutions);
+  }
 
-private handleSideAddSubstitutions(activeAdded: string[]) {
-  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.sideSubstitutions);
-}
-
+  private handleSideAddSubstitutions(activeAdded: string[]) {
+    this.applyGenericSubstitution(activeAdded, this.deletedIngredients.zutaten, this.sideSubstitutions);
+  }
 
   private saladSubstitutions: Record<string, string> = {
     'Joghurtsoße': 'Senfsoße',
@@ -238,22 +234,65 @@ private handleSideAddSubstitutions(activeAdded: string[]) {
     'Balsamico': 'Senfsoße'
   };
 
-private handleSaladAddSubstitutions() {
-  const activeAdded = this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s));
-  this.applyGenericSubstitution(activeAdded, this.deletedIngredients.salat, this.saladSubstitutions);
+  private handleSaladAddSubstitutions() {
+    const activeAdded = this.addedIngredients.salat.map(s => this.capitalizeFirstLetter(s));
+    this.applyGenericSubstitution(activeAdded, this.deletedIngredients.salat, this.saladSubstitutions);
+  }
+
+  private handleSaladDeleteSubstitutions() {
+    if (!this.deletedIngredients.salat.includes(this.BASE_SAUCE)) {
+      this.addedIngredients.salat = this.addedIngredients.salat.filter(
+        s => !this.sauceOptions.includes(s) || s === this.BASE_SAUCE
+      );
+    }
+  }
+
+
+  private getCurrentMainSaladSauce(): string | null {
+  for (const zutat of this.deletedIngredients.zutaten) {
+    const normalized = this.capitalizeFirstLetter(zutat);
+    if (this.sauceOptions.includes(normalized)) {
+      return normalized;
+    }
+  }
+  return null;
 }
 
-private handleSaladDeleteSubstitutions() {
+private handleMainSaladAddSubstitutions(addedSalad: string[]) {
+  const normalizedAdded = addedSalad
+    .map(s => this.capitalizeFirstLetter(s))
+    .filter(s => this.sauceOptions.includes(s));
 
-  if (!this.deletedIngredients.salat.includes(this.BASE_SAUCE)) {
-    this.addedIngredients.salat = this.addedIngredients.salat.filter(
-      s => !this.sauceOptions.includes(s) || s === this.BASE_SAUCE
+  const currentMain = this.getCurrentMainSaladSauce();
+
+  if (normalizedAdded.length > 0) {
+    const selectedSauce = normalizedAdded[0];
+    if (currentMain && !this.deletedIngredients.zutaten.includes(currentMain)) {
+      this.deletedIngredients.zutaten.push(currentMain);
+    }
+    this.addedIngredients.zutaten = [selectedSauce];
+    this.disabledAddSauces = this.sauceOptions.filter(s => s !== selectedSauce);
+
+  } else {
+    this.addedIngredients.zutaten = this.addedIngredients.zutaten
+      .filter(s => !this.sauceOptions.includes(s));
+
+    this.disabledAddSauces = [];
+  }
+
+  this.addedIngredients.zutaten = Array.from(new Set(this.addedIngredients.zutaten));
+}
+
+private handleMainSaladDeleteSubstitutions() {
+  const currentMain = this.getCurrentMainSaladSauce();
+  if (!currentMain) {
+    this.addedIngredients.zutaten = this.addedIngredients.zutaten.filter(
+      zutat => !this.sauceOptions.includes(zutat)
     );
+    this.disabledAddSauces = [];
+    return;
   }
 }
-
-
-
 
   handleDeleteIngredientDelete(event: {
     gericht: Gericht;
@@ -264,6 +303,7 @@ private handleSaladDeleteSubstitutions() {
       salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleMainSaladDeleteSubstitutions()
     this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
@@ -276,6 +316,7 @@ private handleSaladDeleteSubstitutions() {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+      this.handleMainSaladAddSubstitutions(added.zutaten);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
@@ -384,6 +425,7 @@ private handleSaladDeleteSubstitutions() {
       salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+    this.handleMainSaladDeleteSubstitutions()
     this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
@@ -395,6 +437,7 @@ private handleSaladDeleteSubstitutions() {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
+      this.handleMainSaladAddSubstitutions(added.zutaten);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
