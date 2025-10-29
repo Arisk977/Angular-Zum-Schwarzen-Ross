@@ -45,9 +45,9 @@ export class SpeisenModalComponent {
   };
   private sideSubstitutions: Record<string, string> = {};
   private sideOptions = ['Reis', 'Pommes', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
-private saladSauces  = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
-private pizzaSauces  = ['Tomatensoße', 'Barbequesoße', 'Hollondaisesoße', 'Currysoße', 'Creme Fraiche'];
-private burgerSauces = ['American Soße', 'Barbequesoße', 'Ketchup', 'Mayonaise'];
+  private saladSauces = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
+  private pizzaSauces = ['Tomatensoße', 'Barbequesoße', 'Hollandaisesoße', 'Currysoße', 'Creme Fraiche'];
+  private burgerSauces = ['American Soße', 'Barbequesoße', 'Ketchup', 'Mayonaise'];
   private readonly BASE_SAUCE = 'Senfsoße';
 
 
@@ -249,86 +249,106 @@ private burgerSauces = ['American Soße', 'Barbequesoße', 'Ketchup', 'Mayonaise
     }
   }
 
-private normalizeAll(names: string[]): string[] {
-  return names.map(n => this.capitalizeFirstLetter(n));
-}
-private dedupe(list: string[]): string[] {
-  return Array.from(new Set(list));
-}
-private isSauce(name: string, sauceOptions: string[]): boolean {
-  return sauceOptions.includes(this.capitalizeFirstLetter(name));
-}
-
-
-private getCurrentBaseSauceGeneric(sauceOptions: string[]): string | null {
-  for (const z of (this.deletedIngredients?.zutaten ?? [])) {
-    const n = this.capitalizeFirstLetter(z);
-    if (sauceOptions.includes(n)) return n;
+  private normalizeAll(names: string[]): string[] {
+    return names.map(n => this.capitalizeFirstLetter(n));
   }
-  for (const z of (this.originalIngredients?.zutaten ?? [])) {
-    const n = this.capitalizeFirstLetter(z);
-    if (sauceOptions.includes(n)) return n;
+  private dedupe(list: string[]): string[] {
+    return Array.from(new Set(list));
   }
-  return null;
-}
-
-
-private handleAddSauceGeneric(addedInput: string[], sauceOptions: string[]): string[] {
-  const normalized = this.normalizeAll(addedInput);
-  const nonSauce   = normalized.filter(z => !this.isSauce(z, sauceOptions));
-  const addedSauces= normalized.filter(z =>  this.isSauce(z, sauceOptions));
-
-  if (addedSauces.length === 0) {
-    this.addedIngredients.zutaten = this.dedupe(nonSauce);
-    return [];
+  private isSauce(name: string, sauceOptions: string[]): boolean {
+    return sauceOptions.includes(this.capitalizeFirstLetter(name));
   }
 
-  const newSauce = addedSauces[0];
-  this.addedIngredients.zutaten = this.dedupe([...nonSauce, newSauce]);
 
-  const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
-  if (currentBase && !this.deletedIngredients.zutaten
-        .map(s => this.capitalizeFirstLetter(s))
-        .includes(currentBase)) {
-    this.deletedIngredients.zutaten = this.dedupe([
-      ...this.deletedIngredients.zutaten,
-      currentBase
-    ]);
+  private getCurrentBaseSauceGeneric(sauceOptions: string[]): string | null {
+    for (const z of (this.deletedIngredients?.zutaten ?? [])) {
+      const n = this.capitalizeFirstLetter(z);
+      if (sauceOptions.includes(n)) return n;
+    }
+    for (const z of (this.originalIngredients?.zutaten ?? [])) {
+      const n = this.capitalizeFirstLetter(z);
+      if (sauceOptions.includes(n)) return n;
+    }
+    return null;
   }
-  return sauceOptions.filter(s => s !== newSauce);
-}
 
 
-private handleDeleteSauceGeneric(sauceOptions: string[]): string[] {
-  const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
-  const delListNorm = (this.deletedIngredients?.zutaten ?? [])
-                      .map(z => this.capitalizeFirstLetter(z));
-  const stillExists = !!currentBase && delListNorm.includes(currentBase);
+  private handleAddSauceGeneric(addedInput: string[], sauceOptions: string[]): string[] {
+    const normalized = this.normalizeAll(addedInput);
+    const nonSauce = normalized.filter(z => !this.isSauce(z, sauceOptions));
+    const addedSauces = normalized.filter(z => this.isSauce(z, sauceOptions));
 
-  if (!stillExists) {
-    const added = (this.addedIngredients?.zutaten ?? []);
-    this.addedIngredients.zutaten = added.filter(z => !this.isSauce(z, sauceOptions));
-    return [];
+    if (addedSauces.length === 0) {
+      this.addedIngredients.zutaten = this.dedupe(nonSauce);
+      return [];
+    }
+
+    const newSauce = addedSauces[0];
+    this.addedIngredients.zutaten = this.dedupe([...nonSauce, newSauce]);
+
+    const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
+    if (currentBase && !this.deletedIngredients.zutaten
+      .map(s => this.capitalizeFirstLetter(s))
+      .includes(currentBase)) {
+      this.deletedIngredients.zutaten = this.dedupe([
+        ...this.deletedIngredients.zutaten,
+        currentBase
+      ]);
+    }
+    return sauceOptions.filter(s => s !== newSauce);
   }
-  return null as unknown as string[];
+
+
+  private handleDeleteSauceGeneric(sauceOptions: string[]): string[] {
+    const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
+    const delListNorm = (this.deletedIngredients?.zutaten ?? [])
+      .map(z => this.capitalizeFirstLetter(z));
+    const stillExists = !!currentBase && delListNorm.includes(currentBase);
+
+    if (!stillExists) {
+      const added = (this.addedIngredients?.zutaten ?? []);
+      this.addedIngredients.zutaten = added.filter(z => !this.isSauce(z, sauceOptions));
+      return [];
+    }
+    return null as unknown as string[];
+  }
+
+  // SpeisenModalComponent
+
+private recomputeDisabledAddSauces() {
+  const sets = [this.saladSauces, this.pizzaSauces, this.burgerSauces];
+
+  // finde die aktuell gewählte Sauce (aus addedIngredients.zutaten), egal aus welchem Set
+  const selected = this.addedIngredients.zutaten.find(z =>
+    sets.some(set => set.includes(this.capitalizeFirstLetter(z)))
+  );
+
+  if (!selected) {
+    this.disabledAddSauces = [];
+    return;
+  }
+
+  const owningSet = sets.find(set => set.includes(this.capitalizeFirstLetter(selected)));
+  this.disabledAddSauces = owningSet ? owningSet.filter(s => s !== this.capitalizeFirstLetter(selected)) : [];
 }
 
-private handleDeleteSauces(){
-      this.handleDeleteSauceGeneric(this.saladSauces);
-      this.handleDeleteSauceGeneric(this.pizzaSauces);
-      this.handleDeleteSauceGeneric(this.burgerSauces);
-}
 
-private handleAddSauces(added: { zutaten: string[]; salat: string[] }){
+ private handleAddSauces(added: { zutaten: string[]; salat: string[] }) {
   this.handleAddSauceGeneric(added.zutaten, this.saladSauces);
   this.handleAddSauceGeneric(added.zutaten, this.pizzaSauces);
   this.handleAddSauceGeneric(added.zutaten, this.burgerSauces);
+  this.recomputeDisabledAddSauces(); // 👈 wichtig
 }
 
-  handleDeleteIngredientDelete(event: {
-    gericht: Gericht;
-    entfernte: { zutaten: string[]; salat: string[] };
-  }) {
+private handleDeleteSauces() {
+  this.handleDeleteSauceGeneric(this.saladSauces);
+  this.handleDeleteSauceGeneric(this.pizzaSauces);
+  this.handleDeleteSauceGeneric(this.burgerSauces);
+  this.recomputeDisabledAddSauces(); // 👈 wichtig
+}
+
+
+  handleDeleteIngredient(event: { gericht: Gericht; entfernte: { zutaten: string[]; salat: string[] }; }) {
     this.deletedIngredients = {
       zutaten: event.entfernte.zutaten.map(z => this.capitalizeFirstLetter(z)),
       salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
@@ -347,7 +367,7 @@ private handleAddSauces(added: { zutaten: string[]; salat: string[] }){
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-     this.handleAddSauces(this.addedIngredients);
+    this.handleAddSauces(this.addedIngredients);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
@@ -468,7 +488,7 @@ private handleAddSauces(added: { zutaten: string[]; salat: string[] }){
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-     this.handleAddSauces(this.addedIngredients);
+    this.handleAddSauces(this.addedIngredients);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();

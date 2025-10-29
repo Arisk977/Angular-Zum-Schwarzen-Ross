@@ -1,4 +1,4 @@
-import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output, SimpleChanges } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import extrasData from '../../../../assets/json/add-ingredients.json';
 
@@ -20,6 +20,8 @@ export class AddIngredientsComponent implements OnInit {
   @Output() back = new EventEmitter<void>();
   @Output() selectionSubmitted = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
   @Output() selectionChanged = new EventEmitter<{ zutaten: string[]; salat: string[] }>();
+  @Output() disabledSaucesChange = new EventEmitter<string[]>();
+
 
   selectedExtras: string[] = [];
   selectedSalatExtras: string[] = [];
@@ -34,9 +36,11 @@ export class AddIngredientsComponent implements OnInit {
     this.preSelection();
   }
 
-  ngOnChanges() {
+ ngOnChanges(changes: SimpleChanges) {
+  if (changes['preselectedExtras'] && changes['preselectedExtras'].currentValue) {
     this.preSelection();
   }
+}
 
   private preSelection() {
     if (this.preselectedExtras) {
@@ -100,24 +104,32 @@ private handleStandardExtra(extra: string) {
 private handleSauceSelection(extra: string): boolean {
   const index = this.selectedExtras.indexOf(extra);
   const isSauce = this.sauceOptions.includes(extra);
-
   if (!isSauce) return false;
 
   if (index !== -1) {
     this.selectedExtras.splice(index, 1);
-    this.disabledAddSauces = [];
     this.emitSelection();
     return true;
   }
 
-  this.selectedExtras = this.selectedExtras.filter(
-    e => !this.sauceOptions.includes(e)
-  );
+  this.selectedExtras = this.selectedExtras.filter(e => !this.sauceOptions.includes(e));
   this.selectedExtras.push(extra);
-  this.disabledAddSauces = this.sauceOptions.filter(s => s !== extra);
   this.emitSelection();
   return true;
 }
+
+private normalize(name: string) {
+  return name.trim().toLowerCase().split(' ')
+    .map(w => w.charAt(0).toUpperCase() + w.slice(1))
+    .join(' ');
+}
+
+isDisabled(extra: string): boolean {
+  const norm = this.normalize(extra);
+  return this.isOtherSideSelected(extra) ||
+         (this.disabledAddSauces ?? []).map(this.normalize.bind(this)).includes(norm);
+}
+
 
 private handleSideSelection(extra: string): boolean {
   const index = this.selectedExtras.indexOf(extra);

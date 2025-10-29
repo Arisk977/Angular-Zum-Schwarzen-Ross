@@ -25,7 +25,7 @@
     <ng-container *ngIf="isDeleteIngredientsActive">
       <div class="fade-slide">
         <app-delete-ingredients [gericht]="selectedDish!"   [preselected]="deletedIngredients"
-          (selectionChanged)="liveDeleteUpdate($event)" (selectionSubmitted)="handleDeleteIngredientDelete($event)">
+          (selectionChanged)="liveDeleteUpdate($event)" (selectionSubmitted)="handleDeleteIngredient($event)">
         </app-delete-ingredients>
       </div>
     </ng-container>
