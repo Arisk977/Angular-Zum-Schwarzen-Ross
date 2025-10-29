@@ -45,7 +45,9 @@ export class SpeisenModalComponent {
   };
   private sideSubstitutions: Record<string, string> = {};
   private sideOptions = ['Reis', 'Pommes', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
-  private sauceOptions = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
+private saladSauces  = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
+private pizzaSauces  = ['Tomatensoße', 'Barbequesoße', 'Hollondaisesoße', 'Currysoße', 'Creme Fraiche'];
+private burgerSauces = ['American Soße', 'Barbequesoße', 'Ketchup', 'Mayonaise'];
   private readonly BASE_SAUCE = 'Senfsoße';
 
 
@@ -242,56 +244,85 @@ export class SpeisenModalComponent {
   private handleSaladDeleteSubstitutions() {
     if (!this.deletedIngredients.salat.includes(this.BASE_SAUCE)) {
       this.addedIngredients.salat = this.addedIngredients.salat.filter(
-        s => !this.sauceOptions.includes(s) || s === this.BASE_SAUCE
+        s => !this.saladSauces.includes(s) || s === this.BASE_SAUCE
       );
     }
   }
 
+private normalizeAll(names: string[]): string[] {
+  return names.map(n => this.capitalizeFirstLetter(n));
+}
+private dedupe(list: string[]): string[] {
+  return Array.from(new Set(list));
+}
+private isSauce(name: string, sauceOptions: string[]): boolean {
+  return sauceOptions.includes(this.capitalizeFirstLetter(name));
+}
 
-  private getCurrentMainSaladSauce(): string | null {
-  for (const zutat of this.deletedIngredients.zutaten) {
-    const normalized = this.capitalizeFirstLetter(zutat);
-    if (this.sauceOptions.includes(normalized)) {
-      return normalized;
-    }
+
+private getCurrentBaseSauceGeneric(sauceOptions: string[]): string | null {
+  for (const z of (this.deletedIngredients?.zutaten ?? [])) {
+    const n = this.capitalizeFirstLetter(z);
+    if (sauceOptions.includes(n)) return n;
+  }
+  for (const z of (this.originalIngredients?.zutaten ?? [])) {
+    const n = this.capitalizeFirstLetter(z);
+    if (sauceOptions.includes(n)) return n;
   }
   return null;
 }
 
-private handleMainSaladAddSubstitutions(addedSalad: string[]) {
-  const normalizedAdded = addedSalad
-    .map(s => this.capitalizeFirstLetter(s))
-    .filter(s => this.sauceOptions.includes(s));
 
-  const currentMain = this.getCurrentMainSaladSauce();
+private handleAddSauceGeneric(addedInput: string[], sauceOptions: string[]): string[] {
+  const normalized = this.normalizeAll(addedInput);
+  const nonSauce   = normalized.filter(z => !this.isSauce(z, sauceOptions));
+  const addedSauces= normalized.filter(z =>  this.isSauce(z, sauceOptions));
 
-  if (normalizedAdded.length > 0) {
-    const selectedSauce = normalizedAdded[0];
-    if (currentMain && !this.deletedIngredients.zutaten.includes(currentMain)) {
-      this.deletedIngredients.zutaten.push(currentMain);
-    }
-    this.addedIngredients.zutaten = [selectedSauce];
-    this.disabledAddSauces = this.sauceOptions.filter(s => s !== selectedSauce);
-
-  } else {
-    this.addedIngredients.zutaten = this.addedIngredients.zutaten
-      .filter(s => !this.sauceOptions.includes(s));
-
-    this.disabledAddSauces = [];
+  if (addedSauces.length === 0) {
+    this.addedIngredients.zutaten = this.dedupe(nonSauce);
+    return [];
   }
 
-  this.addedIngredients.zutaten = Array.from(new Set(this.addedIngredients.zutaten));
+  const newSauce = addedSauces[0];
+  this.addedIngredients.zutaten = this.dedupe([...nonSauce, newSauce]);
+
+  const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
+  if (currentBase && !this.deletedIngredients.zutaten
+        .map(s => this.capitalizeFirstLetter(s))
+        .includes(currentBase)) {
+    this.deletedIngredients.zutaten = this.dedupe([
+      ...this.deletedIngredients.zutaten,
+      currentBase
+    ]);
+  }
+  return sauceOptions.filter(s => s !== newSauce);
 }
 
-private handleMainSaladDeleteSubstitutions() {
-  const currentMain = this.getCurrentMainSaladSauce();
-  if (!currentMain) {
-    this.addedIngredients.zutaten = this.addedIngredients.zutaten.filter(
-      zutat => !this.sauceOptions.includes(zutat)
-    );
-    this.disabledAddSauces = [];
-    return;
+
+private handleDeleteSauceGeneric(sauceOptions: string[]): string[] {
+  const currentBase = this.getCurrentBaseSauceGeneric(sauceOptions);
+  const delListNorm = (this.deletedIngredients?.zutaten ?? [])
+                      .map(z => this.capitalizeFirstLetter(z));
+  const stillExists = !!currentBase && delListNorm.includes(currentBase);
+
+  if (!stillExists) {
+    const added = (this.addedIngredients?.zutaten ?? []);
+    this.addedIngredients.zutaten = added.filter(z => !this.isSauce(z, sauceOptions));
+    return [];
   }
+  return null as unknown as string[];
+}
+
+private handleDeleteSauces(){
+      this.handleDeleteSauceGeneric(this.saladSauces);
+      this.handleDeleteSauceGeneric(this.pizzaSauces);
+      this.handleDeleteSauceGeneric(this.burgerSauces);
+}
+
+private handleAddSauces(added: { zutaten: string[]; salat: string[] }){
+  this.handleAddSauceGeneric(added.zutaten, this.saladSauces);
+  this.handleAddSauceGeneric(added.zutaten, this.pizzaSauces);
+  this.handleAddSauceGeneric(added.zutaten, this.burgerSauces);
 }
 
   handleDeleteIngredientDelete(event: {
@@ -303,7 +334,7 @@ private handleMainSaladDeleteSubstitutions() {
       salat: event.entfernte.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-    this.handleMainSaladDeleteSubstitutions()
+    this.handleDeleteSauces();
     this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
@@ -316,7 +347,7 @@ private handleMainSaladDeleteSubstitutions() {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-      this.handleMainSaladAddSubstitutions(added.zutaten);
+     this.handleAddSauces(this.addedIngredients);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();
@@ -425,7 +456,7 @@ private handleMainSaladDeleteSubstitutions() {
       salat: removed.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-    this.handleMainSaladDeleteSubstitutions()
+    this.handleDeleteSauces();
     this.handleSaladDeleteSubstitutions();
     this.handleDeleteSubstitutions();
     this.calculateFinalPrice();
@@ -437,7 +468,7 @@ private handleMainSaladDeleteSubstitutions() {
       salat: added.salat.map(s => this.capitalizeFirstLetter(s))
     };
 
-      this.handleMainSaladAddSubstitutions(added.zutaten);
+     this.handleAddSauces(this.addedIngredients);
     this.handleSaladAddSubstitutions()
     this.handleAddSubstitutions();
     this.calculateFinalPrice();

@@ -70,7 +70,7 @@
         "Tomaten",
         "Rote Zwiebeln",
         "Oliven",
-        "Essig/öl"
+        "Essig Öl"
       ]
     },
     {
@@ -83,21 +83,21 @@
         "Rote Zwiebeln",
         "Schinken",
         "Parmesan",
-        "Essig/öl",
+        "Essig Öl",
         "Mozarella"
       ]
     },
     {
       "nummer": 13,
       "name": "Mozzarellasalat",
-      "beschreibung": "Tomatenscheiben, Mozzarella, Basilikum, Oliven*, Öl, Pizzabrot",
+      "beschreibung": "Tomatenscheiben, Mozzarella, Basilikum, Oliven*, Balsamico, Pizzabrot",
       "preis": 8.5,
       "zutaten": [
         "Tomatenscheiben",
         "Mozzarella",
         "Basilikum",
         "Oliven",
-        "Öl",
+        "Balsamico",
         "Pizzabrot"
       ]
     },
@@ -168,7 +168,7 @@
         "Peperoni",
         "Oliven",
         "Pizzabrot",
-        "Essig/öl"
+        "Essig Öl"
       ]
     },
     {
@@ -216,7 +216,7 @@
         "Paprika",
         "Gyrosfleisch",
         "Schafskäse",
-        "Essig/öl",
+        "Essig Öl",
         "Pizzabrot"
       ]
     },
@@ -272,7 +272,8 @@
         "Tomaten",
         "Käse",
         "Pommes",
-        "Hähnchenfleisch"
+        "Hähnchenfleisch",
+        "American Soße"
       ]
     },
     {
@@ -287,7 +288,8 @@
         "Tomaten",
         "Gurken",
         "Käse",
-        "Pommes"
+        "Pommes",
+        "American Soße"
       ]
     },
     {
@@ -302,7 +304,8 @@
         "Tomaten",
         "Gurken",
         "Pommes",
-        "Rindfleisch"
+        "Rindfleisch",
+        "American Soße"
       ]
     },
     {

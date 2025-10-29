@@ -27,7 +27,7 @@ export class AddIngredientsComponent implements OnInit {
 
   salatExtras: string[] = ['Joghurtsoße', 'Essig Öl', 'Balsamico', 'Mais', 'Paprika'];
   private sideOptions = ['Pommes', 'Reis', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
-  private sauceOptions = ['Joghurtsoße', 'Essig Öl', 'Balsamico'];
+  private sauceOptions = ['Joghurtsoße', 'Essig Öl', 'Balsamico', 'Senfsoße'];
 
   ngOnInit() {
     this.loadExtrasForCategory();
