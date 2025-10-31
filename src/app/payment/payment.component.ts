@@ -7,19 +7,22 @@ import { CartService } from 'app/shared/services/cart.service';
 import { Order } from 'app/interfaces/order.interface';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from 'app/shared/component/header/header.component';
+import { LoadingSpinnerComponent } from 'app/shared/component/loading-spinner/loading-spinner.component';
 
 declare var paypal: any;
 
 @Component({
   selector: 'app-payment',
   standalone: true,
-  imports: [CommonModule, FormsModule, HeaderComponent],
+  imports: [CommonModule, FormsModule, HeaderComponent, LoadingSpinnerComponent],
   templateUrl: './payment.component.html',
   styleUrls: ['./payment.component.scss']
 })
 export class PaymentComponent implements OnInit, AfterViewInit {
   order: Order | null = null;
-  paymentMethod: string = '';
+  paymentMethod: string = 'bar';
+  isLoading: boolean = false;
+
 
   constructor(
     private orderService: OrderService,
@@ -53,94 +56,95 @@ export class PaymentComponent implements OnInit, AfterViewInit {
     }
   }
 
-renderPayPalButton() {
-  setTimeout(() => {
-    // 🔹 Existierenden Container komplett entfernen
-    const oldContainer = document.getElementById('paypal-button-container');
-    if (oldContainer) {
-      oldContainer.remove();
-    }
+  renderPayPalButton() {
+    setTimeout(() => {
+      const oldContainer = document.getElementById('paypal-button-container');
+      if (oldContainer) {
+        oldContainer.remove();
+      }
 
-    const wrapper = document.querySelector('.paypal-zone-wrapper');
-    const newContainer = document.createElement('div');
-    newContainer.id = 'paypal-button-container';
-    newContainer.className = 'paypal-zone';
-    wrapper?.appendChild(newContainer);
+      const wrapper = document.querySelector('.paypal-zone-wrapper');
+      const newContainer = document.createElement('div');
+      newContainer.id = 'paypal-button-container';
+      newContainer.className = 'paypal-zone';
+      wrapper?.appendChild(newContainer);
 
-    // 🔹 Prüfen, ob SDK geladen
-    if (typeof paypal === 'undefined') {
-      console.warn('⚠️ PayPal SDK noch nicht geladen.');
-      return;
-    }
+      // 🔹 Prüfen, ob SDK geladen
+      if (typeof paypal === 'undefined') {
+        console.warn('⚠️ PayPal SDK noch nicht geladen.');
+        return;
+      }
 
-    const fundingSource =
-      this.paymentMethod === 'karte'
-        ? paypal.FUNDING.CARD
-        : paypal.FUNDING.PAYPAL;
+      const fundingSource =
+        this.paymentMethod === 'karte'
+          ? paypal.FUNDING.CARD
+          : paypal.FUNDING.PAYPAL;
 
-    paypal
-      .Buttons({
-        fundingSource,
-        style: {
-          layout: 'vertical',
-          color: this.paymentMethod === 'karte' ? 'black' : 'gold',
-          shape: 'pill',
-          label: this.paymentMethod === 'karte' ? 'pay' : 'paypal'
-        },
-        createOrder: (data: any, actions: any) => {
-          return actions.order.create({
-            purchase_units: [
-              {
-                amount: { value: this.order!.total.toFixed(2) },
-                description: `Bestellung ${this.order!.name}`
-              }
-            ]
-          });
-        },
-        onApprove: async (data: any, actions: any) => {
-          const details = await actions.order.capture();
-          console.log(`✅ ${this.paymentMethod} bestätigt:`, details);
-          await this.confirmPaymentSuccess(this.paymentMethod);
-        },
-        onError: (err: any) => {
-          console.error(`❌ Fehler bei ${this.paymentMethod}:`, err);
-          alert('Zahlung fehlgeschlagen. Bitte erneut versuchen.');
-        }
-      })
-      .render('#paypal-button-container');
-  }, 150);
-}
-
-
-
-
-  async confirmPaymentSuccess(method: string) {
-    if (!this.order) return;
-
-    try {
-      const orderId = Date.now().toString();
-      const orderRef = doc(this.firestore, 'orders', orderId);
-
-      await setDoc(orderRef, {
-        ...this.order,
-        paymentMethod: method,
-        status: 'bezahlt',
-        timestamp: new Date().toISOString()
-      });
-
-      this.cartService.clearCart();
-      this.orderService.clearPendingOrder();
-
-      setTimeout(() => {
-        this.ngZone.run(() => {
-          this.router.navigate(['/payment/order-success'], {
-            state: { orderId }
-          });
-        });
-      }, 500);
-    } catch (err) {
-      console.error('❌ Fehler beim Speichern:', err);
-      alert('Fehler beim Abschluss. Bitte erneut versuchen.');
-    }
+      paypal
+        .Buttons({
+          fundingSource,
+          style: {
+            layout: 'vertical',
+            color: this.paymentMethod === 'karte' ? 'black' : 'gold',
+            shape: 'pill',
+            label: this.paymentMethod === 'karte' ? 'pay' : 'paypal'
+          },
+          createOrder: (data: any, actions: any) => {
+            return actions.order.create({
+              purchase_units: [
+                {
+                  amount: { value: this.order!.total.toFixed(2) },
+                  description: `Bestellung ${this.order!.name}`
+                }
+              ]
+            });
+          },
+         onApprove: async (data: any, actions: any) => { 
+          const details = await actions.order.capture(); 
+          console.log(`✅ ${this.paymentMethod} bestätigt:`, details); 
+         await this.confirmPaymentSuccess(this.paymentMethod); },
+          onError: (err: any) => {
+            console.error(`❌ Fehler bei ${this.paymentMethod}:`, err);
+            alert('Zahlung fehlgeschlagen. Bitte erneut versuchen.');
+          }
+        })
+        .render('#paypal-button-container');
+    }, 150);
   }
+
+async confirmPaymentSuccess(method: string) {
+  if (!this.order) return;
+
+  this.isLoading = true; // Spinner anzeigen
+
+  try {
+    const orderId = Date.now().toString();
+    const orderRef = doc(this.firestore, 'orders', orderId);
+
+    await setDoc(orderRef, {
+      ...this.order,
+      paymentMethod: method,
+      status: 'bezahlt',
+      timestamp: new Date().toISOString()
+    });
+
+    this.cartService.clearCart();
+    this.orderService.clearPendingOrder();
+
+    // 🔹 2 Sekunden Spinner anzeigen, dann weiterleiten
+    setTimeout(() => {
+      this.ngZone.run(() => {
+        this.isLoading = false;
+        this.router.navigate(['/payment/order-success'], {
+          state: { orderId }
+        });
+      });
+    }, 2000);
+
+  } catch (err) {
+    console.error('❌ Fehler beim Speichern:', err);
+    alert('Fehler beim Abschluss. Bitte erneut versuchen.');
+    this.isLoading = false;
+  }
+}
 }

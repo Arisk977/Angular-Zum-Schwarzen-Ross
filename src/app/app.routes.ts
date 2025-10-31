@@ -15,6 +15,6 @@ export const routes: Routes = [
   { path: 'bestellungen', loadComponent: () => import('./bestellungen/bestellungen.component').then(m => m.BestellungenComponent) },
   { path: 'checkout', component: CheckoutComponent },
   { path: 'payment', component: PaymentComponent },
-  { path: 'payment/order-success', component: OrderSuccessComponent }
+  { path: 'payment/order-success', component: OrderSuccessComponent },
 
 ];

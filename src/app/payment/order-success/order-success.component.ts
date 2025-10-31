@@ -20,7 +20,8 @@ export class OrderSuccessComponent implements OnInit {
     this.orderNumber = nav?.extras.state?.['orderId'] || null;
   }
 
-  goHome() {
-    this.router.navigate(['/']);
-  }
+  goToMyOrders() {
+  this.router.navigate(['/bestellungen']);
+}
+
 }

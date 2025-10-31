@@ -1,66 +1,71 @@
-<app-header></app-header>
+<!-- Wenn NICHT geladen wird -->
+<ng-container *ngIf="!isLoading; else loadingTpl">
 
-<!-- Äußerer Wrapper -->
-<div class="payment-wrapper">
-  <!-- Hauptcontainer -->
-  <div class="payment-container">
-    <h1>Zahlung</h1>
+  <app-header></app-header>
 
-    <div class="content" *ngIf="order">
-      <p><strong>Gesamtbetrag:</strong> {{ order.total | currency:'EUR' }}</p>
+  <!-- Äußerer Wrapper -->
+  <div class="payment-wrapper">
+    <div class="payment-container">
+      <h1>Zahlung</h1>
 
-      <h3>Zahlungsmethode wählen:</h3>
+      <div class="content" *ngIf="order">
+        <p><strong>Gesamtbetrag:</strong> {{ order.total | currency:'EUR' }}</p>
 
-      <div class="payment-options">
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="bar"
-            [(ngModel)]="paymentMethod"
-            (change)="onPaymentChange()"
-          />
-          Barzahlung bei Lieferung / Abholung
-        </label>
+        <h3>Zahlungsmethode wählen:</h3>
 
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="paypal"
-            [(ngModel)]="paymentMethod"
-            (change)="onPaymentChange()"
-          />
-          PayPal
-        </label>
+        <div class="payment-options">
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="bar"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentChange()"
+            />
+            Barzahlung bei Lieferung / Abholung
+          </label>
 
-        <label>
-          <input
-            type="radio"
-            name="payment"
-            value="karte"
-            [(ngModel)]="paymentMethod"
-            (change)="onPaymentChange()"
-          />
-          Kreditkarte / Debitkarte
-        </label>
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="paypal"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentChange()"
+            />
+            PayPal
+          </label>
+
+          <label>
+            <input
+              type="radio"
+              name="payment"
+              value="karte"
+              [(ngModel)]="paymentMethod"
+              (change)="onPaymentChange()"
+            />
+            Kreditkarte / Debitkarte
+          </label>
+        </div>
       </div>
+    </div>
+
+    <div class="paypal-zone-wrapper">
+      <div id="payment-form" class="paypal-zone"></div>
+
+      <button
+        *ngIf="paymentMethod === 'bar'"
+        (click)="confirmPaymentSuccess(paymentMethod)"
+        class="pay-button buttons"
+      >
+        Zahlung bestätigen
+      </button>
     </div>
   </div>
 
-<!-- 💳 Gemeinsamer Zahlungsbereich -->
-<div class="paypal-zone-wrapper">
-  <!-- Hier rendert PayPal oder Kreditkarte -->
-  <div id="payment-form" class="paypal-zone"></div>
+</ng-container>
 
-  <!-- Nur Barzahlung -->
-  <button
-    *ngIf="paymentMethod === 'bar'"
-    (click)="confirmPaymentSuccess(paymentMethod)"
-    class="pay-button buttons"
-  >
-    Zahlung bestätigen
-  </button>
-</div>
-
-</div>
+<!-- 🔹 Loading Spinner Template -->
+<ng-template #loadingTpl>
+  <app-loading-spinner></app-loading-spinner>
+</ng-template>
