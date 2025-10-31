@@ -3,6 +3,8 @@ import { SpeisenComponent } from './speisen/speisen.component';
 import { MainComponent } from './main/main.component';
 import { RegisterComponent } from './register/register.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { PaymentComponent } from './payment/payment.component';
+import { OrderSuccessComponent } from './payment/order-success/order-success.component';
 
 export const routes: Routes = [
   { path: '', component: MainComponent, pathMatch: 'full' },
@@ -12,5 +14,7 @@ export const routes: Routes = [
   { path: 'warenkorb', loadComponent: () => import('./warenkorb/warenkorb.component').then(m => m.WarenkorbComponent) },
   { path: 'bestellungen', loadComponent: () => import('./bestellungen/bestellungen.component').then(m => m.BestellungenComponent) },
   { path: 'checkout', component: CheckoutComponent },
+  { path: 'payment', component: PaymentComponent },
+  { path: 'payment/order-success', component: OrderSuccessComponent }
 
 ];

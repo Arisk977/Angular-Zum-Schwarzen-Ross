@@ -1,0 +1,66 @@
+<app-header></app-header>
+
+<!-- Äußerer Wrapper -->
+<div class="payment-wrapper">
+  <!-- Hauptcontainer -->
+  <div class="payment-container">
+    <h1>Zahlung</h1>
+
+    <div class="content" *ngIf="order">
+      <p><strong>Gesamtbetrag:</strong> {{ order.total | currency:'EUR' }}</p>
+
+      <h3>Zahlungsmethode wählen:</h3>
+
+      <div class="payment-options">
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="bar"
+            [(ngModel)]="paymentMethod"
+            (change)="onPaymentChange()"
+          />
+          Barzahlung bei Lieferung / Abholung
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="paypal"
+            [(ngModel)]="paymentMethod"
+            (change)="onPaymentChange()"
+          />
+          PayPal
+        </label>
+
+        <label>
+          <input
+            type="radio"
+            name="payment"
+            value="karte"
+            [(ngModel)]="paymentMethod"
+            (change)="onPaymentChange()"
+          />
+          Kreditkarte / Debitkarte
+        </label>
+      </div>
+    </div>
+  </div>
+
+<!-- 💳 Gemeinsamer Zahlungsbereich -->
+<div class="paypal-zone-wrapper">
+  <!-- Hier rendert PayPal oder Kreditkarte -->
+  <div id="payment-form" class="paypal-zone"></div>
+
+  <!-- Nur Barzahlung -->
+  <button
+    *ngIf="paymentMethod === 'bar'"
+    (click)="confirmPaymentSuccess(paymentMethod)"
+    class="pay-button buttons"
+  >
+    Zahlung bestätigen
+  </button>
+</div>
+
+</div>

@@ -9,6 +9,7 @@ import { HeaderComponent } from 'app/shared/component/header/header.component';
 import { Order } from 'app/interfaces/order.interface';
 import { CartItem } from 'app/interfaces/cart-item.interface';
 import { NavigationEnd, Router } from '@angular/router';
+import { OrderService } from 'app/shared/services/order.service';
 
 @Component({
   selector: 'app-checkout',
@@ -40,18 +41,19 @@ export class CheckoutComponent implements OnInit {
     private cartService: CartService,
     private firestore: Firestore,
     private auth: Auth,
-    private router: Router
+    private router: Router,
+    private orderService: OrderService
   ) { }
 
   ngOnInit(): void {
-   this.setupCartSubscription();
-  this.router.events
-    .pipe(filter(e => e instanceof NavigationEnd))
-    .subscribe((e: any) => {
-      if (e.urlAfterRedirects === '/checkout') {
-        this.setupCartSubscription();
-      }
-    });
+    this.setupCartSubscription();
+    this.router.events
+      .pipe(filter(e => e instanceof NavigationEnd))
+      .subscribe((e: any) => {
+        if (e.urlAfterRedirects === '/checkout') {
+          this.setupCartSubscription();
+        }
+      });
 
     onAuthStateChanged(this.auth, async (user: User | null) => {
       if (user) {
@@ -60,15 +62,15 @@ export class CheckoutComponent implements OnInit {
     });
   }
 
-private setupCartSubscription() {
-  this.cartItems$ = this.cartService.cart$;
-  this.cartService.cart$.subscribe(items => {
-    this.totalPrice = items.reduce(
-      (acc, item) => acc + (item.preis * item.quantity),
-      0
-    );
-  });
-}
+  private setupCartSubscription() {
+    this.cartItems$ = this.cartService.cart$;
+    this.cartService.cart$.subscribe(items => {
+      this.totalPrice = items.reduce(
+        (acc, item) => acc + (item.preis * item.quantity),
+        0
+      );
+    });
+  }
 
 
   private async loadUserData(uid: string): Promise<void> {
@@ -103,14 +105,14 @@ private setupCartSubscription() {
   }
 
   async finalizeOrder(form: NgForm): Promise<void> {
-  if (form.invalid) {
-    return;
-  }
-    const cartItems = await firstValueFrom(this.cartService.cart$);
-    const order = this.buildOrder(cartItems);
+  if (form.invalid) return;
 
-    await this.saveOrderInFirestore(order);
-  }
+  const cartItems = await firstValueFrom(this.cartService.cart$);
+  const order = this.buildOrder(cartItems);
+  this.orderService.setPendingOrder(order);
+  this.router.navigate(['/payment']);
+}
+
 
   private buildOrder(cartItems: CartItem[]): Order {
     const fullAddress = `${this.checkoutForm.street} ${this.checkoutForm.houseNumber}, ${this.checkoutForm.zip} ${this.checkoutForm.city}`;

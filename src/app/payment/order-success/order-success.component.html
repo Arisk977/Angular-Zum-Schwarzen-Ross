@@ -1,0 +1,12 @@
+<app-header></app-header>
+<div class="success-container">
+  <h1>🎉 Bestellung erfolgreich!</h1>
+
+  <p *ngIf="orderNumber">
+    Deine Bestellnummer lautet: <strong>#{{ orderNumber }}</strong>
+  </p>
+
+  <p>Wir haben deine Bestellung erhalten und beginnen bald mit der Zubereitung.</p>
+
+  <button (click)="goHome()">Zur Startseite</button>
+</div>

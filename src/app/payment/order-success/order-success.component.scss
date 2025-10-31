@@ -1,0 +1,39 @@
+.success-container {
+  max-width: 600px;
+  margin: 120px auto;
+  text-align: center;
+  background: #fff;
+  border-radius: 20px;
+  padding: 40px 50px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  font-family: 'Rubik', sans-serif;
+  color: #222;
+
+  h1 {
+    font-size: 2rem;
+    color: rgb(160, 0, 0);
+    margin-bottom: 20px;
+  }
+
+  p {
+    font-size: 1.1rem;
+    margin-bottom: 25px;
+  }
+
+  button {
+    background: rgb(160, 0, 0);
+    color: #fff;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 1.1rem;
+    cursor: pointer;
+    transition: all 0.25s ease;
+
+    &:hover {
+      background: rgb(130, 0, 0);
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(160, 0, 0, 0.3);
+    }
+  }
+}
