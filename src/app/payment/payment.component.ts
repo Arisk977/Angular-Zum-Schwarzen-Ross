@@ -8,6 +8,7 @@ import { Order } from 'app/interfaces/order.interface';
 import { FormsModule } from '@angular/forms';
 import { HeaderComponent } from 'app/shared/component/header/header.component';
 import { LoadingSpinnerComponent } from 'app/shared/component/loading-spinner/loading-spinner.component';
+import { Auth } from '@angular/fire/auth';
 
 declare var paypal: any;
 
@@ -26,6 +27,7 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
   constructor(
     private orderService: OrderService,
+    private auth: Auth,
     private firestore: Firestore,
     private cartService: CartService,
     private router: Router,
@@ -114,24 +116,30 @@ export class PaymentComponent implements OnInit, AfterViewInit {
 
 async confirmPaymentSuccess(method: string) {
   if (!this.order) return;
-
   this.isLoading = true; // Spinner anzeigen
 
   try {
     const orderId = Date.now().toString();
     const orderRef = doc(this.firestore, 'orders', orderId);
+    const user = this.auth.currentUser;
 
-    await setDoc(orderRef, {
+    const orderData = {
       ...this.order,
       paymentMethod: method,
       status: 'bezahlt',
-      timestamp: new Date().toISOString()
-    });
+      timestamp: new Date().toISOString(),
+      userId: user ? user.uid : null,
+      userEmail: user ? user.email : null
+    };
+    await setDoc(orderRef, orderData);
 
+    if (user) {
+      const userOrderRef = doc(this.firestore, `users/${user.uid}/orders/${orderId}`);
+      await setDoc(userOrderRef, orderData);
+    }
     this.cartService.clearCart();
     this.orderService.clearPendingOrder();
 
-    // 🔹 2 Sekunden Spinner anzeigen, dann weiterleiten
     setTimeout(() => {
       this.ngZone.run(() => {
         this.isLoading = false;

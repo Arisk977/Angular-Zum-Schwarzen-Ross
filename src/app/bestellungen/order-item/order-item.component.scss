@@ -1,0 +1,36 @@
+.order-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 16px 32px;
+  margin: 0;
+  gap: 24px;
+  background: transparent; /* ⚠️ kein festes Grau hier – das kommt vom Parent */
+}
+
+/* Struktur in der Bestellung */
+.order-wrapper-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  width: 100%;
+}
+
+.order-wrapper-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+/* Textformatierung */
+.underline {
+  text-decoration: underline;
+  &:hover {
+    color: rgb(160, 0, 0);
+    cursor: pointer;
+  }
+}
+
+.color-red {
+  color: rgb(160, 0, 0);
+}

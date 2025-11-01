@@ -1,0 +1,16 @@
+<div class="order-container">
+  <div class="order-wrapper-top">
+    <div class="left-side">
+      <strong>Bestellnummer:</strong> {{ orderNumber }}
+    </div>
+    <div class="right-side">
+      <strong class="color-red">Gesamtbetrag:</strong> {{ total | number:'1.2-2' }} €
+    </div>
+  </div>
+
+  <div class="order-wrapper-bottom">
+    <p><strong>Bestelldatum:</strong> {{ date }}</p>
+    <p><strong>Status:</strong> {{ status }}</p>
+    <p><strong class="underline">Zu den Bestelldetails</strong></p>
+  </div>
+</div>

@@ -1,5 +1,27 @@
 <app-header></app-header>
-<div class="container py-5">
-  <h1>Bestellungen</h1>
-  <p>Deine vergangenen Bestellungen – folgt.</p>
-</div>
+
+<main>
+  <div class="header">
+    <h1>Bestellungen</h1>
+  </div>
+
+  <div
+    class="order-content"
+    [style.justify-content]="(orders$ | async)?.length ? 'flex-start' : 'center'"
+  >
+    <div class="no-orders" *ngIf="(orders$ | async)?.length === 0">
+      <p>Es sind noch keine Bestellungen eingegangen</p>
+      <button>Zur Speisekarte</button>
+    </div>
+
+    <ng-container *ngIf="(orders$ | async) as orders">
+      <app-order-item
+        *ngFor="let order of orders"
+        [orderNumber]="order.orderNumber"
+        [total]="order.total"
+        [date]="order.date"
+        [status]="order.status"
+      ></app-order-item>
+    </ng-container>
+  </div>
+</main>
