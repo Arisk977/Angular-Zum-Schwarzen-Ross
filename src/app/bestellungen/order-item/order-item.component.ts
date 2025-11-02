@@ -1,16 +1,26 @@
+import { Component, EventEmitter, Input, Output } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { Order } from 'app/interfaces/order.interface';
 
 @Component({
   selector: 'app-order-item',
-  imports: [CommonModule, FormsModule],
+  standalone: true,
+  imports: [CommonModule],
   templateUrl: './order-item.component.html',
-  styleUrl: './order-item.component.scss'
+  styleUrls: ['./order-item.component.scss']
 })
 export class OrderItemComponent {
-  @Input() orderNumber!: string;
-  @Input() total!: number;
-  @Input() date!: string;
-  @Input() status!: string;
+  @Input() order!: Order;
+  @Input() orderId!: string;
+    @Input() activeOrderId!: string | null;
+  @Output() toggle = new EventEmitter<void>();
+
+    get showDetails(): boolean {
+    return this.activeOrderId === this.orderId;
+  }
+
+  onToggleDetails() {
+    this.toggle.emit();
+  }
+
 }

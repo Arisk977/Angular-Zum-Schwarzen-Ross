@@ -5,7 +5,9 @@ import { OrderItemComponent } from './order-item/order-item.component';
 import { Firestore, collection, collectionData } from '@angular/fire/firestore';
 import { Auth, onAuthStateChanged, User } from '@angular/fire/auth';
 import { Observable } from 'rxjs';
-import { OrderDetails } from 'app/interfaces/order-details.interface';
+import { Order } from 'app/interfaces/order.interface'; // dein bestehendes Interface
+
+type OrderWithId = Order & { id: string };
 
 @Component({
   selector: 'app-bestellungen',
@@ -15,9 +17,10 @@ import { OrderDetails } from 'app/interfaces/order-details.interface';
   styleUrls: ['./bestellungen.component.scss']
 })
 export class BestellungenComponent implements OnInit {
-  orders$?: Observable<OrderDetails[]>;
-  hasOrders = false;
+  orders$?: Observable<OrderWithId[]>;
   user: User | null = null;
+  activeOrderId: string | null = null;
+
 
   constructor(private firestore: Firestore, private auth: Auth) {}
 
@@ -26,17 +29,16 @@ export class BestellungenComponent implements OnInit {
       if (!user) {
         this.user = null;
         this.orders$ = undefined;
-        this.hasOrders = false;
         return;
       }
 
       this.user = user;
-      const ordersRef = collection(this.firestore, `users/${user.uid}/orders`);
-      this.orders$ = collectionData(ordersRef, { idField: 'id' }) as Observable<OrderDetails[]>;
-
-      this.orders$.subscribe((orders) => {
-        this.hasOrders = orders.length > 0;
-      });
+      const ref = collection(this.firestore, `users/${user.uid}/orders`);
+      this.orders$ = collectionData(ref, { idField: 'id' }) as Observable<OrderWithId[]>;
     });
   }
+
+   setActiveOrder(id: string) {
+  this.activeOrderId = this.activeOrderId === id ? null : id;
+}
 }

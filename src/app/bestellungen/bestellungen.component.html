@@ -17,11 +17,10 @@
     <ng-container *ngIf="(orders$ | async) as orders">
       <app-order-item
         *ngFor="let order of orders"
-        [orderNumber]="order.orderNumber"
-        [total]="order.total"
-        [date]="order.date"
-        [status]="order.status"
-      ></app-order-item>
+        [order]="order" [orderId]="order.id"
+        [activeOrderId]="activeOrderId"
+    (toggle)="setActiveOrder(order.id)">
+      </app-order-item>
     </ng-container>
   </div>
 </main>

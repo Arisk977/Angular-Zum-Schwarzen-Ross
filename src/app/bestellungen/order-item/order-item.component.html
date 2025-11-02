@@ -1,16 +1,65 @@
 <div class="order-container">
   <div class="order-wrapper-top">
     <div class="left-side">
-      <strong>Bestellnummer:</strong> {{ orderNumber }}
+      <strong>Bestellnummer:</strong> {{ orderId }}
     </div>
     <div class="right-side">
-      <strong class="color-red">Gesamtbetrag:</strong> {{ total | number:'1.2-2' }} €
+      <strong class="color-red">Gesamtbetrag:</strong> {{ order.total | number:'1.2-2' }} €
     </div>
   </div>
 
   <div class="order-wrapper-bottom">
-    <p><strong>Bestelldatum:</strong> {{ date }}</p>
-    <p><strong>Status:</strong> {{ status }}</p>
-    <p><strong class="underline">Zu den Bestelldetails</strong></p>
+    <p><strong>Bestelldatum:</strong> {{ order.timestamp | date:'medium' }}</p>
+    <p><strong>Status:</strong> {{ order.status }}</p>
+    <p class="underline" (click)="onToggleDetails()">
+      {{ showDetails ? 'Details ausblenden' : 'Zu den Bestelldetails' }}
+    </p>
+  </div>
+</div>
+
+
+<div class="order-details" *ngIf="showDetails">
+  <div class="meta">
+    <div><strong>Name:</strong> {{ order.name }}</div>
+    <div><strong>Telefon:</strong> {{ order.phone }}</div>
+    <div *ngIf="order.abholung">
+      <strong>Abholung:</strong> Ja
+    </div>
+    <div *ngIf="!order.abholung && order.lieferung">
+      <strong>Lieferung:</strong> Ja
+    </div>
+    <div *ngIf="order.uhrzeit">
+      <strong>Bestellt für:</strong> {{ order.uhrzeit }}
+    </div>
+    <div>
+      <strong>Uhrzeit:</strong> {{ order.timestamp | date:'HH:mm' }} Uhr
+    </div>
+  </div>
+
+  <div class="items">
+    <h4>Bestellte Artikel</h4>
+
+    <div class="item" *ngFor="let item of order.items; index as i">
+      <div class="row">
+        <div class="gericht">
+          <strong>{{ item.gerichtNummer }}</strong> {{ item.title }}
+        </div>
+
+        <div class="opts">
+          <strong>Entfernt:</strong>
+          {{ item.zutatenEntfernt.length ? item.zutatenEntfernt.join(', ') : '–' }}
+        </div>
+
+        <div class="opts">
+          <strong>Hinzugefügt:</strong>
+          {{ item.zutatenHinzugefuegt.length ? item.zutatenHinzugefuegt.join(', ') : '–' }}
+        </div>
+
+
+        <div class="preis">
+          <strong>Preis:</strong> {{ item.preis | number:'1.2-2' }} €
+        </div>
+      </div>
+    </div>
   </div>
 </div>

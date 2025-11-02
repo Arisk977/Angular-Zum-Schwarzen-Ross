@@ -5,7 +5,8 @@
   padding: 16px 32px;
   margin: 0;
   gap: 24px;
-  background: transparent; /* ⚠️ kein festes Grau hier – das kommt vom Parent */
+  background: transparent;
+  /* ⚠️ kein festes Grau hier – das kommt vom Parent */
 }
 
 /* Struktur in der Bestellung */
@@ -25,6 +26,7 @@
 /* Textformatierung */
 .underline {
   text-decoration: underline;
+
   &:hover {
     color: rgb(160, 0, 0);
     cursor: pointer;
@@ -33,4 +35,93 @@
 
 .color-red {
   color: rgb(160, 0, 0);
+}
+
+.order-details {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 20px 30px;
+  background-color: #f9f9f9;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: 0 0 10px 10px;
+  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05);
+
+  .items {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    h4 {
+      font-size: 17px;
+      font-weight: 600;
+      color: rgb(160, 0, 0);
+      margin: 0;
+      padding-bottom: 6px;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    }
+
+    .item {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      padding: 10px 0;
+      border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      .row {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        gap: 12px;
+        width: 100%;
+        overflow: hidden;
+
+        >div {
+          display: flex;
+          align-items: center;
+          gap: 6px;
+          white-space: nowrap;
+        }
+
+        .gericht {
+          flex: 1 1 100%;
+          /* ⚡ gibt dem Gericht 60% Platzanteil */
+          overflow: hidden;
+          text-overflow: ellipsis;
+          min-width: 200px;
+          /* verhindert, dass es zu klein wird */
+
+          strong {
+            color: rgb(160, 0, 0);
+            margin-right: 4px;
+          }
+        }
+
+        .opts {
+          flex: 0 1 auto;
+          font-size: 14px;
+          color: #444;
+
+          strong {
+            color: #000;
+          }
+        }
+
+        .preis {
+          flex: 0 0 auto;
+          font-weight: 600;
+          color: #000;
+          white-space: nowrap;
+        }
+      }
+
+    }
+  }
 }
