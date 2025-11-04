@@ -19,7 +19,7 @@
 
 
 <div class="order-details" *ngIf="showDetails">
-  <div class="meta">
+  <div class="details">
     <div><strong>Name:</strong> {{ order.name }}</div>
     <div><strong>Telefon:</strong> {{ order.phone }}</div>
     <div *ngIf="order.abholung">
@@ -36,30 +36,33 @@
     </div>
   </div>
 
-  <div class="items">
+  <div class="order-article-head">
     <h4>Bestellte Artikel</h4>
+  </div>
 
-    <div class="item" *ngFor="let item of order.items; index as i">
-      <div class="row">
-        <div class="gericht">
-          <strong>{{ item.gerichtNummer }}</strong> {{ item.title }}
-        </div>
+  <div class="items" *ngFor="let item of order.items; index as i">
+      <div class="meal">
+        <p> <strong class="number">{{ item.gerichtNummer }}</strong> </p>
+        
+        <p>{{ item.title }}</p>
+      </div>
 
-        <div class="opts">
-          <strong>Entfernt:</strong>
-          {{ item.zutatenEntfernt.length ? item.zutatenEntfernt.join(', ') : '–' }}
-        </div>
+      <div class="opts">
+        <p> <strong>Entfernt:</strong></p>
+        
+        <p> {{ item.zutatenEntfernt.length ? item.zutatenEntfernt.join(', ') : '–' }}</p> 
+      </div>
 
-        <div class="opts">
-          <strong>Hinzugefügt:</strong>
-          {{ item.zutatenHinzugefuegt.length ? item.zutatenHinzugefuegt.join(', ') : '–' }}
-        </div>
+      <div class="opts">
+        <p><strong>Hinzugefügt:</strong></p>
+      
+        <p>{{ item.zutatenHinzugefuegt.length ? item.zutatenHinzugefuegt.join(', ') : '–' }}</p>
+      </div>
 
 
-        <div class="preis">
-          <strong>Preis:</strong> {{ item.preis | number:'1.2-2' }} €
-        </div>
+      <div class="price">
+        <p><strong>Preis:</strong> </p>
+        <p>{{ item.preis | number:'1.2-2' }} €</p>
       </div>
     </div>
   </div>
-</div>

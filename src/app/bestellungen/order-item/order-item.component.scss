@@ -23,7 +23,6 @@
   align-items: flex-start;
 }
 
-/* Textformatierung */
 .underline {
   text-decoration: underline;
 
@@ -37,23 +36,23 @@
   color: rgb(160, 0, 0);
 }
 
-.order-details {
-  width: 100%;
+.order-details{
   display: flex;
   flex-direction: column;
-  gap: 20px;
-  padding: 20px 30px;
-  background-color: #f9f9f9;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 0 0 10px 10px;
-  box-shadow: inset 0 1px 0 rgba(0, 0, 0, 0.05);
+  align-content: center;
+  justify-content: center;
+  width: 100%;
+}
 
-  .items {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    width: 100%;
-    h4 {
+.details{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 24px;
+}
+
+.order-article-head h4 {
+      padding: 12px 24px;
       font-size: 17px;
       font-weight: 600;
       color: rgb(160, 0, 0);
@@ -62,66 +61,39 @@
       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
 
-    .item {
+    .items{
       display: flex;
       justify-content: space-between;
       align-items: center;
+      padding: 12px 24px;
       width: 100%;
-      padding: 10px 0;
-      border-bottom: 1px dashed rgba(0, 0, 0, 0.1);
-
-      &:last-child {
-        border-bottom: none;
-      }
-
-      .row {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        flex-wrap: nowrap;
-        gap: 12px;
-        width: 100%;
-        overflow: hidden;
-
-        >div {
-          display: flex;
-          align-items: center;
-          gap: 6px;
-          white-space: nowrap;
-        }
-
-        .gericht {
-          flex: 1 1 100%;
-          /* ⚡ gibt dem Gericht 60% Platzanteil */
-          overflow: hidden;
-          text-overflow: ellipsis;
-          min-width: 200px;
-          /* verhindert, dass es zu klein wird */
-
-          strong {
-            color: rgb(160, 0, 0);
-            margin-right: 4px;
-          }
-        }
-
-        .opts {
-          flex: 0 1 auto;
-          font-size: 14px;
-          color: #444;
-
-          strong {
-            color: #000;
-          }
-        }
-
-        .preis {
-          flex: 0 0 auto;
-          font-weight: 600;
-          color: #000;
-          white-space: nowrap;
-        }
-      }
-
+      gap: 32px;
+       border-bottom: 1px solid rgba(0, 0, 0, 0.1);
     }
-  }
-}
+
+    .meal{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .number{
+      color: rgb(160, 0, 0);
+    }
+    .opts{
+      display: flex;
+      justify-content: flex-start;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+    }
+
+    .price{
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 16px;
+      width: 100%;
+    }
