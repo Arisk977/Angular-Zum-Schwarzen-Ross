@@ -6,10 +6,8 @@
   margin: 0;
   gap: 24px;
   background: transparent;
-  /* ⚠️ kein festes Grau hier – das kommt vom Parent */
 }
 
-/* Struktur in der Bestellung */
 .order-wrapper-top {
   display: flex;
   justify-content: space-between;
@@ -25,7 +23,6 @@
 
 .underline {
   text-decoration: underline;
-
   &:hover {
     color: rgb(160, 0, 0);
     cursor: pointer;

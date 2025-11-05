@@ -44,10 +44,10 @@ export class SpeisenModalComponent {
     'Schweinefleisch': 'Putenfleisch'
   };
   private sideSubstitutions: Record<string, string> = {};
-  private sideOptions = ['Reis', 'Pommes', 'Kroketten', 'Bratkartoffel', 'Folienkartoffeln', 'Salzkartoffeln'];
+  private sideOptions = ['Reis', 'Pommes', 'Kroketten', 'Bratkartoffeln', 'Folienkartoffeln', 'Salzkartoffeln'];
   private saladSauces = ['Senfsoße', 'Joghurtsoße', 'Essig Öl', 'Balsamico'];
-  private pizzaSauces = ['Tomatensoße', 'Barbequesoße', 'Hollandaisesoße', 'Currysoße', 'Creme Fraiche'];
-  private burgerSauces = ['American Soße', 'Barbequesoße', 'Ketchup', 'Mayonaise'];
+  private pizzaSauces = ['Tomatensoße', 'Barbecuesoße', 'Sauce Hollandaise', 'Currysoße', 'Creme Fraiche'];
+  private burgerSauces = ['American Soße', 'Barbecuesoße', 'Ketchup', 'Mayonaise'];
   private readonly BASE_SAUCE = 'Senfsoße';
 
 

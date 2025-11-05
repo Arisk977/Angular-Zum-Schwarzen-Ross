@@ -1,17 +1,17 @@
 {
   "Vorspeisen": [],
   "Salate": [
-    "Mais", "Tomaten", "Gurken", "Rote Zwiebeln", "Zwiebeln", "Thunfisch", "Oliven", "Schafskäse", "Mozarella", "Schinken", "Käse", "Rucola", "Gekochtes Ei", "Peperoni", "Karotten", "Paprika", "Weißkraut",
+    "Mais", "Tomaten", "Gurken", "Rote Zwiebeln", "Zwiebeln", "Thunfisch", "Oliven", "Schafskäse", "Mozzarella", "Schinken", "Käse", "Rucola", "Gekochtes Ei", "Peperoni", "Karotten", "Paprika", "Weißkraut",
     "Senfsoße", "Joghurtsoße", "Essig Öl", "Balsamico", "Scampis", "Hähnchen", "Pilze"
   ],
   "Kleine Gerichte": {
-    "Chicken-Nuggets 8 Stück":["Kroketten", "Reis", "Barbequesoße"],
+    "Chicken-Nuggets 8 Stück":["Kroketten", "Reis", "Barbecuesoße"],
     "Kinder-Schnitzel":["Putenfleisch", "Kroketten", "Reis"]
   },
   "Burger": {
-        "default": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "Ketchup", "Extra Patty"],
-        "Crispy Chickenburger": ["Grüner Salat", "Rote Zwiebeln", "Saure Gurken", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "Ketchup", "Extra Patty"],        
-        "Veganer Burger": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbequesoße", "American Soße", "Extra Patty"]
+        "default": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbecuesoße", "Ketchup", "Extra Patty"],
+        "Crispy Chickenburger": ["Grüner Salat", "Rote Zwiebeln", "Saure Gurken", "Gurken", "Jalapeño", "Oliven", "Barbecuesoße", "Ketchup", "Extra Patty"],        
+        "Veganer Burger": ["Rucola", "Gurken", "Jalapeño", "Oliven", "Barbecuesoße", "American Soße", "Extra Patty"]
     },
   "Überbackene Nudeln": {
     "default":[
@@ -24,7 +24,7 @@
   ],
   "Pizzen": {
     "default": [
-"Barbequesoße", "Chillisauce", "Creme Fraiche", "Currysoße", "Hollandaisesoße", "Tomatensoße", "Tabasco",
+"Barbecuesoße", "Chillisauce", "Creme Fraiche", "Currysoße", "Sauce Hollandaise", "Tomatensoße", "Tabasco",
 "Ananas", "Artischocken", "Basilikum", "Bolognese", "Brokkoli", "Champignons", "gekochtes Ei", 
 "Spiegelei", "Spinat", "Gorgonzola", "Gouda", "Gyrosfleisch", "Hackfleisch", "Hähnchen", "Jalapeño", 
 "Käse", "Kirschtomaten", "Knoblauch", "Krabben", "Lachs", "Mais", "Meeresfrüchte", "Mozzarella", "Oliven", 

@@ -6,7 +6,6 @@
       "beschreibung": "mit Jogurt, Quark, Gurken, frischem Knoblauch und Dill",
       "preis": 4.5,
       "zutaten": [
-        "Tzatziki",
         "Gurken",
         "Oliven"
       ]
@@ -27,10 +26,9 @@
     {
       "nummer": 9,
       "name": "Schafskäse paniert",
-      "beschreibung": "garniert",
+      "beschreibung": "mit paniertem Schafskäse",
       "preis": 6.0,
       "zutaten": [
-        "Schafskäse"
       ]
     },
     {
@@ -53,7 +51,6 @@
       "beschreibung": "Grüner Salat, Tomaten, Gurken, Zwiebeln, Karotten",
       "preis": 6.0,
       "zutaten": [
-        "Grüner salat",
         "Tomaten",
         "Gurken",
         "Zwiebeln",
@@ -76,7 +73,7 @@
     {
       "nummer": "12a",
       "name": "Rucolasalat",
-      "beschreibung": "mit Kirschtomaten, Rote Zwiebeln, Schinken*, Parmesan, Essig/Öl, Mozarella",
+      "beschreibung": "mit Kirschtomaten, Rote Zwiebeln, Schinken*, Parmesan, Essig/Öl, Mozzarella",
       "preis": 9.0,
       "zutaten": [
         "Kirschtomaten",
@@ -84,7 +81,7 @@
         "Schinken",
         "Parmesan",
         "Essig Öl",
-        "Mozarella"
+        "Mozzarella"
       ]
     },
     {
@@ -107,7 +104,6 @@
       "beschreibung": "Grüner Salat, Mais, Gurken, Oliven*, Tomaten, Champignons, Zwiebeln, Putenstreifen, Pizzabrot",
       "preis": 9.0,
       "zutaten": [
-        "Grüner salat",
         "Mais",
         "Gurken",
         "Oliven",
@@ -125,7 +121,6 @@
       "beschreibung": "Grüner Salat, Schinken*, Käse*, Ei, Oliven*, Gurken, Tomaten, Karotten, Thunfisch, Pizzabrot",
       "preis": 8.5,
       "zutaten": [
-        "Grüner salat",
         "Schinken",
         "Käse",
         "Ei",
@@ -141,14 +136,13 @@
     {
       "nummer": 16,
       "name": "Thunfisch Salat",
-      "beschreibung": "Grüner Salat, Thunfisch, Zwiebeln, Ei, Tomatenscheiben, Pizzabrot",
+      "beschreibung": "Grüner Salat, Thunfisch, Rote Zwiebeln, Ei, Tomaten, Pizzabrot",
       "preis": 8.5,
       "zutaten": [
-        "Grüner salat",
         "Thunfisch",
-        "Zwiebeln",
+        "Rote Zwiebeln",
         "Ei",
-        "Tomatenscheiben",
+        "Tomaten",
         "Pizzabrot",
         "Joghurtsoße"
       ]
@@ -156,15 +150,15 @@
     {
       "nummer": 17,
       "name": "Bauernsalat",
-      "beschreibung": "Grüner Salat, Tomaten, Gurken, Zwiebeln, Schafskäse*, Paprika, Peperoni, Oliven*, Pizzabrot, Essig/Öl",
+      "beschreibung": "Grüner Salat, Tomaten, Gurken, Rote Zwiebeln, Schafskäse*, Paprika, Mais, Peperoni, Oliven*, Pizzabrot, Essig/Öl",
       "preis": 8.5,
       "zutaten": [
-        "Grüner salat",
         "Tomaten",
         "Gurken",
-        "Zwiebeln",
+        "Rote Zwiebeln",
         "Schafskäse",
         "Paprika",
+        "Mais",
         "Peperoni",
         "Oliven",
         "Pizzabrot",
@@ -177,7 +171,6 @@
       "beschreibung": "Grüner Salat, Tomaten, Gurken, Karotten, Käse*, Schinken*, Eier",
       "preis": 8.0,
       "zutaten": [
-        "Grüner salat",
         "Tomaten",
         "Gurken",
         "Karotten",
@@ -193,7 +186,6 @@
       "beschreibung": "Grüner Salat, Tomaten, Gurken, Gebr. Rindfleisch, Zwiebeln, Champignons, Chilisauce und Pizzabrot",
       "preis": 9.5,
       "zutaten": [
-        "Grüner salat",
         "Tomaten",
         "Gurken",
         "Rindfleisch",
@@ -210,7 +202,6 @@
       "beschreibung": "Grüner Salat, Tomaten, Gurken, Paprika, Gyrosfleisch und Schafskäse mit Essigdressing und Pizzabrot",
       "preis": 9.0,
       "zutaten": [
-        "Grüner salat",
         "Tomaten",
         "Gurken",
         "Paprika",
@@ -226,13 +217,12 @@
       "beschreibung": "Grüner Salat mit Käse*, Tomaten, Gurken, Ei, Scampis, frische Champignons und Pizzabrot",
       "preis": 9.0,
       "zutaten": [
-        "Grüner salat",
         "Käse",
         "Tomaten",
         "Gurken",
         "Ei",
         "Scampis",
-        "Frische champignons",
+        "Champignons",
         "Pizzabrot",
         "Joghurtsoße"
       ]
@@ -242,10 +232,10 @@
     {
       "nummer": "19a",
       "name": "Chicken-Nuggets 8 Stück",
-      "beschreibung": "Mit süß-sauer Sauce und Pommes",
+      "beschreibung": "Mit Süß-sauer-Soße und Pommes",
       "preis": 8.0,
       "zutaten": [
-        "Süß-sauer sauce",
+        "Süß-sauer-Soße",
         "Pommes"
       ]
     },
@@ -255,8 +245,9 @@
       "beschreibung": "Mit Pommes",
       "preis": 7.5,
       "zutaten": [
+        "Schweinefleisch",
         "Pommes",
-        "Schweinefleisch"
+        "Zitrone"
       ]
     }
   ],
@@ -264,15 +255,14 @@
     {
       "nummer": 405,
       "name": "Crispy Chickenburger",
-      "beschreibung": "Mit Rucola, Fetakäse, Tomaten, Käse und Pommes",
+      "beschreibung": "Mit Rucola, Schafskäse, Tomaten, Käse und Pommes",
       "preis": 9.0,
       "zutaten": [
         "Rucola",
-        "Fetakäse",
+        "Schafskäse",
         "Tomaten",
         "Käse",
         "Pommes",
-        "Hähnchenfleisch",
         "American Soße"
       ]
     },
@@ -282,7 +272,6 @@
       "beschreibung": "Mit 100% Rindfleisch, grüner Salat, Tomaten, Gurken, Käse und Pommes",
       "preis": 8.0,
       "zutaten": [
-        "Rindfleisch",
         "Grüner salat",
         "Rote Zwiebeln",
         "Tomaten",
@@ -304,7 +293,6 @@
         "Tomaten",
         "Gurken",
         "Pommes",
-        "Rindfleisch",
         "American Soße"
       ]
     },
@@ -314,7 +302,6 @@
       "beschreibung": "Mit veganem Patty, grüner Salat, Tomaten, Gurken, Ketchup und Pommes",
       "preis": 8.5,
       "zutaten": [
-        "Veganes patty",
         "Grüner salat",
         "Rote Zwiebeln",
         "Tomaten",
@@ -341,77 +328,78 @@
     {
       "nummer": 21,
       "name": "Rigatoni Maison",
-      "beschreibung": "Mit Tomaten, Sahnesoße, Mozzarella-Käse",
+      "beschreibung": "Mit Tomaten-Sahnesoße, Käse überbacken",
       "preis": 8.0,
       "zutaten": [
-        "Tomaten",
+        "Tomatensoße",
         "Sahnesoße",
-        "Mozzarella-käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 22,
       "name": "Rigatoni al Forno",
-      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße, Erbsen",
+      "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße, Erbsen, Käse überbacken",
       "preis": 9.0,
       "zutaten": [
         "Schinken",
         "Champignons",
         "Tomatensoße",
         "Sahne",
-        "Erbsen"
+        "Erbsen",
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 23,
       "name": "Combinazione",
-      "beschreibung": "Verschieden Nudeln, Hackfleischsoße (Rind), Sahne, Käse*",
+      "beschreibung": "Verschieden Nudeln, Hackfleischsoße (Rind), Sahne, Käse überbacken",
       "preis": 9.0,
       "zutaten": [
         "Hackfleischsoße",
         "Sahne",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 24,
       "name": "Tortellini Bolognese",
-      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse überbacken",
       "preis": 8.5,
       "zutaten": [
         "Hackfleischsoße",
         "Sahne",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 25,
       "name": "Tortellini Würges",
-      "beschreibung": "Mit Hackfleischsoße, Champignons, Schinken*, Sahne, Käse*",
+      "beschreibung": "Mit Hackfleischsoße, Champignons, Schinken*, Sahne, Käse überbacken",
       "preis": 9.0,
       "zutaten": [
         "Hackfleischsoße",
         "Champignons",
         "Schinken",
         "Sahne",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 26,
       "name": "Spaghetti Bolognese",
-      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse*",
+      "beschreibung": "Mit Hackfleischsoße (Rind), Sahne, Käse überbacken",
       "preis": 8.5,
       "zutaten": [
         "Hackfleischsoße",
         "Sahne",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 27,
       "name": "Spaghetti",
-      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse überbacken",
       "preis": 9.0,
       "zutaten": [
         "Tomaten",
@@ -419,13 +407,13 @@
         "Sahne",
         "Erbsen",
         "Schinken",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
       "nummer": 28,
       "name": "Tagliatelle",
-      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse*",
+      "beschreibung": "Mit Tomaten, Champignons, Sahne, Erbsen, Schinken*, Käse überbacken",
       "preis": 9.0,
       "zutaten": [
         "Tomaten",
@@ -433,7 +421,7 @@
         "Sahne",
         "Erbsen",
         "Schinken",
-        "Käse"
+        "Käse überbacken"
       ]
     }
   ],
@@ -457,9 +445,9 @@
         "beschreibung": "Mit Shrimps und Tomaten-Sahnesoße",
         "preis": 9.0,
         "zutaten": [
-          "Shrimps",
           "Tomatensoße",
-          "Sahne"
+          "Sahne",
+          "Shrimps"
         ]
       },
       {
@@ -468,10 +456,10 @@
         "beschreibung": "Mit Hähnchen, Champignons und Tomaten-Sahnesoße",
         "preis": 9.0,
         "zutaten": [
-          "Hähnchen",
-          "Champignons",
           "Tomatensoße",
-          "Sahne"
+          "Sahne",
+          "Hähnchen",
+          "Champignons"
         ]
       },
       {
@@ -489,8 +477,8 @@
         "beschreibung": "Mit Schinken*, Sahnesoße",
         "preis": 8.5,
         "zutaten": [
-          "Schinken",
-          "Sahnesoße"
+          "Sahnesoße",
+          "Schinken"
         ]
       },
       {
@@ -499,10 +487,10 @@
         "beschreibung": "Mit Erbsen, Champignons, Schinken*, Tomatensoße",
         "preis": 8.5,
         "zutaten": [
+          "Tomatensoße",
           "Erbsen",
           "Champignons",
-          "Schinken",
-          "Tomatensoße"
+          "Schinken"
         ]
       },
       {
@@ -511,7 +499,7 @@
         "beschreibung": "Mit Gorgonzolasoße",
         "preis": 8.5,
         "zutaten": [
-          "Sahne",
+          "Sahnesoße",
           "Gorgonzola"
         ]
       },
@@ -521,10 +509,10 @@
         "beschreibung": "Mit frischem Lachs, Zwiebeln, Tomaten-Sahnesoße",
         "preis": 9.5,
         "zutaten": [
-          "Frischem lachs",
-          "Zwiebeln",
           "Tomatensoße",
-          "Sahne"
+          "Sahne",
+          "Lachs",
+          "Zwiebeln"
         ]
       },
       {
@@ -533,9 +521,9 @@
         "beschreibung": "Mit 4 verschiedenen Käsesorten",
         "preis": 9.0,
         "zutaten": [
-          "Sahne",
+          "Sahnesoße",
           "Käse",
-          "Mozarella",
+          "Mozzarella",
           "Gorgonzola",
           "Schafskäse"
         ]
@@ -546,21 +534,21 @@
         "beschreibung": "Mit Hackfleisch, Champignons, Schinken*, Sahne",
         "preis": 8.5,
         "zutaten": [
-          "Hackfleisch",
+          "Hackfleischsoße",
+          "Sahne",
           "Champignons",
-          "Schinken",
-          "Sahne"
+          "Schinken"
         ]
       },
       {
         "nummer": 44,
-        "name": "Rigatoni Broccoli",
-        "beschreibung": "Mit Schinken*, Broccoli, Sahnesoße",
+        "name": "Rigatoni Brokkoli",
+        "beschreibung": "Mit Schinken*, Brokkoli, Sahnesoße",
         "preis": 8.5,
         "zutaten": [
+          "Sahnesoße",
           "Schinken",
-          "Broccoli",
-          "Sahnesoße"
+          "Brokkoli"
         ]
       }
     ],
@@ -571,8 +559,8 @@
         "beschreibung": "Mit Schinken* und Sahnesoße",
         "preis": 8.5,
         "zutaten": [
-          "Schinken",
-          "Sahnesoße"
+          "Sahnesoße",
+          "Schinken"
         ]
       },
       {
@@ -581,22 +569,22 @@
         "beschreibung": "Mit frischem Lauch, Paprika, Zwiebeln, Champignons, Tomaten, Sahne",
         "preis": 8.5,
         "zutaten": [
-          "Frischem lauch",
+          "Tomatensoße",
+          "Sahne",
+          "Frischem Lauch",
           "Paprika",
           "Zwiebeln",
-          "Champignons",
-          "Tomaten",
-          "Sahne"
+          "Champignons"
         ]
       },
       {
         "nummer": 47,
         "name": "Tortellini* Gorgonzola",
-        "beschreibung": "Mit Gorgonzolakäse und Sahnesoße",
+        "beschreibung": "Mit Gorgonzola und Sahnesoße",
         "preis": 8.5,
         "zutaten": [
-          "Gorgonzolakäse",
-          "Sahnesoße"
+          "Sahnesoße",
+          "Gorgonzola"
         ]
       },
       {
@@ -605,9 +593,9 @@
         "beschreibung": "Mit Schinken*, Tomaten-Sahnesoße, Champignons, Erbsen",
         "preis": 8.5,
         "zutaten": [
-          "Schinken",
           "Tomatensoße",
           "Sahne",
+          "Schinken",
           "Champignons",
           "Erbsen"
         ]
@@ -629,22 +617,22 @@
         "beschreibung": "Mit Schinken*, Champignons, Tomaten-Sahnesoße",
         "preis": 8.5,
         "zutaten": [
-          "Schinken",
-          "Champignons",
           "Tomatensoße",
-          "Sahne"
+          "Sahne",
+          "Schinken",
+          "Champignons"
         ]
       },
       {
         "nummer": 51,
         "name": "Tagliatelle Salmone",
-        "beschreibung": "Mit frischem Lachsfilet, Tomaten, Zwiebeln, Sahnesoße",
+        "beschreibung": "Mit frischem Lachsfilet, Tomaten-Sahnesoße, Zwiebeln",
         "preis": 9.5,
         "zutaten": [
-          "Frischem lachsfilet",
-          "Tomaten",
-          "Zwiebeln",
-          "Sahnesoße"
+          "Tomatensoße",
+          "Sahne",
+          "Lachs",
+          "Zwiebeln"
         ]
       }
     ],
@@ -671,34 +659,34 @@
       {
         "nummer": 402,
         "name": "Gnocchi Sorrentino",
-        "beschreibung": "Mit Tomatensoße, Basilikum, Mozzarella, Sahnesoße",
+        "beschreibung": "Mit Tomaten-Sahnesoße, Basilikum, Mozzarella",
         "preis": 8.5,
         "zutaten": [
           "Tomatensoße",
+          "Sahne",
           "Basilikum",
-          "Mozzarella",
-          "Sahnesoße"
+          "Mozzarella"
         ]
       },
       {
         "nummer": 403,
         "name": "Gnocchi Gorgonzola",
-        "beschreibung": "Mit Sahne, Gorgonzolakäse",
+        "beschreibung": "Mit Sahne, Gorgonzola",
         "preis": 9.0,
         "zutaten": [
-          "Sahne",
-          "Gorgonzolakäse"
+          "Sahnesoße",
+          "Gorgonzola"
         ]
       },
       {
         "nummer": 404,
         "name": "Gnocchi Atlanta",
-        "beschreibung": "Mit Tomatensoße, Spinat und Gorgonzolakäse*",
+        "beschreibung": "Mit Tomatensoße, Spinat und Gorgonzola",
         "preis": 9.5,
         "zutaten": [
           "Tomatensoße",
           "Spinat",
-          "Gorgonzolakäse"
+          "Gorgonzola"
         ]
       }
     ]
@@ -1015,7 +1003,7 @@
     {
       "nummer": 70,
       "name": "Pizza Vegetarisch",
-      "beschreibung": "Mit Champignons, Oliven*, Broccoli, Paprika, Artischocken, Zwiebeln",
+      "beschreibung": "Mit Champignons, Oliven*, Brokkoli, Paprika, Artischocken, Zwiebeln",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
@@ -1024,7 +1012,7 @@
         "Tomatensoße",
         "Champignons",
         "Oliven",
-        "Broccoli",
+        "Brokkoli",
         "Paprika",
         "Artischocken",
         "Zwiebeln",
@@ -1034,7 +1022,7 @@
     {
       "nummer": 71,
       "name": "Pizza Quattro Formaggi",
-      "beschreibung": "Mit Gorgonzola, Parmesan, Mozzarella, Gouda",
+      "beschreibung": "Mit Gorgonzola, Parmesan, Mozzarella, Käse",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
@@ -1044,7 +1032,6 @@
         "Gorgonzola",
         "Parmesan",
         "Mozzarella",
-        "Gouda",
         "Käse"
       ]
     },
@@ -1116,13 +1103,13 @@
     {
       "nummer": 76,
       "name": "Pizza Barbeque",
-      "beschreibung": "Mit Barbequesoße, Peperoniwurst*, Zwiebeln, Hackfleisch",
+      "beschreibung": "Mit Barbecuesoße, Peperoniwurst*, Zwiebeln, Hackfleisch",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
       },
       "zutaten": [
-        "Barbequesoße",
+        "Barbecuesoße",
         "Peperoniwurst",
         "Zwiebeln",
         "Hackfleisch",
@@ -1156,7 +1143,7 @@
       },
       "zutaten": [
         "Tomatensoße",
-        "Frischem spinat",
+        "Spinat",
         "Zwiebeln",
         "Champignons",
         "Mozzarella",
@@ -1167,16 +1154,16 @@
     {
       "nummer": 410,
       "name": "Pizza Chef",
-      "beschreibung": "Mit Hähnchenbrust, Zwiebeln, Chillisauce, Mozzarella",
+      "beschreibung": "Mit Hähnchenbrust, Zwiebeln, Chilisauce, Mozzarella",
       "preis": {
         "30cm": 10.0,
         "40cm": 18.5
       },
       "zutaten": [
         "Tomatensoße",
-        "Hähnchenbrust",
+        "Hähnchen",
         "Zwiebeln",
-        "Chillisauce",
+        "Chilisauce",
         "Mozzarella",
         "Käse"
       ]
@@ -1234,14 +1221,14 @@
     {
       "nummer": 414,
       "name": "Pizza Orient (Halal)",
-      "beschreibung": "Mit türkischer Wurst, Peperoni, Zwiebeln, Champignons, Knoblauch, scharf",
+      "beschreibung": "Mit Sucuk, Peperoni, Zwiebeln, Champignons, Knoblauch, scharf",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
       },
       "zutaten": [
         "Tomatensoße",
-        "Türkischer wurst",
+        "Sucuk",
         "Peperoni",
         "Zwiebeln",
         "Champignons",
@@ -1261,7 +1248,6 @@
       "zutaten": [
         "Currysoße",
         "Hähnchen",
-        "Ingwer",
         "Zwiebeln",
         "Paprika",
         "Knoblauch",
@@ -1279,7 +1265,7 @@
       },
       "zutaten": [
         "Tomatensoße",
-        "Bolognese",
+        "Hackfleischsoße",
         "Spaghetti",
         "Käse"
       ]
@@ -1287,44 +1273,44 @@
     {
       "nummer": 417,
       "name": "Pizza Hollandaise",
-      "beschreibung": "Mit Schinken*, Zwiebeln, Mozarella",
+      "beschreibung": "Mit Schinken*, Zwiebeln, Mozzarella",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
       },
       "zutaten": [
-        "Hollandaisesoße",
+        "Sauce Hollandaise",
         "Schinken",
         "Zwiebeln",
-        "Mozarella",
+        "Mozzarella",
         "Käse"
       ]
     },
     {
       "nummer": 418,
       "name": "Pizza Hähnchen",
-      "beschreibung": "Mit Hähnchenfleisch, Hollandaisesauce, Mozarella",
+      "beschreibung": "Mit Hähnchenfleisch, Sauce Hollandaise, Mozzarella",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
       },
       "zutaten": [
-        "Hollandaisesoße",
+        "Sauce Hollandaise",
         "Hähnchen",
-        "Mozarella",
+        "Mozzarella",
         "Käse"
       ]
     },
     {
       "nummer": 419,
-      "name": "Pizza Broccoli",
-      "beschreibung": "Mit Hollandaisesauce, Brokkoli, Sucuk, Jalapeño",
+      "name": "Pizza Brokkoli",
+      "beschreibung": "Mit Sauce Hollandaise, Brokkoli, Sucuk, Jalapeño",
       "preis": {
         "30cm": 9.5,
         "40cm": 18.0
       },
       "zutaten": [
-        "Hollandaisesoße",
+        "Sauce Hollandaise",
         "Brokkoli",
         "Sucuk",
         "Jalapeño",
@@ -1352,7 +1338,7 @@
     {
       "nummer": 421,
       "name": "Pizza Rucola Prociutto",
-      "beschreibung": "Mit Kirschtomaten, Schinken*, Rucola, Parmesan, Mozarella",
+      "beschreibung": "Mit Kirschtomaten, Schinken*, Rucola, Parmesan, Mozzarella",
       "preis": {
         "30cm": 9.5,
         "40cm": 18.0
@@ -1363,20 +1349,20 @@
         "Schinken",
         "Rucola",
         "Parmesan",
-        "Mozarella",
+        "Mozzarella",
         "Käse"
       ]
     },
     {
       "nummer": 422,
       "name": "Pizza Chicken BBQ",
-      "beschreibung": "Mit BBQ-Soße, Hähnchen, Mais, Rote Zwiebeln",
+      "beschreibung": "Mit Barbecuesoße, Hähnchen, Mais, Rote Zwiebeln",
       "preis": {
         "30cm": 9.0,
         "40cm": 17.5
       },
       "zutaten": [
-        "Barbequesoße",
+        "Barbecuesoße",
         "Hähnchen",
         "Mais",
         "Rote Zwiebeln",
@@ -1392,8 +1378,9 @@
       "preis": 10.5,
       "zutaten": [
         "Schweinefleisch",
-        "Pommes frites",
-        "Salat"
+        "Pommes",
+        "Salat",
+        "Zitrone"
       ]
     },
     {
@@ -1403,7 +1390,7 @@
       "preis": 11.5,
       "zutaten": [
         "Schweinefleisch",
-        "Scharfer currysoße",
+        "Currysoße",
         "Reis",
         "Salat"
       ]
@@ -1411,11 +1398,11 @@
     {
       "nummer": "80b",
       "name": "Schnitzel Hollandaise",
-      "beschreibung": "Mit Hollandaisesauce, Käse* überbacken, Salzkartoffeln, Salat",
+      "beschreibung": "Mit Sauce Hollandaise, Käse* überbacken, Salzkartoffeln, Salat",
       "preis": 12.5,
       "zutaten": [
         "Schweinefleisch",
-        "Hollandaisesauce",
+        "Sauce Hollandaise",
         "Käse überbacken",
         "Salzkartoffeln",
         "Salat"
@@ -1423,12 +1410,12 @@
     },
     {
       "nummer": "80c",
-      "name": "Schnitzel Broccoli & Hollandaise",
-      "beschreibung": "Mit Hollandaisesauce, Käse* überbacken, Salzkartoffeln, Salat",
+      "name": "Schnitzel Brokkoli & Hollandaise",
+      "beschreibung": "Mit Sauce Hollandaise, Käse* überbacken, Salzkartoffeln, Salat",
       "preis": 13.5,
       "zutaten": [
         "Schweinefleisch",
-        "Hollandaisesauce",
+        "Sauce Hollandaise",
         "Käse überbacken",
         "Salzkartoffeln",
         "Salat"
@@ -1442,7 +1429,7 @@
       "zutaten": [
         "Schweinefleisch",
         "Jägersoße",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ]
     },
@@ -1461,12 +1448,14 @@
     {
       "nummer": 83,
       "name": "Hawaii Schnitzel",
-      "beschreibung": "Mit Ananas, Käse*",
+      "beschreibung": "Mit Rahmsoße, Reis, Salat, Ananas, Käse* überbacken",
       "preis": 11.5,
       "zutaten": [
         "Schweinefleisch",
+        "Reis",
+        "Salat",
         "Ananas",
-        "Käse"
+        "Käse überbacken"
       ]
     },
     {
@@ -1489,8 +1478,9 @@
       "preis": 11.5,
       "zutaten": [
         "Putenfleisch",
-        "Pommes frites",
-        "Salat"
+        "Pommes",
+        "Salat",
+        "Zitrone"
       ]
     },
     {
@@ -1515,19 +1505,19 @@
       "zutaten": [
         "Schweinefleisch",
         "pikante soße",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ]
     },
     {
       "nummer": 87,
       "name": "Zwiebelschnitzel",
-      "beschreibung": "Mit Zwiebeln, Pommes Frites und Salat",
+      "beschreibung": "Mit Röstzwiebeln, Pommes Frites und Salat",
       "preis": 11.5,
       "zutaten": [
         "Schweinefleisch",
-        "Zwiebeln",
-        "Pommes frites",
+        "Röstzwiebeln",
+        "Pommes",
         "Salat"
       ]
     },
@@ -1550,9 +1540,9 @@
       "name": "Hähnchenbrustfilet gegrillt",
       "beschreibung": "Mit Champignonsoße, Pommes und Salat",
       "zutaten": [
-        "Hähnchenfleisch",
+        "Hähnchenbrust",
         "Jägersoße",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ],
       "preis": 15.50
@@ -1562,7 +1552,10 @@
       "name": "Hähnchenbrust (gegrillt)",
       "beschreibung": "Mit Schinken*, Käse*, Röstzwiebeln, Kroketten, Salat",
       "zutaten": [
-        "Hähnchenfleisch",
+        "Hähnchenbrust",
+        "Röstzwiebeln",
+        "Schinken",
+        "Käse",
         "Kroketten",
         "Salat"
       ],
@@ -1576,7 +1569,7 @@
         "Putensteak",
         "Hacksteak",
         "Rindersteak",
-        "Pommes frites",
+        "Pommes",
         "Salat",
         "Tzaziki",
         "Kräuterbutter"
@@ -1613,9 +1606,9 @@
       "name": "Hähnchenmedaillons",
       "beschreibung": "Gebraten, frische Champignons, Sahne, Reis und Salat",
       "zutaten": [
-        "Hähnchenfleisch",
+        "Hähnchenbrust",
         "Champignons",
-        "Sahne",
+        "Sahnesoße",
         "Reis",
         "Salat"
       ],
@@ -1626,10 +1619,10 @@
       "name": "Hähnchenmedaillons",
       "beschreibung": "Mit Ananas, Sherry-Cognac-Soße, Reis und Salat",
       "zutaten": [
-        "Hähnchenfleisch",
+        "Hähnchenbrust",
         "Ananas",
         "Cognac",
-        "Sahne",
+        "Sahnesoße",
         "Reis",
         "Salat"
       ],
@@ -1640,7 +1633,7 @@
       "name": "Pikantiko",
       "beschreibung": "Hähnchenbrustfilet-Spieß mit Paprika, Zwiebeln, Peperoni, gegrillt mit Pikanta-Soße, dazu Reis und Salat",
       "zutaten": [
-        "Hähnchenfleisch",
+        "Hähnchenbrust",
         "Paprika",
         "Zwiebeln",
         "Peperoni",
@@ -1659,7 +1652,7 @@
         "Schinken",
         "Käse",
         "Röstzwiebeln",
-        "gegrillte Tomate",
+        "Tomaten",
         "Pommes",
         "Salat"
       ],
@@ -1674,7 +1667,7 @@
         "Hacksteak",
         "Rindersteak",
         "Putensteak",
-        "Pommes frites",
+        "Pommes",
         "Reis",
         "Salat",
         "Gemüse",
@@ -1720,7 +1713,7 @@
         "Hacksteak",
         "Rindersteak",
         "Putensteak",
-        "Pommes frites",
+        "Pommes",
         "Salat",
         "Tzaziki",
         "Kräuterbutter"
@@ -1735,9 +1728,9 @@
       "beschreibung": "Mit Kräuterbutter, Pommes Frites und Salat",
       "zutaten": [
         "Hüftsteak",
-        "Kräuterbutter",
-        "Pommes frites",
-        "Salat"
+        "Pommes",
+        "Salat",
+        "Kräuterbutter"
       ],
       "preis": 16.00
     },
@@ -1747,9 +1740,9 @@
       "beschreibung": "Mit Kräuterbutter, Folienkartoffeln und Salat",
       "zutaten": [
         "Hüftsteak",
-        "Kräuterbutter",
         "Folienkartoffeln",
-        "Salat"
+        "Salat",
+        "Kräuterbutter"
       ],
       "preis": 18.50
     },
@@ -1771,9 +1764,9 @@
       "beschreibung": "Mit Kräuterbutter, Pommes Frites und Salat",
       "zutaten": [
         "Rumpsteak",
-        "Kräuterbutter",
-        "Pommes frites",
-        "Salat"
+        "Pommes",
+        "Salat",
+        "Kräuterbutter"
       ],
       "preis": 18.50
     },
@@ -1783,9 +1776,9 @@
       "beschreibung": "Saftiges Rinderrückensteak mit leichtem Fettrand vom Grill, mit Kräuterbutter, Folienkartoffeln und Salat",
       "zutaten": [
         "Rumpsteak",
-        "Kräuterbutter",
         "Folienkartoffeln",
-        "Salat"
+        "Salat",
+        "Kräuterbutter"
       ],
       "preis": 21.50
     },
@@ -1796,7 +1789,7 @@
       "zutaten": [
         "Rumpsteak",
         "Röstzwiebeln",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ],
       "preis": 20.00
@@ -1807,9 +1800,9 @@
       "beschreibung": "Mit Kräuterbutter, Kroketten und Salat",
       "zutaten": [
         "Entrecote",
-        "Kräuterbutter",
         "Kroketten",
-        "Salat"
+        "Salat",
+        "Kräuterbutter"
       ],
       "preis": 23.50
     },
@@ -1820,7 +1813,7 @@
       "zutaten": [
         "Rumpsteak",
         "Pfeffer-Rahmsoße",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ],
       "preis": 23.50
@@ -1828,12 +1821,12 @@
     {
       "nummer": 111,
       "name": "Argentinischer Spieß",
-      "beschreibung": "Saftige Fleischstücke, Zwiebeln, Paprika, delikat-scharfer Soße, dazu Folienkartoffeln und Salat",
+      "beschreibung": "Saftige Fleischstücke, Zwiebeln, Paprika, pikante Soße, dazu Folienkartoffeln und Salat",
       "zutaten": [
-        "Fleischspieß",
+        "Rumpsteak",
         "Zwiebeln",
         "Paprika",
-        "Scharfe Soße",
+        "pikante Soße",
         "Folienkartoffeln",
         "Salat"
       ],
@@ -1848,7 +1841,7 @@
       "zutaten": [
         "Schollenfilet",
         "Remouladensauce",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ],
       "preis": 11.50
@@ -1885,7 +1878,7 @@
       "zutaten": [
         "Calamaris",
         "Knoblauchsoße",
-        "Pommes frites",
+        "Pommes",
         "Salat"
       ],
       "preis": 11.50
@@ -1897,7 +1890,7 @@
       "name": "Chicken Curry",
       "beschreibung": "Zartes Hühnerfilet in Currysoße mit frischen Gewürzen, Basmati Reis und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
+        "Hähnchen",
         "Currysoße",
         "Reis",
         "Salat"
@@ -1909,10 +1902,9 @@
       "name": "Chicken Chilli Masala (scharf)",
       "beschreibung": "Hähnchenbrustfilet gebraten mit Knoblauch und Cognac, Ingwer, Zwiebeln, Paprika, frischen Gewürzen, Basmati Reis und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
+        "Hähnchen",
+        "Currysoße",
         "Knoblauch",
-        "Cognac",
-        "Ingwer",
         "Zwiebeln",
         "Paprika",
         "Reis",
@@ -1925,8 +1917,8 @@
       "name": "Chicken Saag",
       "beschreibung": "Hähnchenbrustfilet mit frischen Gewürzen, Blattspinat, Kokosnuss-Sahnesoße, Basmati Reis und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
-        "Blattspinat",
+        "Hähnchen",
+        "Spinat",
         "Kokosnuss-Sahnesoße",
         "Reis",
         "Salat"
@@ -1938,7 +1930,7 @@
       "name": "Chicken Biryani",
       "beschreibung": "Gebratener Reis, mit Paprika, Hähnchenfilet und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
+        "Hähnchen",
         "Reis",
         "Paprika",
         "Salat"
@@ -1948,10 +1940,10 @@
     {
       "nummer": 154,
       "name": "Chicken Korma",
-      "beschreibung": "Hähnchenfilet in Kokosnuss-Joghurt-Sahnesoße, Wodka, mit geriebenen Mandeln, Basmati Reis, Chilisauce und Salat",
+      "beschreibung": "Hähnchenfilet in Kokosnuss-Sahnesoße, Wodka, mit geriebenen Mandeln, Basmati Reis, Chilisauce und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
-        "Kokosnuss-Joghurt-Sahnesoße",
+        "Hähnchen",
+        "Kokosnuss-Sahnesoße",
         "Wodka",
         "Mandeln",
         "Reis",
@@ -1965,7 +1957,7 @@
       "name": "Chicken Malai",
       "beschreibung": "Hähnchenfilet in Sahnecremesoße, Reis, Salat, Mandeln-Wodka",
       "zutaten": [
-        "Hähnchenbrustfilet",
+        "Hähnchen",
         "Sahnecremesoße",
         "Mandeln",
         "Wodka",
@@ -1977,10 +1969,10 @@
     {
       "nummer": 156,
       "name": "Chicken Shahi",
-      "beschreibung": "Hähnchenbrustfilet mit frischen Gewürzen, Broccoli, Tomaten-Sahnesoße, Basmati Reis und Salat",
+      "beschreibung": "Hähnchenbrustfilet mit frischen Gewürzen, Brokkoli, Tomaten-Sahnesoße, Basmati Reis und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
-        "Broccoli",
+        "Hähnchen",
+        "Brokkoli",
         "Tomaten-Sahnesoße",
         "Masala-Gewürze",
         "Reis",
@@ -1993,8 +1985,8 @@
       "name": "Saag Panier Spinat",
       "beschreibung": "Blattspinat mit Frischkäse, Sahne, exotischen Gewürzen, gebratenem Basmati Reis und Salat",
       "zutaten": [
-        "Blattspinat",
-        "Paneer",
+        "Spinat",
+        "Panierkäse",
         "Sahne",
         "Masala-Gewürze",
         "Reis",
@@ -2008,7 +2000,7 @@
       "beschreibung": "Erbsen, mit Frischkäse, frischen Gewürzen, Currysoße, dazu Basmati Reis und Salat",
       "zutaten": [
         "Erbsen",
-        "Paneer",
+        "Panierkäse",
         "Currysoße",
         "Masala-Gewürze",
         "Reis",
@@ -2021,7 +2013,7 @@
       "name": "Chicken Hawaii",
       "beschreibung": "Hähnchenbrustfilet mit frischen Indischen Gewürzen, Knoblauch, Ananas, Wodka-Curry-Sahnesoße, Basmati Reis und Salat",
       "zutaten": [
-        "Hähnchenbrustfilet",
+        "Hähnchen",
         "Knoblauch",
         "Ananas",
         "Wodka-Curry-Sahnesoße",
@@ -2069,13 +2061,13 @@
       "beschreibung": "Lammfleisch, Spinat, Knoblauch, Ingwer, Zwiebeln, Tomaten Creme Fraiche und Wodkasoße, dazu Basmati Reis und Salat",
       "zutaten": [
         "Lammfleisch",
-        "Blattspinat",
+        "Spinat",
         "Knoblauch",
         "Ingwer",
         "Zwiebeln",
         "Tomaten",
         "Creme Fraiche",
-        "Wodkasoße",
+        "Wodka",
         "Reis",
         "Salat"
       ],
@@ -2084,10 +2076,10 @@
     {
       "nummer": 170,
       "name": "Schlemmer Topf überbacken",
-      "beschreibung": "Hähnchenfleisch mit Broccoli, Blumenkohl, Kartoffeln, Pilze*, Tomaten, Sahne und Käse* überbacken",
+      "beschreibung": "Hähnchenfleisch mit Brokkoli, Blumenkohl, Kartoffeln, Pilze*, Tomaten, Sahne und Käse* überbacken",
       "zutaten": [
-        "Hähnchenfleisch",
-        "Broccoli",
+        "Hähnchen",
+        "Brokkoli",
         "Blumenkohl",
         "Kartoffeln",
         "Pilze",
@@ -2103,7 +2095,7 @@
       "beschreibung": "Kartoffeln und Spinat Spezialitäten nach indischer Art, dazu Basmati Reis und Salat",
       "zutaten": [
         "Kartoffeln",
-        "Blattspinat",
+        "Spinat",
         "Masala-Gewürze",
         "Reis",
         "Salat"

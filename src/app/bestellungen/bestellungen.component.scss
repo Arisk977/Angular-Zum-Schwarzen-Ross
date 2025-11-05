@@ -5,10 +5,15 @@ main {
   gap: 64px;
   padding-top: 64px;
   width: 100%;
-  min-height: 100vh;
+  min-height: calc(100vh - 80px);
 }
 
-/* Container aller Bestellungen */
+h1{
+  color: rgb(160, 0, 0);
+  font-weight: 700;
+  filter: drop-shadow(1px 5px 5px rgba(0, 0, 0, 0.336));
+}
+
 .order-content {
   display: flex;
   flex-direction: column;
@@ -16,28 +21,28 @@ main {
   justify-content: flex-start;
   width: 80%;
   height: 400px;
-  background-color: #fff;
+  background-color: #f7f7f7;
   border: 1px solid rgba(0, 0, 0, 0.37);
   box-shadow: 1px 4px 10px rgba(0, 0, 0, 0.31);
   border-radius: 10px;
-  padding: 0;
-  overflow-y: auto; // aktiviert Scrollbalken bei Bedarf
+  padding: 0 2px 0 0;
+  overflow-y: auto;
   scroll-behavior: smooth;
 
-  /* ───────────── Scrollbar Styling (Chromium, Edge, Safari) ───────────── */
   &::-webkit-scrollbar {
     width: 10px;
   }
 
   &::-webkit-scrollbar-track {
-    background: #f1f1f1;
-    border-radius: 10px;
+    background: transparent;
+    margin: 6px;
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(160, 0, 0, 0.5); // leicht rot
+    background-color: rgba(160, 0, 0, 0.5);
     border-radius: 10px;
-    border: 2px solid #f1f1f1;
+    border: 2px solid transparent;
+    background-clip: content-box;
     transition: background-color 0.2s ease;
   }
 
@@ -45,24 +50,20 @@ main {
     background-color: rgba(160, 0, 0, 0.8);
   }
 
-  /* ───────────── Scrollbar Styling (Firefox) ───────────── */
   scrollbar-width: thin;
-  scrollbar-color: rgba(160, 0, 0, 0.6) #f1f1f1;
+  scrollbar-color: rgba(160, 0, 0, 0.6) transparent;
 }
 
 
-/* Wenn keine Bestellungen existieren */
 .order-content:has(.no-orders) {
   justify-content: center;
 }
 
-/* Bei Bestellungen → oben ausgerichtet */
 .order-content:has(app-order-item) {
   justify-content: flex-start;
   align-items: stretch;
 }
 
-/* ───────────── Keine Bestellungen ───────────── */
 .no-orders {
   display: flex;
   flex-direction: column;
@@ -94,39 +95,33 @@ main {
   }
 }
 
-/* ───────────── Bestellkarten-Liste ───────────── */
 app-order-item {
   width: 100%;
   margin: 0;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
-/* erste Bestellung – obere Rundung */
 app-order-item:first-child {
   border-radius: 10px 10px 0 0;
 }
 
-/* letzte Bestellung – keine Linie unten, untere Rundung */
 app-order-item:last-child {
   border-bottom: none;
   border-radius: 0 0 10px 10px;
 }
 
-/* Wechselnde Hintergrundfarben */
 app-order-item:nth-child(odd) {
-  background-color: #f7f7f7; /* hellgrau */
+  background-color: #f7f7f7;
 }
 
 app-order-item:nth-child(even) {
-  background-color: #ffffff; /* weiß */
+  background-color: #ffffff;
 }
 
-/* optional leichter Hover */
 app-order-item:hover {
   background-color: #f0f0f0;
 }
 
-/* Utility */
 .d_none {
   display: none !important;
 }
