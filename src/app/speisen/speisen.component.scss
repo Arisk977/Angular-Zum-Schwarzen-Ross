@@ -30,8 +30,18 @@ h1 {
     }
 }
 
+.meals-container{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 .meals {
     width: 100%;
+    padding-left: 5%;
+    padding-right: 5%;
+    max-width: 1920px;
     display: flex;
     flex-wrap: wrap;
     align-items: center;

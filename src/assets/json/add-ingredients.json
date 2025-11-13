@@ -34,29 +34,29 @@
   },
   "Schnitzelgerichte":{ "default":[
     "Putenfleisch",
-    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten", 
     "Gebratene Zwiebeln", "Käse überbacken", "Schinken"
   ],
   "Putenschnitzel Pizzaiola":[
     "Schweinefleisch",
-    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten", 
     "Gebratene Zwiebeln", "Käse überbacken", "Schinken"
   ],
   "Schnitzel paniert (Wiener Art)":[
-    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten"
+    "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten"
   ]
 },
   "Unsere Spezialitäten": [
    "Putenfleisch", "Schweinefleisch",
-   "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+   "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten", 
    "Gebratene Zwiebeln"
   ],
   "Argentinische Rindersteaks": [
-    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten", 
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten", 
     "Gebratene Zwiebeln", "gebratene Pilze"
   ],
   "Fischgerichte": [
-    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffel", "Reis", "Kroketten"
+    "Pommes", "Folienkartoffeln", "Salzkartoffeln", "Bratkartoffeln", "Reis", "Kroketten"
   ],
   "Indische & Pakistanische Spezialitäten":{
     "default": ["Hähnchen", "Panier Käse", "Erbsen", "Kartoffel", "Spinat", "Mandeln", "Kokusmilch", "scharfe Peperoni"

@@ -36,6 +36,7 @@ main {
     height: 80px;
     background-color: rgba(0, 0, 0, 0.4);
     display: flex;
+    justify-content: center;
     align-items: center;
 }
 
@@ -43,8 +44,10 @@ main {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    width: 90%;
+    width: 100%;
+    max-width: 1920px;
     padding-left: 5%;
+    padding-right: 5%;
 }
 
 .user-avatar {

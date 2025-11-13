@@ -28,8 +28,7 @@
       "name": "Schafskäse paniert",
       "beschreibung": "mit paniertem Schafskäse",
       "preis": 6.0,
-      "zutaten": [
-      ]
+      "zutaten": []
     },
     {
       "nummer": 10,
@@ -2118,38 +2117,84 @@
   "Dessert & Extras": {
     "Dessert": [
       {
+        "nummer": "206",
         "name": "Hausgemachtes Tiramisu",
+        "beschreibung": "ohne Alkohol",
         "preis": 6.00
       }
     ],
     "Extras": [
       {
-        "name": "Pommes Frites, Kroketten, Reis",
+        "name": "Pommes Frites",
         "preis": 3.50
       },
       {
-        "name": "Bratkartoffeln, Salzkartoffeln",
+        "name": "Reis",
+        "preis": 3.50
+      },
+      {
+        "name": "Kroketten",
+        "preis": 3.50
+      },
+      {
+        "name": "Bratkartoffeln",
         "preis": 5.00
       },
       {
-        "name": "Folienkartoffeln mit Sour Cream",
+        "name": "Salzkartoffeln",
+        "preis": 5.00
+      },
+      {
+        "name": "Folienkartoffeln",
+        "beschreibung": "mit Sour Cream",
         "preis": 5.50
       }
     ]
   },
-  "Getränke": [
+  "Getränke":{
+    "Alkoholfreie Getränke":[
     {
       "name": "Mineralwasser",
       "beschreibung": "0,7l mit Pfand",
       "preis": 2.50
     },
     {
-      "name": "Coca Cola, Cola light, Fanta, Sprite",
+      "name": "Coca Cola",
       "beschreibung": "1,0l mit Pfand",
       "preis": 3.50
     },
     {
-      "name": "Orangensaft, Apfelsaft",
+      "name": "Cola Light",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Fanta",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Sprite",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Cola Zero",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Mezzo Mix",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 3.50
+    },
+    {
+      "name": "Apfelsaft",
+      "beschreibung": "1,0l mit Pfand",
+      "preis": 4.50
+    },
+    {
+      "name": "Orangensaft",
       "beschreibung": "1,0l mit Pfand",
       "preis": 4.50
     }
@@ -2166,16 +2211,43 @@
       "preis": 3.00
     },
     {
-      "name": "Schöfferhofer Hefeweizen (Hell, Dunkel, Kristall, alkoholfrei)",
+      "name": "Krombacher Hefeweizen",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 4.50
+    },
+    {
+      "name": "Krombacher Hefeweizen alkoholfrei",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 4.50
+    },
+    {
+      "name": "Schöfferhofer Dunkles Hefeweizen",
+      "beschreibung": "0,5l mit Pfand",
+      "preis": 4.50
+    },
+    {
+      "name": "Schöfferhofer Kristall Hefeweizen",
       "beschreibung": "0,5l mit Pfand",
       "preis": 4.50
     }
   ],
-  "Weine": [
+  "Weine":[
     {
-      "name": "Lambrusco, Chianti D.O.C, Rose, Pinot Grigio",
-      "beschreibung": "0,7l",
+      "name": "Lambrusco 0,7l",
+      "preis": 10.00
+    },{
+      "name": "Chianti 0,7l",
+    
+      "preis": 10.00
+    },{
+      "name": "Rose 0,7l",
+    
+      "preis": 10.00
+    },{
+      "name": "Pinot Grigio 0,7l",
+   
       "preis": 10.00
     }
   ]
+  } 
 }

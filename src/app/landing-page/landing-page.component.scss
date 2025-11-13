@@ -1,61 +1,103 @@
-.hero-container {
-  position: relative; /* wichtig für absolute Positionierung des Videos */
+main {
   width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #151515;
+}
+
+.hero-container {
+  position: relative;
+  width: 100%;
+  max-width: 1920px;
   min-height: 100vh;
-  background-color: rgba(0, 0, 0, 0.4);
+  padding-left: 5%;
+  padding-right: 5%;
   display: flex;
   align-items: center;
   justify-content: flex-start;
   overflow: hidden;
 }
 
-.background-clip {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* skaliert automatisch und behält Seitenverhältnis */
-  z-index: -1;
-}
-
-.slogan{
+.content-wrapper {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: 200px;
-
+  width: 100%;
 }
 
-h1{
-  padding-left: 96px;
+.slogan {
+  width: 100%;
+  height: calc(100vh - 80px);
+  display: flex;
+  flex-direction: column;
+  /* vertikale Anordnung */
+  justify-content: space-between;
+  /* verteilt oben - mitte - unten */
+  align-items: stretch;
+  padding: 40px 60px;
+  /* Abstand vom Rand */
+  z-index: 2;
+  pointer-events: none;
+  /* damit Klicks auf Video nicht blockiert werden */
+}
+
+
+h1 {
   color: white;
   font-size: 64px;
   font-family: 'Kalam', sans-serif;
   filter: drop-shadow(1px 4px 10px black);
 }
 
-.genuss{
-  padding-bottom: 180px;
+.genuss {
+  align-self: flex-start;
+  text-align: left;
+  width: 600px;
+  padding-top: 64px;
 }
 
-.welcome{
-  padding-top: 280px;
+
+.welcome {
+  align-self: flex-end;
+  text-align: right;
+  margin-top: -128px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+
+  >h1 {
+    width: 600px;
+  }
+
+  >.background-clip {
+    margin-top: -250px;
+    border-radius: 20px;
+    width: 550px;
+    box-shadow: 1px 1px 4px black;
+    object-fit: cover;
+    z-index: -1;
+  }
 }
 
-app-header{
+app-header {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
 }
 
-b{
+b {
   color: rgb(160, 0, 0);
 }
 
-.logo{
-  width: 250px;
-  margin: -200px;
-  filter: drop-shadow(1px 2px 4px white);
+.logo {
+  align-self: center;
+  text-align: center;
+  width: 350px;
+  filter: drop-shadow(1px 1px 4px rgba(255, 255, 255, 0.721));
+
+  img {
+    width: 100%;
+  }
 }

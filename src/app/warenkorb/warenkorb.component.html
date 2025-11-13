@@ -42,10 +42,12 @@
       </div>
 
       <div class="item-controls">
-        <button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">−</button>
+        <button class="remove" (click)="removeItem(item)">✕</button>
+        <div class="descrease-increase">
+          <button (click)="decreaseQuantity(item)" [disabled]="item.quantity <= 1">−</button>
         <span>{{ item.quantity }}</span>
         <button (click)="increaseQuantity(item)">+</button>
-        <button class="remove" (click)="removeItem(item)">✕</button>
+        </div>
       </div>
 
     </div>

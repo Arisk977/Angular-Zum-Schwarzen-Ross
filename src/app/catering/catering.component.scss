@@ -6,14 +6,26 @@ main {
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  background-color: rgb(36, 36, 36);
   color: white;
   padding-top: 72px;
 }
 
+.background-clip {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  filter: brightness(0.7) blur(2px);
+}
+
+
 h1 {
   font-size: 64px;
   color: rgb(180, 0, 0);
+  -webkit-text-stroke: 0.2px black;
   margin: 0;
   filter: drop-shadow(1px 4px 1px rgba(0, 0, 0, 0.4));
 }
@@ -39,6 +51,7 @@ h1 {
 
 .img {
   width: 100%;
+  border: 2px solid black;
   border-radius: 50px 10px;
   box-shadow: 1px 1px 5px rgba(255, 255, 255, 0.4);
 }
@@ -83,6 +96,10 @@ h1 {
 
 .text {
   width: 100%;
+  background-color: rgba(0, 0, 0, 0.258);
+  padding: 12px;
+  border: 1px solid black;
+  border-radius: 10px;
 }
 
 .button-container {
@@ -175,3 +192,4 @@ h1 {
     opacity: 1;
   }
 }
+

@@ -239,18 +239,25 @@
 }
 
 
+.descrease-increase{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
   .item-controls {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-
-    button {
-      margin: 0.2rem 0;
-    }
+    width: 100px;
 
     .remove {
       color: red;
       font-size: 1.2rem;
+      align-self: flex-end;
+      margin-bottom: 20px;
     }
   }
 }
