@@ -3,7 +3,7 @@ main {
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: #151515;
+  background-color: #000000;
 }
 
 .hero-container {
@@ -31,23 +31,20 @@ main {
   height: calc(100vh - 80px);
   display: flex;
   flex-direction: column;
-  /* vertikale Anordnung */
   justify-content: space-between;
-  /* verteilt oben - mitte - unten */
   align-items: stretch;
   padding: 40px 60px;
-  /* Abstand vom Rand */
   z-index: 2;
   pointer-events: none;
-  /* damit Klicks auf Video nicht blockiert werden */
+
 }
+
 
 
 h1 {
   color: white;
   font-size: 64px;
   font-family: 'Kalam', sans-serif;
-  filter: drop-shadow(1px 4px 10px black);
 }
 
 .genuss {
@@ -55,30 +52,54 @@ h1 {
   text-align: left;
   width: 600px;
   padding-top: 64px;
+
+  h1{
+    filter: drop-shadow(1px 1px 7px rgba(255, 255, 255, 0.519));
+  }
 }
 
 
 .welcome {
-  align-self: flex-end;
-  text-align: right;
+  width: 100%;
   margin-top: -128px;
   display: flex;
-  justify-content: space-between;
-  width: 100%;
+  justify-content: flex-end;   // nach rechts schieben
+  align-items: flex-end;        // nach unten schieben
+  height: 200px;                // oder ein anderer fester/relativer Wert
+  text-align: right;
+  pointer-events: none;
 
-  >h1 {
+  h1 {
     width: 600px;
-  }
-
-  >.background-clip {
-    margin-top: -250px;
-    border-radius: 20px;
-    width: 550px;
-    box-shadow: 1px 1px 4px black;
-    object-fit: cover;
-    z-index: -1;
+    filter: drop-shadow(1px 1px 7px rgba(255, 255, 255, 0.682));
   }
 }
+
+
+.background-clip {
+  position: absolute;
+  bottom: 0px;
+  left: 50px;
+  width: 40%;
+  object-fit: contain;
+  filter: brightness(0.8) contrast(1.2);
+  z-index: 2;  
+  pointer-events: none;
+}
+
+
+.hero-image {
+  position: absolute;
+  top: 180px;
+  right: 200px;
+  width: 550px;
+  filter: drop-shadow(1px 1px 20px rgba(255, 255, 255, 0.34));
+  object-fit: cover;
+  border-radius: 20px;
+  z-index: 1;
+  pointer-events: none;
+}
+
 
 app-header {
   position: absolute;
