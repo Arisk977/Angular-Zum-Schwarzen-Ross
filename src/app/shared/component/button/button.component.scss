@@ -12,8 +12,7 @@ button {
 
   &:hover {
     cursor: pointer;
-    background-color: rgb(220,0,0) !important;
-    filter: drop-shadow(0px 0px 0px black) !important;
+    filter:brightness(1.4) drop-shadow(0px 0px 0px black) !important;
     transform: translate(2px, 4px);
   }
 }

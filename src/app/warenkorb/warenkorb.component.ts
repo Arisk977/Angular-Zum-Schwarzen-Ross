@@ -5,10 +5,11 @@ import { CartService } from './../shared/services/cart.service';
 import { Observable } from 'rxjs';
 import { FormsModule } from '@angular/forms';
 import { CartItem } from 'app/interfaces/cart-item.interface';
+import { ButtonComponent } from 'app/shared/component/button/button.component';
 
 @Component({
   selector: 'app-warenkorb',
-  imports: [CommonModule, FormsModule, RouterModule],
+  imports: [CommonModule, FormsModule, RouterModule, ButtonComponent],
   templateUrl: './warenkorb.component.html',
   styleUrl: './warenkorb.component.scss'
 })

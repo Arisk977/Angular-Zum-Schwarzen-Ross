@@ -59,13 +59,14 @@
     <div class="total">
       Gesamt: <strong>{{ getTotal() | currency:'EUR' }}</strong>
     </div>
-    <button class="checkout-btn" (click)="checkout()">Zur Kasse</button>
+    <app-button (click)="checkout()" text="Zur Kasse" shadowColor="rgba(0, 0, 0, 0.5)" textColor="white" backgroundColor="rgb(160,0,0)"></app-button>
   </div>
 
   <ng-template #emptyCart>
     <div class="empty-cart">
       <p>Dein Warenkorb ist leer.</p>
-      <button class="go-to-menu" routerLink="/speisen" (click)="closeCart()">Zur Speisekarte</button>
+      
+<app-button (click)="closeCart()" text="Zur Speisekarte" shadowColor="rgba(0, 0, 0, 0.5)" textColor="white" backgroundColor="rgb(160,0,0)" routerLink="/speisen"></app-button>
     </div>
   </ng-template>
 </div>

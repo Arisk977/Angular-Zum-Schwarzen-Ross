@@ -76,9 +76,8 @@
     <div class="preis-live me-3">
       {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
     </div>
-    <button type="button" class="btn-ross" (click)="triggerSubmitFromFooter()">
-      Bestätigen
-    </button>
+    <app-button (click)="triggerSubmitFromFooter()" text="Bestätigen" shadowColor="rgba(0, 0, 0, 0.5)" textColor="white" backgroundColor="rgb(160,0,0)"></app-button>
+
   </div>
 </ng-container>
 
@@ -89,9 +88,9 @@
     <div class="preis-live me-3">
       {{ finalPrice | currency:'EUR':'symbol':'1.2-2' }}
     </div>
-    <button type="button" class="btn-ross" (click)="triggerAddIngredientsSubmit()">
-      Bestätigen
-    </button>
+ 
+<app-button (click)="triggerAddIngredientsSubmit()" text="Bestätigen" shadowColor="rgba(0, 0, 0, 0.5)" textColor="white" backgroundColor="rgb(160,0,0)"></app-button>
+
   </div>
 </ng-container>
 
@@ -100,7 +99,7 @@
     <!-- 📝 Step 4: Übersicht -->
     <ng-container *ngIf="isOverviewActive">
       <div class="fade-slide align-items-center">
-        <button type="button" class="btn btn-success px-4" (click)="finalizeOrder()">🛒 In den Warenkorb</button>
+        <app-button (click)="finalizeOrder()" text="🛒 In den Warenkorb" shadowColor="rgba(0, 0, 0, 0.5)" textColor="white" backgroundColor="#198754"></app-button>
       </div>
     </ng-container>
 

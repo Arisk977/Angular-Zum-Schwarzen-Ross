@@ -148,6 +148,10 @@
       }
     }
 
+     app-button{
+      font-family: 'Bricolage Grotesque';
+    }
+
     .checkout-btn {
       background: rgb(160, 0, 0);
       color: white;
@@ -174,20 +178,8 @@
       margin-bottom: 1rem;
     }
 
-    .go-to-menu {
-      background: rgb(160, 0, 0);
-      color: white;
-      border: none;
-      padding: 0.8rem 1.6rem;
-      border-radius: 12px;
-      font-weight: bold;
-      cursor: pointer;
-      transition: 0.3s;
-      text-decoration: none;
-
-      &:hover {
-        background: rgb(120, 0, 0);
-      }
+    app-button{
+      font-family: 'Bricolage Grotesque';
     }
   }
 

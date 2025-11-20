@@ -9,12 +9,13 @@ import { AddIngredientsComponent } from './add-ingredients/add-ingredients.compo
 import { OverviewComponent } from './overview/overview.component';
 import ingredientsDataJson from './../../../assets/json/ingredients.json';
 import { CartService } from './../../shared/services/cart.service';
+import { ButtonComponent } from 'app/shared/component/button/button.component';
 
 
 @Component({
   selector: 'app-speisen-modal',
   standalone: true,
-  imports: [CommonModule, FormsModule, SpeisenGruppeComponent, DeleteIngredientsComponent, AddIngredientsComponent, OverviewComponent],
+  imports: [CommonModule, FormsModule, SpeisenGruppeComponent, DeleteIngredientsComponent, AddIngredientsComponent, OverviewComponent, ButtonComponent],
   templateUrl: './speisen-modal.component.html',
   styleUrl: './speisen-modal.component.scss'
 })

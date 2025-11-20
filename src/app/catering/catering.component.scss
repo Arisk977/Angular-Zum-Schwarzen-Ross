@@ -7,6 +7,7 @@ main {
   justify-content: flex-start;
   align-items: center;
   color: white;
+  background-color: black;
   padding-top: 72px;
 }
 
@@ -96,8 +97,8 @@ h1 {
 
 .text {
   width: 100%;
-  background-color: rgba(0, 0, 0, 0.258);
-  padding: 12px;
+  background-color: rgba(130, 129, 129, 0.258);
+  padding: 24px;
   border: 1px solid black;
   border-radius: 10px;
 }
@@ -128,7 +129,7 @@ h1 {
   width: 100%;
   /* Start: komplett abgeschnitten (rechts 100%) */
   clip-path: inset(0 100% 0 0);
-  animation: revealRightToLeft 1s ease-in-out infinite;
+  animation: revealRightToLeft 2s ease-in-out infinite;
 }
 
 @keyframes revealRightToLeft {
@@ -147,14 +148,14 @@ h1 {
 
 .catering-icon {
   position: absolute;
-  top: 72px;
-  left: 72px;
-  width: 250px;
+  top: 64px;
+  left: 64px;
+  width: 350px;
 
   >img {
     position: absolute;
     width: 100%;
-    opacity: 0; // Standard: unsichtbar
+    opacity: 0;
     filter: drop-shadow(1px 1px 4px rgba(0, 0, 0, 0.403));
     transition: opacity 0.6s ease-in-out;
   }
@@ -166,8 +167,8 @@ h1 {
   .icon-2 {
     animation: fadeCycle 2s infinite ease-in-out;
     animation-delay: 1s; // startet versetzt
-    margin-top: -12px;
-    margin-left: -5px;
+    margin-top: -16.5px;
+    margin-left: -7.5px;
   }
 }
 
